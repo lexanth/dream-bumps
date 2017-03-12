@@ -1,0 +1,78 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+	    ],
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "userCrewPositionHistory"
+        },
+        {
+            "relationshipName": "crew",
+            "otherEntityName": "crew",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "sex",
+            "fieldType": "Sex",
+            "fieldValues": "male,female",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "day",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "1",
+            "fieldValidateRulesMax": "4"
+        },
+        {
+            "fieldName": "seat",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required",
+                "min",
+                "max"
+            ],
+            "fieldValidateRulesMin": "1",
+            "fieldValidateRulesMax": "9"
+        },
+        {
+            "fieldName": "bumps",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+             ]
+        },
+        {
+            "fieldName": "dividend",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required",
+                "min"
+            ],
+            "fieldValidateRulesMin": "0"
+        }
+    ],
+    "changelogDate": "20170305152430",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "user_crew_position_history",
+    "pagination": "no"
+}

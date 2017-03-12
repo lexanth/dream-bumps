@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity UserCrewPrice.
+    -->
+    <changeSet id="20170306220237-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_crew_price"
+                                 constraintName="fk_user_crew_price_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+<addUniqueConstraint
+                     columnNames="user_id,sex"
+                     constraintName="one_price_per_crew"
+                     tableName="user_crew_price"/>
+    </changeSet>
+</databaseChangeLog>

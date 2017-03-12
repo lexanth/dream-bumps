@@ -1,0 +1,7 @@
+{
+  "name":"jhipter_react_spring_time-swagger",
+  "version": "0.0.0",
+  "dependencies": {
+    "swagger-ui": "2.1.5"
+  }
+}

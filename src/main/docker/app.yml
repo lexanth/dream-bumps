@@ -1,0 +1,14 @@
+version: '2'
+services:
+    dreambumps-app:
+        image: dreambumps
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mariadb://dreambumps-mariadb:3306/dreambumps
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    dreambumps-mariadb:
+        extends:
+            file: mariadb.yml
+            service: dreambumps-mariadb

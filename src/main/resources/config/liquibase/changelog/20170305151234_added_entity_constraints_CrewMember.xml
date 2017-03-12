@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <!--
+        Added the constraints for entity CrewMember.
+    -->
+    <changeSet id="20170305151234-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="crew_id"
+                                 baseTableName="crew_member"
+                                 constraintName="fk_crew_member_crew_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="crew"/>
+
+         <addUniqueConstraint
+                     columnNames="crew_id,seat"
+                     constraintName="one_person_in_each_seat"
+                     tableName="crew_member"/>
+    </changeSet>
+</databaseChangeLog>

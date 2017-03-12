@@ -1,0 +1,49 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "crewMember",
+            "otherEntityName": "crewMember",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "crew"
+        },
+        {
+            "relationshipName": "crewPriceHistory",
+            "otherEntityName": "crewPriceHistory",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "crew"
+        },
+        {
+            "relationshipName": "crewPositionHistory",
+            "otherEntityName": "crewPositionHistory",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "crew"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sex",
+            "fieldType": "Sex",
+            "fieldValues": "male,female",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170305151015",
+    "dto": "mapstruct",
+    "service": "serviceClass",
+    "entityTableName": "crew",
+    "pagination": "no"
+}
