@@ -54,7 +54,8 @@ App.propTypes = {
   children: PropTypes.object,
   fetchCurrentUser: PropTypes.func,
   loading: PropTypes.bool,
-  fetchConfig: PropTypes.func
+  fetchConfig: PropTypes.func,
+  fetchStatus: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({

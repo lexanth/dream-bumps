@@ -170,10 +170,14 @@ class BumpsAdminPage extends Component {
     );
   }
 }
-// TODO - add a submit button
 
 BumpsAdminPage.propTypes = {
-  sex: PropTypes.string
+  sex: PropTypes.string,
+  day: PropTypes.number,
+  crews: PropTypes.array,
+  uploadBumps: PropTypes.func,
+  fetchCrews: PropTypes.func,
+  params: PropTypes.object
 }
 
 const mapStateToProps = (state, {params}) => ({

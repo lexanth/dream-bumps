@@ -6,17 +6,17 @@ const fetchUsersStart = () => ({
   type: types.FETCH_USERS_REQUEST
 });
 
-const fetchUsersSuccess = users => ({
+const fetchUsersSuccess = (users: Array<Object>) => ({
   type: types.FETCH_USERS_SUCCESS,
   users
 });
 
-const fetchUsersError = errorMessage => ({
+const fetchUsersError = (errorMessage: string) => ({
   type: types.FETCH_USERS_ERROR,
   errorMessage
 });
 
-export const fetchUsers = () => dispatch => {
+export const fetchUsers = () => (dispatch: Function) => {
   dispatch(fetchUsersStart());
   return requestWithAuth.get(`/api/users`)
     .then(response => {
@@ -27,22 +27,22 @@ export const fetchUsers = () => dispatch => {
     });
 }
 
-const updateUserStart = (user) => ({
+const updateUserStart = (user: Object) => ({
   type: types.UPDATE_USER_REQUEST,
   user
 });
 
-const updateUserSuccess = user => ({
+const updateUserSuccess = (user: Object) => ({
   type: types.UPDATE_USER_SUCCESS,
   user
 });
 
-const updateUserError = errorMessage => ({
+const updateUserError = (errorMessage: string) => ({
   type: types.UPDATE_USER_ERROR,
   errorMessage
 });
 
-export const updateUser = user => dispatch => {
+export const updateUser = (user: Object) => (dispatch: Function) => {
   dispatch(updateUserStart(user));
   return requestWithAuth.put(`/api/users`, user)
     .then(response => {
@@ -53,22 +53,22 @@ export const updateUser = user => dispatch => {
     });
 }
 
-const uploadBumpsStart = (bumps) => ({
+const uploadBumpsStart = (bumps: Array<Object>) => ({
   type: types.UPLOAD_BUMPS_REQUEST,
   bumps
 });
 
-const uploadBumpsSuccess = bumps => ({
+const uploadBumpsSuccess = (bumps: Array<Object>) => ({
   type: types.UPLOAD_BUMPS_SUCCESS,
   bumps
 });
 
-const uploadBumpsError = errorMessage => ({
+const uploadBumpsError = (errorMessage: string) => ({
   type: types.UPLOAD_BUMPS_ERROR,
   errorMessage
 });
 
-export const uploadBumps = (crews, day) => dispatch => {
+export const uploadBumps = (crews: Array<Object>, day: number) => (dispatch: Function) => {
   const bumps = crews.map(crew => ({
     day,
     crewId: crew.id,

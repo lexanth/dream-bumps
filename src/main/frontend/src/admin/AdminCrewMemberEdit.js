@@ -2,9 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
-import {TextField, SelectField} from 'redux-form-material-ui';
+import {TextField} from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
 
 import {getCrewMembers} from '../rootReducer';
 import {fetchCrewMembers, updateCrewMembers} from '../crews/actions';
@@ -25,6 +24,11 @@ const renderMembers = ({ fields, current }) => (
   )}
   </div>
 )
+
+renderMembers.propTypes = {
+  fields: PropTypes.array,
+  current: PropTypes.array
+}
 
 class AdminCrewMemberEdit extends Component {
   componentWillMount() {
@@ -47,7 +51,12 @@ class AdminCrewMemberEdit extends Component {
 }
 
 AdminCrewMemberEdit.propTypes = {
-}
+  crewId: PropTypes.string,
+  handleSubmit: PropTypes.func,
+  currentMembers: PropTypes.array,
+  initialValues: PropTypes.object,
+  fetchCrewMembers: PropTypes.func
+};
 
 const selector = formValueSelector('edit-crew-members');
 

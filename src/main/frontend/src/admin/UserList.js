@@ -52,6 +52,10 @@ const UserList = ({users}) => (
   </Card>
 );
 
+UserList.propTypes = {
+  users: PropTypes.array
+}
+
 const mapStateToProps = state => ({users: getAllUsers(state)});
 
 export default connect(mapStateToProps)(UserList);

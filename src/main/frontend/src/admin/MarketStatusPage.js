@@ -63,7 +63,8 @@ class MarketStatusPage extends React.Component {
 
 MarketStatusPage.propTypes = {
   status: PropTypes.object,
-  updateMarketStatus: PropTypes.func
+  updateMarketStatus: PropTypes.func,
+  day: PropTypes.number
 };
 
 const mapStateToProps: Object = (state: Object) => ({

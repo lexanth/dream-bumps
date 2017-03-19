@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
 import ActionInfo from 'material-ui/svg-icons/action/info';
 
-import { getCrewsForDivision, getCurrentUserId, getUserCrewRanking, getBuySex, getBuyMemberId } from '../rootReducer';
+import { getCurrentUserId, getUserCrewRanking, getBuySex, getBuyMemberId } from '../rootReducer';
 import { doBuyRower } from '../usercrews/actions';
 /**
  * DivisionTable
@@ -56,7 +56,12 @@ class DivisionTable extends Component { // eslint-disable-line react/prefer-stat
 
 DivisionTable.propTypes = {
   sex: PropTypes.string,
-  division: PropTypes.string
+  division: PropTypes.string,
+  crews: PropTypes.array,
+  buySex: PropTypes.string,
+  crewRanking: PropTypes.array,
+  doBuyRower: PropTypes.func,
+  buyMemberId: PropTypes.number
 };
 
 const mapStateToProps = (state, ownProps) => {

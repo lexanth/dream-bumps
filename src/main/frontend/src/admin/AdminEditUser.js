@@ -31,6 +31,11 @@ const MyReactSelect = (props) => (
   />
 );
 
+MyReactSelect.propTypes = {
+  input: PropTypes.object,
+  options: PropTypes.object
+}
+
 const AdminEditUser = ({user, handleSubmit, params}) => (
   <Cell col="6" offset={3} >
   <Card>
@@ -82,6 +87,13 @@ const AdminEditUser = ({user, handleSubmit, params}) => (
   </Card>
   </Cell>
 );
+
+AdminEditUser.propTypes = {
+  user: PropTypes.object,
+  handleSubmit: PropTypes.func,
+  params: PropTypes.object,
+  initialValues: PropTypes.object
+}
 
 // todo - activated and authorities
 

@@ -16,6 +16,10 @@ const CrewAdminList = ({crews}) => (
   </Grid>
 )
 
+CrewAdminList.propTypes = {
+  crews: PropTypes.array
+};
+
 const mapStateToProps = (state, ownProps) => ({
   crews: getCrewsForSex(state)(ownProps.sex)
 });

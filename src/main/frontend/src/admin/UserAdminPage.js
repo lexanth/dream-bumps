@@ -21,6 +21,9 @@ class UserAdminPage extends Component {
   }
 }
 
-UserAdminPage.propTypes = {}
+UserAdminPage.propTypes = {
+  fetchUsers: PropTypes.func,
+  children: PropTypes.node
+}
 
 export default connect(null, { fetchUsers })(UserAdminPage);

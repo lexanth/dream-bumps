@@ -38,7 +38,9 @@ class CrewList extends React.Component {
 CrewList.propTypes = {
   fetchCrews: PropTypes.func,
   sex: PropTypes.string,
-  numberOfDivisions: PropTypes.number
+  numberOfDivisions: PropTypes.number,
+  crews: PropTypes.array,
+  day: PropTypes.number
 };
 
 const mapStateToProps = (state, ownProps) => ({

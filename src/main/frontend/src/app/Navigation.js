@@ -7,7 +7,6 @@ import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 
-import { getCurrentUser } from '../rootReducer';
 
 const Navigation = ({ authenticated }) => (
       <Toolbar style={{ backgroundColor: 'rgb(0, 188, 212)', color: '#fff' }}>

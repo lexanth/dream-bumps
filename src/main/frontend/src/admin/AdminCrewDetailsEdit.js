@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
@@ -42,9 +43,12 @@ class AdminCrewDetailsEdit extends Component {
 }
 
 AdminCrewDetailsEdit.propTypes = {
+  crewId: PropTypes.string,
+  initialValues: PropTypes.object,
+  handleSubmit: PropTypes.func
 }
 
-const mapStateToProps = (state, {crewId}) => ({
+const mapStateToProps = (state: Object, {crewId}) => ({
   initialValues: getCrew(state)(crewId)
 });
 

@@ -42,7 +42,7 @@ const common = {
       }
 };
 
-if (TARGET === 'start' || !TARGET) {
+// if (TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
     devServer: {
       port: 9090,
@@ -57,8 +57,8 @@ if (TARGET === 'start' || !TARGET) {
     },
     devtool: 'source-map'
   });
-}
+// }
 
-if (TARGET === 'build') {
-  module.exports = merge(common, {});
-}
+// if (TARGET === 'build') {
+//   module.exports = merge(common, {});
+// }

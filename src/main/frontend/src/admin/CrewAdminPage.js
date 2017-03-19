@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Grid, Cell} from 'material-grid/dist';
 
 import { fetchCrews } from '../crews/actions';
 /**
@@ -20,6 +19,9 @@ class CrewAdminPage extends Component {
   }
 }
 
-CrewAdminPage.propTypes = {}
+CrewAdminPage.propTypes = {
+  fetchCrews: PropTypes.func,
+  children: PropTypes.node
+}
 
 export default connect(null, { fetchCrews })(CrewAdminPage);

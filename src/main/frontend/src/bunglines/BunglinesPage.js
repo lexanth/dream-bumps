@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
@@ -16,8 +16,8 @@ const BunglinesPage = ({ cancelBuyMember }) => (
   </Tabs>
 );
 
-// BunglinesPage.propTypes = {
-//
-// }
+BunglinesPage.propTypes = {
+  cancelBuyMember: PropTypes.func
+}
 
 export default connect(null, { cancelBuyMember })(BunglinesPage);
