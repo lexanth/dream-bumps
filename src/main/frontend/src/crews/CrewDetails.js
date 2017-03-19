@@ -15,10 +15,11 @@ const percentChange = (now, original) => {
 };
 
 const stepChange = (now, original) => {
+  // Looks slightly backwards, because lower position is upwards
   if (now - original < 0) {
-    return `${now - original}`;
+    return `+${original-now}`;
   }
-  return `+${now - original}`;
+  return `-${now - original}`;
 };
 
 class CrewDetails extends React.Component {

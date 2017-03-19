@@ -3,17 +3,6 @@ import { combineReducers } from 'redux';
 import * as types from '../actionTypes';
 import copyAndAddIfNotPresent from '../utils/copyAndAddIfNotPresent';
 
-// const copyAndAddIfNotPresent = (list, element) => {
-//   if (list === undefined || list === null) {
-//     return [element];
-//   }
-//   if (list.indexOf(element) === -1) {
-//     return [...list, element];
-//   }
-//   return list;
-// };
-
-
 const membersById = (state = {}, action) => {
   let newState = {...state};
   switch (action.type) {
@@ -58,7 +47,8 @@ const crewsBySex = (state = {}, action) => {
   let newState = {...state};
   switch (action.type) {
     case types.FETCH_CREW_SUCCESS:
-      return copyAndAddIfNotPresent(state[action.crew.sex], action.crew.id);
+      newState[action.crew.sex] = copyAndAddIfNotPresent(newState[action.crew.sex], action.crew.id);
+      return newState;
     case types.FETCH_CREWS_SUCCESS:
       action.crews.forEach(crew => {newState[crew.sex] = copyAndAddIfNotPresent(newState[crew.sex], crew.id);});
       return newState;
@@ -132,3 +122,5 @@ export const _getCrewPrice = state => crewId => {
   const crew = _getCrew(state)(crewId);
   return crew ? crew.price : '';
 };
+
+export const _getCrewsForSex = state => sex => (state.crews.bySex[sex] || []).map(id => state.crews.byId[id]).sort((a,b) => a.position - b.position);

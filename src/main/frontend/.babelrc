@@ -3,6 +3,9 @@
     "react",
     "stage-1"
   ],
+  "plugins": [
+    "transform-flow-strip-types"
+  ],
   "env": {
     "development": {
       "presets": [
@@ -30,4 +33,3 @@
     }
   }
 }
-

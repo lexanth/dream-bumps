@@ -50,7 +50,7 @@ public class CrewResource {
         if (crewDTO.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new crew cannot already have an ID")).body(null);
         }
-        CrewDTO result = crewService.save(crewDTO);
+        CrewDTO result = crewService.saveWithStartPosition(crewDTO);
         return ResponseEntity.created(new URI("/api/crews/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

@@ -1,5 +1,6 @@
 package com.alexanthony.dreambumps.service;
 
+import com.alexanthony.dreambumps.domain.Crew;
 import com.alexanthony.dreambumps.domain.User;
 import com.alexanthony.dreambumps.domain.UserCrewMember;
 import com.alexanthony.dreambumps.domain.enumeration.Sex;
@@ -126,5 +127,9 @@ public class UserCrewMemberService {
 	  userCrewMemberRepository.save(members);
 	}
 	
+	@Transactional(readOnly = true)
+	public Integer getNumberOfHoldingsForCrew(Crew crew) {
+	  return userCrewMemberRepository.countByCrew(crew);
+	}
 	
 }

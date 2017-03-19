@@ -1,6 +1,7 @@
 package com.alexanthony.dreambumps.security.social;
 
 import com.alexanthony.dreambumps.security.jwt.TokenProvider;
+import com.alexanthony.dreambumps.service.UserService;
 
 import io.github.jhipster.config.JHipsterProperties;
 
@@ -30,12 +31,15 @@ public class CustomSignInAdapter implements SignInAdapter {
 
     private final TokenProvider tokenProvider;
 
+    private final UserService userService;
+
 
     public CustomSignInAdapter(UserDetailsService userDetailsService, JHipsterProperties jHipsterProperties,
-            TokenProvider tokenProvider) {
+            TokenProvider tokenProvider, UserService userService) {
         this.userDetailsService = userDetailsService;
         this.jHipsterProperties = jHipsterProperties;
         this.tokenProvider = tokenProvider;
+        this.userService = userService;
     }
 
     @Override
@@ -48,7 +52,8 @@ public class CustomSignInAdapter implements SignInAdapter {
                 user.getAuthorities());
 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            String jwt = tokenProvider.createToken(authenticationToken, false);
+            
+            String jwt = tokenProvider.createToken(authenticationToken, false, userService.getUserWithAuthorities().getId());
             ServletWebRequest servletWebRequest = (ServletWebRequest) request;
             servletWebRequest.getResponse().addCookie(getSocialAuthenticationCookie(jwt));
         } catch (AuthenticationException ae) {

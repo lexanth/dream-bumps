@@ -1,5 +1,6 @@
 package com.alexanthony.dreambumps.repository;
 
+import com.alexanthony.dreambumps.domain.Crew;
 import com.alexanthony.dreambumps.domain.UserCrewMember;
 import com.alexanthony.dreambumps.domain.enumeration.Sex;
 
@@ -17,5 +18,9 @@ public interface UserCrewMemberRepository extends JpaRepository<UserCrewMember,L
     List<UserCrewMember> findByUserIsCurrentUser();
 
     List<UserCrewMember> findByUserIdAndSex(Long userId, Sex sex);
+
+    List<UserCrewMember> findByCrew(Crew crew);
+
+    Integer countByCrew(Crew crew);
 
 }

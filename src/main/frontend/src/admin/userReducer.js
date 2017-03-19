@@ -18,6 +18,8 @@ const byId = (state = {}, action) => {
       const newState = {...state};
       action.users.forEach(user => newState[user.id] = user);
       return newState;
+    case types.UPDATE_USER_SUCCESS:
+      return {...state, [action.user.id]: action.user}
     default:
       return state;
   }

@@ -106,4 +106,8 @@ public class CrewMemberService {
     }).collect(Collectors.toCollection(LinkedList::new));
     crewMemberRepository.save(members);
   }
+
+  public List<CrewMemberDTO> save(List<CrewMemberDTO> crewMemberDTOs) {
+    return crewMemberDTOs.stream().map(this::save).collect(Collectors.toCollection(LinkedList::new));
+  }
 }

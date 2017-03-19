@@ -59,6 +59,20 @@ public class UserCrewPositionHistory implements Serializable {
     @NotNull
     private Crew crew;
 
+    public UserCrewPositionHistory() {
+      
+    }
+    
+    public UserCrewPositionHistory(CrewPositionHistory crewPositionHistory, UserCrewMember holding) {
+      this.bumps = crewPositionHistory.getBumps();
+      this.crew = crewPositionHistory.getCrew();
+      this.day = crewPositionHistory.getDay();
+      this.dividend = crewPositionHistory.getDividend();
+      this.seat = holding.getSeat();
+      this.sex = holding.getSex();
+      this.user = holding.getUser();
+    }
+
     public Long getId() {
         return id;
     }

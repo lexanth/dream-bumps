@@ -14,8 +14,13 @@ import CrewPage from './crews/CrewPage';
 import BunglinesPage from './bunglines/BunglinesPage';
 import AdminPage from './admin/AdminPage';
 import UserAdminPage from './admin/UserAdminPage';
+import CrewAdminPage from './admin/CrewAdminPage';
 import UserList from './admin/UserList';
 import AdminEditUser from './admin/AdminEditUser';
+import CrewAdminLists from './admin/CrewAdminLists';
+import AdminCrewEdit from './admin/AdminCrewEdit';
+import BumpsAdminPage from './admin/BumpsAdminPage';
+import MarketStatusPage from './admin/MarketStatusPage';
 
 export default () => {
 
@@ -45,11 +50,16 @@ export default () => {
       <Route path="register" component={UserIsNotAuthenticated(Register)} />
       <Route path="bunglines" component={BunglinesPage} />
       <Route path="crews/:crewId" component={CrewPage} />
-      <Route path="admin" component={AdminPage} />
       <Route path="admin/users" component={UserAdminPage}>
         <IndexRoute component={UserList} />
         <Route path=":userId" component={AdminEditUser} />
       </Route>
+      <Route path="admin/crews" component={CrewAdminPage}>
+        <IndexRoute component={CrewAdminLists} />
+        <Route path=":crewId" component={AdminCrewEdit} />
+      </Route>
+      <Route path="admin/bumps/:sex" component={BumpsAdminPage} />
+      <Route path="admin/market" component={MarketStatusPage} />
       <Route path="*" component={NotFoundPage}/>
     </Route>
   );

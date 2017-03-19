@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 
 import { fetchCrews } from '../crews/actions';
-import { getNumberOfDivisions, getCrewsByDivision } from '../rootReducer';
+import { getNumberOfDivisions, getCrewsByDivision, getCurrentDay } from '../rootReducer';
 import DivisionTable from './DivisionTable';
 
 class CrewList extends React.Component {
@@ -12,9 +12,10 @@ class CrewList extends React.Component {
   }
 
   render() {
+    const title = this.props.day >= 4 ? 'Finishing Order' : `Starting Order for Day ${this.props.day + 1}`
     return (
       <Card>
-        <CardTitle title="Starting order for Torpids 2017" />
+        <CardTitle title={title} />
         <CardText>
           {
             Object.keys(this.props.crews).map(key =>
@@ -42,7 +43,8 @@ CrewList.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   crews: getCrewsByDivision(state)(ownProps.sex),
-  numberOfDivisions: getNumberOfDivisions(state)(ownProps.sex)
+  numberOfDivisions: getNumberOfDivisions(state)(ownProps.sex),
+  day: getCurrentDay(state)
 });
 
 export default connect(mapStateToProps, { fetchCrews })(CrewList);

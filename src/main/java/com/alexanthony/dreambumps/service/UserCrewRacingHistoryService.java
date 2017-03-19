@@ -1,12 +1,16 @@
 package com.alexanthony.dreambumps.service;
 
+import com.alexanthony.dreambumps.domain.CrewPositionHistory;
+import com.alexanthony.dreambumps.domain.UserCrewMember;
 import com.alexanthony.dreambumps.domain.UserCrewPositionHistory;
+import com.alexanthony.dreambumps.repository.UserCrewMemberRepository;
 import com.alexanthony.dreambumps.repository.UserCrewPositionHistoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +23,11 @@ public class UserCrewRacingHistoryService {
     private final Logger log = LoggerFactory.getLogger(UserCrewRacingHistoryService.class);
     
     private final UserCrewPositionHistoryRepository userCrewPositionHistoryRepository;
+    private final UserCrewMemberRepository userCrewMemberRepository;
 
-    public UserCrewRacingHistoryService(UserCrewPositionHistoryRepository userCrewPositionHistoryRepository) {
+    public UserCrewRacingHistoryService(UserCrewPositionHistoryRepository userCrewPositionHistoryRepository, UserCrewMemberRepository userCrewMemberRepository) {
         this.userCrewPositionHistoryRepository = userCrewPositionHistoryRepository;
+        this.userCrewMemberRepository = userCrewMemberRepository;
     }
 
     /**
@@ -70,5 +76,17 @@ public class UserCrewRacingHistoryService {
     public void delete(Long id) {
         log.debug("Request to delete UserCrewPositionHistory : {}", id);
         userCrewPositionHistoryRepository.delete(id);
+    }
+
+    public void updateCrewsForNewBumps(List<CrewPositionHistory> crewPositionHistories) {
+      List<UserCrewPositionHistory> userBumps = new ArrayList<UserCrewPositionHistory>();
+      for (CrewPositionHistory crewPositionHistory : crewPositionHistories) {
+        List<UserCrewMember> holdings = userCrewMemberRepository.findByCrew(crewPositionHistory.getCrew());
+        for (UserCrewMember holding: holdings) {
+          UserCrewPositionHistory userBump = new UserCrewPositionHistory(crewPositionHistory, holding);
+          userBumps.add(userBump);
+        }
+      }
+      userCrewPositionHistoryRepository.save(userBumps);
     }
 }

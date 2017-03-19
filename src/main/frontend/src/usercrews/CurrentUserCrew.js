@@ -11,11 +11,21 @@ import CurrentUserCrewMemberRow from './CurrentUserCrewMemberRow';
  * CurrentUserCrew
  */
 class CurrentUserCrew extends Component {
+  componentDidMount() {
+    if (this.props.currentUserId) {
+      this.loadCrew(this.props);
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUserId && this.props.currentUserId !== nextProps.currentUserId) {
-      this.props.fetchUserCrewMembers(nextProps.currentUserId, this.props.sex);
-      this.props.fetchUserCrewRanking(nextProps.currentUserId, this.props.sex);
+      this.loadCrew(nextProps);
     }
+  }
+
+  loadCrew(props) {
+    this.props.fetchUserCrewMembers(props.currentUserId, this.props.sex);
+    this.props.fetchUserCrewRanking(props.currentUserId, this.props.sex);
   }
 
   render() {

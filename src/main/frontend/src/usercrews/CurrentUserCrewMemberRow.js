@@ -1,31 +1,61 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { TableRow, TableRowColumn } from 'material-ui/Table';
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {TableRow, TableRowColumn} from 'material-ui/Table';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import seatNumberToName from '../utils/seatNumberToName';
-import { cancelBuyMember, doSellRower } from './actions';
-import { getCrew, getCrewMemberName, getBuyMemberId } from '../rootReducer';
+import {cancelBuyMember, doSellRower} from './actions';
+import {getCrew, getCrewMemberName, getBuyMemberId, isMarketOpen} from '../rootReducer';
 
-const CurrentUserCrewMemberRow = ({ member, crew, crewMemberName, onClickBuy, onClickCancel, buyMemberId, cancelBuyMember, doSellRower }) => (
+const CurrentUserCrewMemberRow = ({
+  member,
+  crew,
+  crewMemberName,
+  onClickBuy,
+  onClickCancel,
+  buyMemberId,
+  cancelBuyMember,
+  doSellRower,
+  marketOpen
+}) => (
   <TableRow>
     <TableRowColumn>{seatNumberToName(member.seat)}</TableRowColumn>
-    <TableRowColumn>{crew ? crew.name : '-'}</TableRowColumn>
-    {/*<TableRowColumn>{crewMemberName}</TableRowColumn>*/}
-    <TableRowColumn>{crew ? crew.price : ''}</TableRowColumn>
     <TableRowColumn>
-      {member.crewId ?
-        <RaisedButton label="Sell" onClick={e => doSellRower(member.crewId, member.id)} />
+      {
+        crew ?
+          crew.name
         :
-        member.id === buyMemberId ?
-          <RaisedButton label="Cancel" onClick={cancelBuyMember} />
-          :
-          buyMemberId ?
-            null
-            :
-            <RaisedButton label="Buy" onClick={onClickBuy} />
+          '-'
       }
     </TableRowColumn>
+    {/*<TableRowColumn>{crewMemberName}</TableRowColumn>*/}
+    <TableRowColumn>
+      {
+        crew ?
+          crew.price
+        :
+          ''
+      }
+    </TableRowColumn>
+    {
+      marketOpen ?
+        <TableRowColumn>
+          {
+            member.crewId ?
+              <RaisedButton label="Sell" onClick={e => doSellRower(member.crewId, member.id)}/>
+            :
+              member.id === buyMemberId ?
+                <RaisedButton label="Cancel" onClick={cancelBuyMember}/>
+              :
+                buyMemberId ?
+                  null
+                :
+                  <RaisedButton label="Buy" onClick={onClickBuy}/>
+          }
+        </TableRowColumn>
+      :
+        null
+    }
   </TableRow>
 );
 
@@ -33,10 +63,11 @@ CurrentUserCrewMemberRow.propTypes = {
   member: PropTypes.object
 };
 
-const mapStateToProps = (state, { member }) => ({
+const mapStateToProps = (state, {member}) => ({
   crew: getCrew(state)(member.crewId),
   crewMemberName: getCrewMemberName(state)(member.crewId, member.seat) || '',
-  buyMemberId: getBuyMemberId(state)
+  buyMemberId: getBuyMemberId(state),
+  marketOpen: isMarketOpen(state)
 });
 
-export default connect(mapStateToProps, { cancelBuyMember, doSellRower })(CurrentUserCrewMemberRow);
+export default connect(mapStateToProps, {cancelBuyMember, doSellRower})(CurrentUserCrewMemberRow);

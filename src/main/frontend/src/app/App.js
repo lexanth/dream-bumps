@@ -10,6 +10,7 @@ import Navigation from './Navigation';
 // import MySnackbar from '../messages/MySnackbar';
 import { fetchCurrentUser } from '../auth/actions';
 import { fetchConfig } from '../config/actions';
+import { fetchStatus } from '../status/actions';
 import { isLoading } from '../rootReducer';
 
 // require('../../style/style.css');
@@ -31,6 +32,7 @@ class App extends Component {
   componentDidMount() {
     this.props.fetchCurrentUser();
     this.props.fetchConfig();
+    this.props.fetchStatus();
   }
   render() {
     return (
@@ -59,4 +61,4 @@ const mapStateToProps = (state) => ({
   loading: isLoading(state)
 });
 
-export default connect(mapStateToProps, { fetchCurrentUser, fetchConfig })(App);
+export default connect(mapStateToProps, { fetchCurrentUser, fetchConfig, fetchStatus })(App);

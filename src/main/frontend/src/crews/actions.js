@@ -108,3 +108,11 @@ export const fetchCrewPriceHistory = crewId => dispatch => {
       dispatch(fetchCrewPriceHistoryError(error));
     });
 };
+
+export const updateCrew = crew => dispatch => {
+  console.log(crew);
+}
+
+export const updateCrewMembers = crew => dispatch => {
+  console.log(crew);
+}

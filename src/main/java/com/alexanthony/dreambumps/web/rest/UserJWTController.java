@@ -2,6 +2,7 @@ package com.alexanthony.dreambumps.web.rest;
 
 import com.alexanthony.dreambumps.security.jwt.JWTConfigurer;
 import com.alexanthony.dreambumps.security.jwt.TokenProvider;
+import com.alexanthony.dreambumps.service.UserService;
 import com.alexanthony.dreambumps.web.rest.vm.LoginVM;
 
 import java.util.Collections;
@@ -31,10 +32,13 @@ public class UserJWTController {
     private final TokenProvider tokenProvider;
 
     private final AuthenticationManager authenticationManager;
+    
+    private final UserService userService;
 
-    public UserJWTController(TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
+    public UserJWTController(TokenProvider tokenProvider, AuthenticationManager authenticationManager, UserService userService) {
         this.tokenProvider = tokenProvider;
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
     }
 
     @PostMapping("/authenticate")
@@ -48,7 +52,8 @@ public class UserJWTController {
             Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
-            String jwt = tokenProvider.createToken(authentication, rememberMe);
+            
+            String jwt = tokenProvider.createToken(authentication, rememberMe, userService.getUserWithAuthorities().getId());
             response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
             return ResponseEntity.ok(new JWTToken(jwt));
         } catch (AuthenticationException ae) {

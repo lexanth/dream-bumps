@@ -22,6 +22,7 @@ public class ConfigResource {
 		config.setCrewsPerDivision(Constants.CREWS_PER_DIVISION);
 		config.setMensCrews(Constants.MENS_CREWS);
 		config.setWomensCrews(Constants.WOMENS_CREWS);
+		config.setRegatta(Constants.REGATTA_NAME);
 		return ResponseEntity.ok(config);
 	}
 

@@ -49,18 +49,18 @@ public class CrewMemberResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new crewMemberDTO, or with status 400 (Bad Request) if the crewMember has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/crew-members")
-    @Timed
-    public ResponseEntity<CrewMemberDTO> createCrewMember(@Valid @RequestBody CrewMemberDTO crewMemberDTO) throws URISyntaxException {
-        log.debug("REST request to save CrewMember : {}", crewMemberDTO);
-        if (crewMemberDTO.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new crewMember cannot already have an ID")).body(null);
-        }
-        CrewMemberDTO result = crewMemberService.save(crewMemberDTO);
-        return ResponseEntity.created(new URI("/api/crew-members/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
-    }
+//    @PostMapping("/crew-members")
+//    @Timed
+//    public ResponseEntity<CrewMemberDTO> createCrewMember(@Valid @RequestBody CrewMemberDTO crewMemberDTO) throws URISyntaxException {
+//        log.debug("REST request to save CrewMember : {}", crewMemberDTO);
+//        if (crewMemberDTO.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new crewMember cannot already have an ID")).body(null);
+//        }
+//        CrewMemberDTO result = crewMemberService.save(crewMemberDTO);
+//        return ResponseEntity.created(new URI("/api/crew-members/" + result.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+//            .body(result);
+//    }
 
     /**
      * PUT  /crew-members : Updates an existing crewMember.
@@ -71,17 +71,15 @@ public class CrewMemberResource {
      * or with status 500 (Internal Server Error) if the crewMemberDTO couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/crew-members")
+    @PutMapping("/crews/{crewId}/members")
     @Timed
-    public ResponseEntity<CrewMemberDTO> updateCrewMember(@Valid @RequestBody CrewMemberDTO crewMemberDTO) throws URISyntaxException {
-        log.debug("REST request to update CrewMember : {}", crewMemberDTO);
-        if (crewMemberDTO.getId() == null) {
-            return createCrewMember(crewMemberDTO);
+    public ResponseEntity<List<CrewMemberDTO>> updateCrewMember(@Valid @RequestBody List<CrewMemberDTO> crewMemberDTOs) throws URISyntaxException {
+        log.debug("REST request to update CrewMembers : {}", crewMemberDTOs);
+        if (crewMemberDTOs.stream().anyMatch(a -> a.getId() == null)) {
+          return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "iddoesnotexist", "An updated crewMember must already have an ID")).body(null);
         }
-        CrewMemberDTO result = crewMemberService.save(crewMemberDTO);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, crewMemberDTO.getId().toString()))
-            .body(result);
+        List<CrewMemberDTO> results = crewMemberService.save(crewMemberDTOs);
+        return ResponseEntity.ok(results);
     }
 
     /**
@@ -89,12 +87,12 @@ public class CrewMemberResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of crewMembers in body
      */
-    @GetMapping("/crew-members")
-    @Timed
-    public List<CrewMemberDTO> getAllCrewMembers() {
-        log.debug("REST request to get all CrewMembers");
-        return crewMemberService.findAll();
-    }
+//    @GetMapping("/crew-members")
+//    @Timed
+//    public List<CrewMemberDTO> getAllCrewMembers() {
+//        log.debug("REST request to get all CrewMembers");
+//        return crewMemberService.findAll();
+//    }
 
     /**
      * GET  /crew-members/:id : get the "id" crewMember.
@@ -102,13 +100,13 @@ public class CrewMemberResource {
      * @param id the id of the crewMemberDTO to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the crewMemberDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/crew-members/{id}")
-    @Timed
-    public ResponseEntity<CrewMemberDTO> getCrewMember(@PathVariable Long id) {
-        log.debug("REST request to get CrewMember : {}", id);
-        CrewMemberDTO crewMemberDTO = crewMemberService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(crewMemberDTO));
-    }
+//    @GetMapping("/crew-members/{id}")
+//    @Timed
+//    public ResponseEntity<CrewMemberDTO> getCrewMember(@PathVariable Long id) {
+//        log.debug("REST request to get CrewMember : {}", id);
+//        CrewMemberDTO crewMemberDTO = crewMemberService.findOne(id);
+//        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(crewMemberDTO));
+//    }
 
     /**
      * DELETE  /crew-members/:id : delete the "id" crewMember.
@@ -116,12 +114,12 @@ public class CrewMemberResource {
      * @param id the id of the crewMemberDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/crew-members/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteCrewMember(@PathVariable Long id) {
-        log.debug("REST request to delete CrewMember : {}", id);
-        crewMemberService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
+//    @DeleteMapping("/crew-members/{id}")
+//    @Timed
+//    public ResponseEntity<Void> deleteCrewMember(@PathVariable Long id) {
+//        log.debug("REST request to delete CrewMember : {}", id);
+//        crewMemberService.delete(id);
+//        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+//    }
 
 }

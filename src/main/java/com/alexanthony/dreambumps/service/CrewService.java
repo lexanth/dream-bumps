@@ -6,6 +6,7 @@ import com.alexanthony.dreambumps.domain.CrewPriceHistory;
 import com.alexanthony.dreambumps.domain.enumeration.Sex;
 import com.alexanthony.dreambumps.repository.CrewRepository;
 import com.alexanthony.dreambumps.service.dto.CrewDTO;
+import com.alexanthony.dreambumps.service.dto.CrewPositionHistoryDTO;
 import com.alexanthony.dreambumps.service.mapper.CrewMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,17 @@ public class CrewService {
    *          the entity to save
    * @return the persisted entity
    */
+  public CrewDTO saveWithStartPosition(CrewDTO crewDTO) {
+    Integer startPosition = crewDTO.getStartPosition();
+    if (startPosition == null) {
+      throw new RuntimeException("No start position");
+    }
+    CrewDTO result = save(crewDTO);
+    CrewPositionHistory crewPositionHistory = new CrewPositionHistory().day(0).crew(crewMapper.crewDTOToCrew(crewDTO)).position(startPosition);
+    crewPositionHistoryService.save(crewPositionHistory);
+    return result;
+  }
+  
   public CrewDTO save(CrewDTO crewDTO) {
     log.debug("Request to save Crew : {}", crewDTO);
     Crew crew = crewMapper.crewDTOToCrew(crewDTO);
@@ -107,13 +119,13 @@ public class CrewService {
   }
   
   private CrewDTO populatePositionsAndPrices(CrewDTO crewDTO) {
-    List<CrewPositionHistory> positionHistories = crewPositionHistoryService.findAllByCrew(crewDTO.getId());
-    Optional<CrewPositionHistory> zeroDay = positionHistories.stream().filter(a -> a.getDay().equals(0)).findFirst();
+    List<CrewPositionHistoryDTO> positionHistories = crewPositionHistoryService.findAllByCrew(crewDTO.getId());
+    Optional<CrewPositionHistoryDTO> zeroDay = positionHistories.stream().filter(a -> a.getDay().equals(0)).findFirst();
     if (zeroDay.isPresent()) {
       crewDTO.setStartPosition(zeroDay.get().getPosition());
     }
     // Might want to reverse the sorting here
-    Optional<CrewPositionHistory> mostRecentDay = positionHistories.stream().sorted((d1,d2) -> Integer.compare(d2.getDay(), d1.getDay())).findFirst();
+    Optional<CrewPositionHistoryDTO> mostRecentDay = positionHistories.stream().sorted((d1,d2) -> Integer.compare(d2.getDay(), d1.getDay())).findFirst();
     if (mostRecentDay.isPresent()) {
       crewDTO.setPosition(mostRecentDay.get().getPosition());
     }

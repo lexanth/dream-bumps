@@ -3,10 +3,11 @@ import { routerReducer as routing } from 'react-router-redux';
 import { reducer as form } from 'redux-form';
 
 import auth, { _getCurrentUserId, _getCurrentUser } from './auth/reducer';
-import crews, { _getCrewMembers, _getCrew, _getCrewPriceHistory, _getCrewName, _getCrewMemberName, _getCrewPrice } from './crews/reducer';
+import crews, { _getCrewMembers, _getCrew, _getCrewPriceHistory, _getCrewName, _getCrewMemberName, _getCrewPrice, _getCrewsForSex } from './crews/reducer';
 import config, { _getNumberOfDivisions, _getNumberOfCrews } from './config/reducer';
 import usercrews, { _getUserCrewMembers, _getUserCrewRanking, _getBuyMemberId, _getBuySex } from './usercrews/reducer';
 import users, {_getAllUsers, _getUser } from './admin/userReducer';
+import status, {_isMarketOpen, _getCurrentDay, _getCurrentStatus} from './status/reducer';
 
 const rootReducer = combineReducers({
   auth,
@@ -15,13 +16,14 @@ const rootReducer = combineReducers({
   crews,
   config,
   usercrews,
-  users
+  users,
+  status
 });
 
 export default rootReducer;
 
 export const isLoading = (state) => (
-  state.auth.loading || state.config.loading
+  state.auth.loading || state.config.loading || state.status.loading
 );
 
 // auth
@@ -34,6 +36,7 @@ export const getCrewPriceHistory = state => _getCrewPriceHistory(state.crews);
 export const getCrewName = state => _getCrewName(state.crews);
 export const getCrewMemberName = state => _getCrewMemberName(state.crews);
 export const getCrewPrice = state => _getCrewPrice(state.crews);
+export const getCrewsForSex = state => _getCrewsForSex(state.crews);
 
 // config
 export const getNumberOfDivisions = state => _getNumberOfDivisions(state.config);
@@ -51,8 +54,7 @@ export const getCrewsForDivision = state => (sex, division) => {
 };
 
 export const getCrewsByDivision = state => sex => {
-  let crewsForSex = state.crews.crews.bySex[sex] || [];
-  crewsForSex = crewsForSex.map(id => state.crews.crews.byId[id]).sort((a,b) => a.position - b.position);
+  const crewsForSex = getCrewsForSex(state)(sex).sort((a,b) => a.position - b.position);
   const result = {0:[]};
   let currentDivision = 0;
   const crewsPerDivision = state.config.config.crewsPerDivision;
@@ -73,3 +75,7 @@ export const getBuySex = state => _getBuySex(state.usercrews);
 
 export const getAllUsers = state => _getAllUsers(state.users);
 export const getUser = state => _getUser(state.users);
+
+export const getCurrentDay = state => _getCurrentDay(state.status);
+export const isMarketOpen = state => _isMarketOpen(state.status);
+export const getCurrentStatus = state => _getCurrentStatus(state.status);

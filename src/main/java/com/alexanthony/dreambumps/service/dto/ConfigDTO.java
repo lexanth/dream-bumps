@@ -10,6 +10,7 @@ public class ConfigDTO implements Serializable {
   private int crewsPerDivision;
 	private int mensCrews;
 	private int womensCrews;
+	private String regatta;
 	
 	public int getCrewsPerDivision() {
 		return crewsPerDivision;
@@ -29,4 +30,10 @@ public class ConfigDTO implements Serializable {
 	public void setWomensCrews(int womensCrews) {
 		this.womensCrews = womensCrews;
 	}
+  public String getRegatta() {
+    return regatta;
+  }
+  public void setRegatta(String regatta) {
+    this.regatta = regatta;
+  }
 }

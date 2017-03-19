@@ -119,6 +119,9 @@ public class BuySellService {
     
 
     UserCrewMemberDTO result = userCrewMemberMapper.userCrewMemberToUserCrewMemberDTO(userCrewMember);
+    
+    // TODO change everybody else slightly
+    
     return result;
   }
 
@@ -172,6 +175,7 @@ public class BuySellService {
     crewToSell.setPrice(newPrice);
     crewService.save(crewToSell);
     
+ // TODO change everybody else slightly
 
     UserCrewMemberDTO result = userCrewMemberMapper.userCrewMemberToUserCrewMemberDTO(userCrewMember);
     return result;

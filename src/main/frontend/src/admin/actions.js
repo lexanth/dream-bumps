@@ -1,3 +1,4 @@
+// @flow
 import requestWithAuth from '../auth/authorisedAxios';
 import * as types from '../actionTypes';
 
@@ -26,28 +27,60 @@ export const fetchUsers = () => dispatch => {
     });
 }
 
-const saveUsersStart = (user) => ({
-  type: types.SAVE_USERS_REQUEST,
+const updateUserStart = (user) => ({
+  type: types.UPDATE_USER_REQUEST,
   user
 });
 
-const saveUsersSuccess = user => ({
-  type: types.SAVE_USERS_SUCCESS,
+const updateUserSuccess = user => ({
+  type: types.UPDATE_USER_SUCCESS,
   user
 });
 
-const saveUsersError = errorMessage => ({
-  type: types.SAVE_USERS_ERROR,
+const updateUserError = errorMessage => ({
+  type: types.UPDATE_USER_ERROR,
   errorMessage
 });
 
-export const saveUser = user => dispatch => {
-  dispatch(saveUsersStart(user));
-  return requestWithAuth.post(`/api/users`, user)
+export const updateUser = user => dispatch => {
+  dispatch(updateUserStart(user));
+  return requestWithAuth.put(`/api/users`, user)
     .then(response => {
-      dispatch(saveUsersSuccess(response.data));
+      dispatch(updateUserSuccess(response.data));
     },
     error => {
-      dispatch(saveUsersError(error));
+      dispatch(updateUserError(error));
     });
 }
+
+const uploadBumpsStart = (bumps) => ({
+  type: types.UPLOAD_BUMPS_REQUEST,
+  bumps
+});
+
+const uploadBumpsSuccess = bumps => ({
+  type: types.UPLOAD_BUMPS_SUCCESS,
+  bumps
+});
+
+const uploadBumpsError = errorMessage => ({
+  type: types.UPLOAD_BUMPS_ERROR,
+  errorMessage
+});
+
+export const uploadBumps = (crews, day) => dispatch => {
+  const bumps = crews.map(crew => ({
+    day,
+    crewId: crew.id,
+    position: crew.position,
+    bumps: crew.bumps
+  }));
+  dispatch(uploadBumpsStart(bumps));
+  return requestWithAuth.post(`/api/bumps`, bumps)
+    .then(response => {
+      dispatch(uploadBumpsSuccess(response.data));
+    },
+    error => {
+      dispatch(uploadBumpsError(error));
+    });
+};

@@ -56,7 +56,7 @@ class DivisionTable extends Component { // eslint-disable-line react/prefer-stat
 
 DivisionTable.propTypes = {
   sex: PropTypes.string,
-  division: PropTypes.number
+  division: PropTypes.string
 };
 
 const mapStateToProps = (state, ownProps) => {

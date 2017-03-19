@@ -4,6 +4,7 @@ import com.alexanthony.dreambumps.repository.SocialUserConnectionRepository;
 import com.alexanthony.dreambumps.repository.CustomSocialUsersConnectionRepository;
 import com.alexanthony.dreambumps.security.jwt.TokenProvider;
 import com.alexanthony.dreambumps.security.social.CustomSignInAdapter;
+import com.alexanthony.dreambumps.service.UserService;
 
 import io.github.jhipster.config.JHipsterProperties;
 
@@ -124,9 +125,9 @@ public class SocialConfiguration implements SocialConfigurer {
 
     @Bean
     public SignInAdapter signInAdapter(UserDetailsService userDetailsService, JHipsterProperties jHipsterProperties,
-            TokenProvider tokenProvider) {
+            TokenProvider tokenProvider, UserService userService) {
         return new CustomSignInAdapter(userDetailsService, jHipsterProperties,
-            tokenProvider);
+            tokenProvider, userService);
     }
 
     @Bean

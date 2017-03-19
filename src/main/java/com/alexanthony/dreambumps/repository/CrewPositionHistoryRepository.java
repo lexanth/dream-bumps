@@ -1,5 +1,6 @@
 package com.alexanthony.dreambumps.repository;
 
+import com.alexanthony.dreambumps.domain.Crew;
 import com.alexanthony.dreambumps.domain.CrewPositionHistory;
 
 import org.springframework.data.jpa.repository.*;
@@ -13,5 +14,7 @@ import java.util.List;
 public interface CrewPositionHistoryRepository extends JpaRepository<CrewPositionHistory,Long> {
 
   List<CrewPositionHistory> findByCrewId(Long crewId);
+
+  CrewPositionHistory findFirstByCrewAndDay(Crew crew, int i);
 
 }
