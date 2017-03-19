@@ -1,9 +1,10 @@
+// @flow
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
 
 import { fetchCrews } from '../crews/actions';
-import { getNumberOfDivisions, getCrewsByDivision, getCurrentDay } from '../rootReducer';
+import { getNumberOfDivisions, getCrewsByDivision, getCurrentDay, isMarketOpen } from '../rootReducer';
 import DivisionTable from './DivisionTable';
 
 class CrewList extends React.Component {
@@ -12,10 +13,11 @@ class CrewList extends React.Component {
   }
 
   render() {
-    const title = this.props.day >= 4 ? 'Finishing Order' : `Starting Order for Day ${this.props.day + 1}`
+    const dayTitle = this.props.day >= 4 ? 'Finishing Order' : `Starting Order for Day ${this.props.day + 1}`
+    const statusSuffix = this.props.marketOpen ? '' : ' - Market is Closed'
     return (
       <Card>
-        <CardTitle title={title} />
+        <CardTitle title={`${dayTitle}${statusSuffix}`} />
         <CardText>
           {
             Object.keys(this.props.crews).map(key =>
@@ -40,22 +42,15 @@ CrewList.propTypes = {
   sex: PropTypes.string,
   numberOfDivisions: PropTypes.number,
   crews: PropTypes.array,
-  day: PropTypes.number
+  day: PropTypes.number,
+  marketOpen: PropTypes.bool
 };
 
 const mapStateToProps = (state, ownProps) => ({
   crews: getCrewsByDivision(state)(ownProps.sex),
   numberOfDivisions: getNumberOfDivisions(state)(ownProps.sex),
-  day: getCurrentDay(state)
+  day: getCurrentDay(state),
+  marketOpen: isMarketOpen(state)
 });
 
 export default connect(mapStateToProps, { fetchCrews })(CrewList);
-
-/*
-<DivisionTable
-  sex={this.props.sex}
-  division={key}
-  key={key}
-  crews={this.props.crews[key]}
-/>
-*/
