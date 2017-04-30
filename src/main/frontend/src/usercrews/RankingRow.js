@@ -2,6 +2,7 @@
 import React, {PropTypes, Component} from 'react';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { getUser } from '../rootReducer';
 
@@ -14,9 +15,9 @@ class RankingRow extends Component {
       <TableRow>
         <TableRowColumn>{this.props.number}</TableRowColumn>
         {this.props.user ?
-          <TableRowColumn>{`${this.props.user.firstName} ${this.props.user.lastName}`}</TableRowColumn>
+          <TableRowColumn><Link to={`/rankings/${this.props.user.id}`}>{`${this.props.user.firstName} ${this.props.user.lastName}`}</Link></TableRowColumn>
         :
-          <TableRowColumn>{`User ${this.props.ranking.userId}`}</TableRowColumn>
+          <TableRowColumn><Link to={`/rankings/${this.props.ranking.userId}`}>{`User ${this.props.ranking.userId}`}</Link></TableRowColumn>
         }
         {this.props.user ?
           <TableRowColumn>{this.props.user.college}</TableRowColumn>
@@ -45,7 +46,8 @@ RankingRow.propTypes = {
   user: PropTypes.shape({
     college: PropTypes.string,
     firstName: PropTypes.string,
-    lastName: PropTypes.string
+    lastName: PropTypes.string,
+    id: PropTypes.number
   })
 }
 

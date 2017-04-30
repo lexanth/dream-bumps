@@ -122,18 +122,18 @@ export const doBuyRower = (crewId, userCrewMemberId) => dispatch => {
     });
 };
 
-export const sellRowerStart = (crewId, userCrewMemberId) => ({
+const sellRowerStart = (crewId, userCrewMemberId) => ({
   type: types.SELL_ROWER_REQUEST,
   crewId,
   userCrewMemberId
 });
 
-export const sellRowerSuccess = (userCrewMember) => ({
+const sellRowerSuccess = (userCrewMember) => ({
   type: types.SELL_ROWER_SUCCESS,
   userCrewMember
 });
 
-export const sellRowerError = errorMessage => ({
+const sellRowerError = errorMessage => ({
   type: types.SELL_ROWER_ERROR,
   errorMessage
 });
@@ -148,5 +148,32 @@ export const doSellRower = (crewId, userCrewMemberId) => dispatch => {
     },
     error => {
       dispatch(sellRowerError(error));
+    });
+};
+
+const fetchUserCrewPriceHistoryStart = (userId, sex) => ({
+  type: types.FETCH_USER_CREW_PRICE_HISTORY_REQUEST,
+  userId,
+  sex
+});
+
+const fetchUserCrewPriceHistorySuccess = (userCrewPriceHistories) => ({
+  type: types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS,
+  userCrewPriceHistories
+});
+
+const fetchUserCrewPriceHistoryError = errorMessage => ({
+  type: types.FETCH_USER_CREW_PRICE_HISTORY_ERROR,
+  errorMessage
+});
+
+export const fetchUserCrewPriceHistory = (userId, sex) => dispatch => {
+  dispatch(fetchUserCrewPriceHistoryStart(userId, sex));
+  return requestWithAuth.get(`/api/users/${userId}/price-history?sex=${sex}`)
+    .then(response => {
+      dispatch(fetchUserCrewPriceHistorySuccess(response.data));
+    },
+    error => {
+      dispatch(fetchUserCrewPriceHistoryError(error));
     });
 };

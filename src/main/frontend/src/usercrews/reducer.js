@@ -104,10 +104,42 @@ const purchase = combineReducers({
   buySex
 })
 
+const historyByUser = (state = {}, history) => {
+  return {...state, [history.sex]: copyAndAddIfNotPresent(state[history.sex], history.id)};
+}
+
+const byUserAndSex = (state = {}, action) => {
+  let newState = {...state};
+  switch (action.type) {
+    case types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS:
+      action.userCrewPriceHistories.forEach(history => newState[history.user.id] = historyByUser(newState[history.user.id], history));
+      return newState;
+    default:
+      return state;
+  }
+}
+
+const historyById = (state = {}, action) => {
+  let newState = {...state};
+  switch (action.type) {
+    case types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS:
+      action.userCrewPriceHistories.forEach(history => newState[history.id] = history);
+      return newState;
+    default:
+      return state;
+  }
+}
+
+const history = combineReducers({
+  byUserAndSex,
+  byId: historyById
+});
+
 export default combineReducers({
   members,
   rankings,
-  purchase
+  purchase,
+  history
 });
 
 export const _getUserCrewMembers = state => (userId, sex) => {
@@ -130,4 +162,10 @@ export const _getUserCrewRankings = state => sex => {
     rankings.push(state.rankings.byUserId[userId][sex]);
   });
   return rankings.map(id => state.rankings.byId[id]);
+}
+
+export const _getUserScoreHistory = state => (userId, sex) => {
+  if (!userId || !state.history.byUserAndSex[userId]) return [];
+  const historyIds = state.history.byUserAndSex[userId][sex] || [];
+  return historyIds.map(id => state.history.byId[id]);
 }

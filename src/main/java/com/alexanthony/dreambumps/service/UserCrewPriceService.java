@@ -128,7 +128,7 @@ public class UserCrewPriceService {
 
   @Transactional(readOnly=true)
   public UserCrewPriceDTO findForUserAndSexDTO(Long userId, Sex sex) {
-    return userCrewPriceMapper.userCrewPriceToUserCrewPriceDTO(findForUserAndSex(userId, sex));
+    return populateBumpsAndDividends(userCrewPriceMapper.userCrewPriceToUserCrewPriceDTO(findForUserAndSex(userId, sex)));
   }
 
   @Transactional(readOnly=true)

@@ -23,6 +23,7 @@ import AdminCrewEdit from './admin/AdminCrewEdit';
 import BumpsAdminPage from './admin/BumpsAdminPage';
 import MarketStatusPage from './admin/MarketStatusPage';
 import RankingsPage from './usercrews/RankingsPage';
+import UserPage from './usercrews/UserPage';
 
 export default () => {
 
@@ -63,6 +64,7 @@ export default () => {
       <Route path="admin/bumps/:sex" component={BumpsAdminPage} />
       <Route path="admin/market" component={MarketStatusPage} />
       <Route path="rankings" component={RankingsPage} />
+      <Route path="rankings/:userId" component={UserPage} />
       <Route path="*" component={NotFoundPage}/>
     </Route>
   );
