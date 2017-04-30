@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import { routerActions } from 'react-router-redux';
@@ -12,7 +13,7 @@ import Logout from './auth/Logout';
 import Register from './auth/Register';
 import CrewPage from './crews/CrewPage';
 import BunglinesPage from './bunglines/BunglinesPage';
-import AdminPage from './admin/AdminPage';
+//import AdminPage from './admin/AdminPage';
 import UserAdminPage from './admin/UserAdminPage';
 import CrewAdminPage from './admin/CrewAdminPage';
 import UserList from './admin/UserList';
@@ -21,6 +22,7 @@ import CrewAdminLists from './admin/CrewAdminLists';
 import AdminCrewEdit from './admin/AdminCrewEdit';
 import BumpsAdminPage from './admin/BumpsAdminPage';
 import MarketStatusPage from './admin/MarketStatusPage';
+import RankingsPage from './usercrews/RankingsPage';
 
 export default () => {
 
@@ -60,6 +62,7 @@ export default () => {
       </Route>
       <Route path="admin/bumps/:sex" component={BumpsAdminPage} />
       <Route path="admin/market" component={MarketStatusPage} />
+      <Route path="rankings" component={RankingsPage} />
       <Route path="*" component={NotFoundPage}/>
     </Route>
   );

@@ -66,7 +66,10 @@ CurrentUserCrew.propTypes = {
   sex: PropTypes.string,
   currentUserId: PropTypes.number,
   crewMembers: PropTypes.array,
-  fetchUserCrewMembers: PropTypes.func
+  fetchUserCrewMembers: PropTypes.func,
+  fetchUserCrewRanking: PropTypes.func,
+  onClickBuy: PropTypes.func,
+  crewRanking: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => {

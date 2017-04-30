@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {TableRow, TableRowColumn} from 'material-ui/Table';
@@ -60,7 +61,15 @@ const CurrentUserCrewMemberRow = ({
 );
 
 CurrentUserCrewMemberRow.propTypes = {
-  member: PropTypes.object
+  member: PropTypes.object,
+  crew: PropTypes.object,
+  crewMemberName: PropTypes.string,
+  onClickBuy: PropTypes.func,
+  onClickCancel: PropTypes.func,
+  buyMemberId: PropTypes.number,
+  cancelBuyMember: PropTypes.func,
+  doSellRower: PropTypes.func,
+  marketOpen: PropTypes.bool
 };
 
 const mapStateToProps = (state, {member}) => ({

@@ -4,13 +4,15 @@
     "stage-1"
   ],
   "plugins": [
-    "transform-flow-strip-types"
+    "transform-flow-strip-types",
+    "transform-class-properties"
   ],
   "env": {
     "development": {
       "presets": [
         "latest",
-        "react-hmre"
+        "react-hmre",
+        "stage-0"
       ]
     },
     "production": {

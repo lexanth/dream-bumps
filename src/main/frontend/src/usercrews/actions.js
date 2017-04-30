@@ -57,6 +57,32 @@ export const fetchUserCrewRanking = (userId, sex) => dispatch => {
     });
 };
 
+const fetchUserCrewRankingsStart = (sex) => ({
+  type: types.FETCH_USER_CREW_RANKINGS_REQUEST,
+  sex
+});
+
+const fetchUserCrewRankingsSuccess = rankings => ({
+  type: types.FETCH_USER_CREW_RANKINGS_SUCCESS,
+  rankings
+});
+
+const fetchUserCrewRankingsError = errorMessage => ({
+  type: types.FETCH_USER_CREW_RANKINGS_ERROR,
+  errorMessage
+});
+
+export const fetchUserCrewRankings = (sex) => dispatch => {
+  dispatch(fetchUserCrewRankingsStart(sex));
+  return requestWithAuth.get(`/api/rankings?sex=${sex}`)
+    .then(response => {
+      dispatch(fetchUserCrewRankingsSuccess(response.data));
+    },
+    error => {
+      dispatch(fetchUserCrewRankingsError(error));
+    });
+};
+
 export const setBuyMember = (memberId, sex) => ({
   type: types.SET_BUY_MEMBER,
   memberId,

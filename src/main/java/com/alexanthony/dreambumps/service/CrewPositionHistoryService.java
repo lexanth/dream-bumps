@@ -1,6 +1,7 @@
 package com.alexanthony.dreambumps.service;
 
 import com.alexanthony.dreambumps.config.Constants;
+import com.alexanthony.dreambumps.domain.Crew;
 import com.alexanthony.dreambumps.domain.CrewPositionHistory;
 import com.alexanthony.dreambumps.domain.enumeration.Sex;
 import com.alexanthony.dreambumps.repository.CrewPositionHistoryRepository;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +29,7 @@ public class CrewPositionHistoryService {
   private final Logger log = LoggerFactory.getLogger(CrewPositionHistoryService.class);
 
   private final CrewPositionHistoryRepository crewPositionHistoryRepository;
-  
+
   private final CrewPositionHistoryMapper crewPositionHistoryMapper;
   private final CrewRepository crewRepository;
   private final UserCrewRacingHistoryService userCrewRacingHistoryService;
@@ -51,7 +53,7 @@ public class CrewPositionHistoryService {
     CrewPositionHistory result = crewPositionHistoryRepository.save(crewPositionHistory);
     return result;
   }
-  
+
   public CrewPositionHistoryDTO save(CrewPositionHistoryDTO crewPositionHistoryDTO) {
     CrewPositionHistory crewPositionHistory = save(crewPositionHistoryMapper.crewPositionHistoryDTOToCrewPositionHistory(crewPositionHistoryDTO));
     return crewPositionHistoryMapper.crewPositionHistoryToCrewPositionHistoryDTO(crewPositionHistory);
@@ -59,7 +61,7 @@ public class CrewPositionHistoryService {
 
   /**
    * Get all the crewPositionHistories.
-   * 
+   *
    * @return the list of entities
    */
   @Transactional(readOnly = true)
@@ -108,7 +110,7 @@ public class CrewPositionHistoryService {
     crewPositionHistories.forEach(crewPositionHistory -> crewPositionHistory.setCrew(crewRepository.findOne(crewPositionHistory.getCrew().getId())));
     Sex firstSex = crewPositionHistories.get(0).getCrew().getSex();
     Integer firstDay = crewPositionHistories.get(0).getDay();
-    
+
     if (crewPositionHistories.stream().anyMatch(a -> a.getCrew().getSex() != firstSex)) {
       // Error handling
       return null;
@@ -117,34 +119,34 @@ public class CrewPositionHistoryService {
       // Error handling
       return null;
     }
-    
+
     Integer numberOfCrews;
     if (firstSex == Sex.male) {
       numberOfCrews = Constants.MENS_CREWS;
     } else {
       numberOfCrews = Constants.WOMENS_CREWS;
     }
-    
+
     if (false && crewPositionHistories.size() != numberOfCrews) {
       return null;
     }
-    
+
     crewPositionHistories = crewPositionHistories.stream().map(this::setBumpsAndDividend).collect(Collectors.toList());
-    
+
     crewPositionHistories = crewPositionHistoryRepository.save(crewPositionHistories);
-    
+
     userCrewRacingHistoryService.updateCrewsForNewBumps(crewPositionHistories);
-    
+
     return crewPositionHistoryMapper.crewPositionHistorysToCrewPositionHistoryDTOs(crewPositionHistories);
   }
-  
+
   private CrewPositionHistory setBumpsAndDividend(CrewPositionHistory crewPositionHistory) {
     CrewPositionHistory lastPosition = crewPositionHistoryRepository.findFirstByCrewAndDay(crewPositionHistory.getCrew(), crewPositionHistory.getDay() - 1);
     Integer startPosition = lastPosition.getPosition();
     Integer endPosition = crewPositionHistory.getPosition();
     Integer bumps = endPosition - startPosition;
     crewPositionHistory.setBumps(bumps);
-    
+
     if (startPosition == 1 && endPosition == 1) {
       // headship rowover
       crewPositionHistory.setDividend(Constants.HEADSHIP_MULTIPLIER.multiply(calculateRowOverDividendForPosition(startPosition)));
@@ -164,7 +166,7 @@ public class CrewPositionHistoryService {
     }
     return crewPositionHistory;
   }
-  
+
   private boolean isPositionSandwichBoat(Integer startPosition, Sex sex) {
     if (startPosition.equals(Constants.getNumberOfCrewsForSex(sex))) {
       return false;
@@ -175,17 +177,45 @@ public class CrewPositionHistoryService {
   private BigDecimal calculateStartPriceForPosition(Integer position) {
     return Constants.THREE_HUNDRED.subtract(Constants.MULTIPLIER.multiply(new BigDecimal(Math.log(position))));
   }
-  
+
   private BigDecimal calculateRowOverDividendForPosition(Integer position) {
     return Constants.ROWOVER_DIVIDEND.multiply(calculateStartPriceForPosition(position));
   }
-  
+
   private BigDecimal calculateBumpDividend(Integer startPosition, Integer bumps) {
     return calculateRowOverDividendForPosition(startPosition).multiply(Constants.BUMP_MULTIPLIER).multiply(new BigDecimal(bumps));
   }
 
   public List<CrewPositionHistoryDTO> updateFullBumps(List<CrewPositionHistoryDTO> crewPositionHistoryDTOs) {
-    // TODO Auto-generated method stub
-    return null;
+    if (crewPositionHistoryDTOs.isEmpty()) {
+      return crewPositionHistoryDTOs;
+    }
+    // Check all have the same day
+    Integer day = crewPositionHistoryDTOs.get(0).getDay();
+    if (crewPositionHistoryDTOs.stream().filter(bump -> bump.getDay() != day).findFirst().isPresent()) {
+      // throw an error
+    }
+
+    List<CrewPositionHistory> bumps = new ArrayList<>();
+    for (CrewPositionHistoryDTO bumpDTO: crewPositionHistoryDTOs) {
+      Crew crew = crewRepository.findOne(bumpDTO.getCrewId());
+      CrewPositionHistory bump = crewPositionHistoryRepository.findFirstByCrewAndDay(crew, day);
+      bump.setPosition(bumpDTO.getPosition());
+      bump = setBumpsAndDividend(bump);
+//      bump = crewPositionHistoryRepository.save(bump);
+      bumps.add(bump);
+    }
+    bumps = crewPositionHistoryRepository.save(bumps);
+
+    userCrewRacingHistoryService.updateCrewsForUpdatedBumps(bumps);
+
+    return crewPositionHistoryMapper.crewPositionHistorysToCrewPositionHistoryDTOs(bumps);
+  }
+
+  public boolean getAllCrewsHaveBumps(Integer day) {
+    // Assume db integrity has worked, so we're ok if we have the same number
+    List<CrewPositionHistory> bumps = crewPositionHistoryRepository.findByDay(day);
+    List<Crew> crews = crewRepository.findAll();
+    return bumps.size() == crews.size();
   }
 }

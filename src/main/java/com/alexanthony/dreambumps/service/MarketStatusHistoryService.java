@@ -27,10 +27,16 @@ public class MarketStatusHistoryService {
 
   private final MarketStatusHistoryMapper marketStatusHistoryMapper;
 
+  private final CrewPositionHistoryService crewPositionHistoryService;
+
+  private final UserCrewRacingHistoryService userCrewRacingHistoryService;
+
   public MarketStatusHistoryService(MarketStatusHistoryRepository marketStatusHistoryRepository,
-      MarketStatusHistoryMapper marketStatusHistoryMapper) {
+      MarketStatusHistoryMapper marketStatusHistoryMapper, CrewPositionHistoryService crewPositionHistoryService, UserCrewRacingHistoryService userCrewRacingHistoryService) {
     this.marketStatusHistoryRepository = marketStatusHistoryRepository;
     this.marketStatusHistoryMapper = marketStatusHistoryMapper;
+    this.crewPositionHistoryService = crewPositionHistoryService;
+    this.userCrewRacingHistoryService = userCrewRacingHistoryService;
   }
 
   /**
@@ -45,15 +51,31 @@ public class MarketStatusHistoryService {
     MarketStatusHistory marketStatusHistory = marketStatusHistoryMapper
         .marketStatusHistoryDTOToMarketStatusHistory(marketStatusHistoryDTO);
     marketStatusHistory.setDateTime(ZonedDateTime.now());
+    Integer currentDay = findLatest().getDay();
+    if (marketStatusHistory.getDay() < currentDay || marketStatusHistory.getDay() > currentDay + 1) {
+      // throw an error
+    } else if (marketStatusHistory.getDay() == currentDay + 1) {
+      advanceDay(marketStatusHistory.getDay());
+    }
+
+
     marketStatusHistory = marketStatusHistoryRepository.save(marketStatusHistory);
     MarketStatusHistoryDTO result = marketStatusHistoryMapper
         .marketStatusHistoryToMarketStatusHistoryDTO(marketStatusHistory);
     return result;
   }
 
+  private void advanceDay(Integer day) {
+    if (!crewPositionHistoryService.getAllCrewsHaveBumps(day)) {
+      // throw an error
+    }
+    userCrewRacingHistoryService.payDividends(day);
+
+  }
+
   /**
    * Get all the marketStatusHistories.
-   * 
+   *
    * @return the list of entities
    */
   @Transactional(readOnly = true)

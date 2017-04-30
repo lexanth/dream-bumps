@@ -34,29 +34,37 @@ const members = combineReducers({
 });
 
 const rankingsById = (state = {}, action) => {
-  // let newState = {...state};
+  let newState = {...state};
   switch (action.type) {
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
       return {...state, [action.ranking.id]: action.ranking};
+    case types.FETCH_USER_CREW_RANKINGS_SUCCESS:
+      action.rankings.forEach(ranking => newState[ranking.id] = ranking);
+      return newState;
     default:
       return state;
   }
 };
 
-const rankingsBySex = (state = {}, action) => {
+const rankingsBySex = (state = {}, action, ranking) => {
   switch (action.type) {
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
       return {...state, [action.ranking.sex]: action.ranking.id};
+    case types.FETCH_USER_CREW_RANKINGS_SUCCESS:
+      return {...state, [ranking.sex]: ranking.id}
     default:
       return state;
   }
 }
 
 const rankingsByUserId = (state = {}, action) => {
-  // let newState = {...state};
+  let newState = {...state};
   switch (action.type) {
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
       return {...state, [action.ranking.userId]: rankingsBySex(state[action.ranking.userId], action)};
+    case types.FETCH_USER_CREW_RANKINGS_SUCCESS:
+      action.rankings.forEach(ranking => newState[ranking.userId] = rankingsBySex(state[ranking.userId], action, ranking));
+      return newState;
     default:
       return state;
   }
@@ -104,7 +112,10 @@ export default combineReducers({
 
 export const _getUserCrewMembers = state => (userId, sex) => {
   const membersForUser = state.members.byUserId[userId] || [];
-  return membersForUser.map(id => state.members.byId[id]).filter(member => member.sex === sex).sort((a,b) => (a.seat - b.seat));
+  return membersForUser
+    .map(id => state.members.byId[id])
+    .filter(member => member.sex === sex)
+    .sort((a,b) => (a.seat - b.seat));
 };
 
 export const _getUserCrewRanking = state => (userId, sex) => {
@@ -113,3 +124,10 @@ export const _getUserCrewRanking = state => (userId, sex) => {
 }
 export const _getBuyMemberId = state => state.purchase.buyMember;
 export const _getBuySex = state => state.purchase.buySex;
+export const _getUserCrewRankings = state => sex => {
+  const rankings = [];
+  Object.keys(state.rankings.byUserId).forEach(userId => {
+    rankings.push(state.rankings.byUserId[userId][sex]);
+  });
+  return rankings.map(id => state.rankings.byId[id]);
+}

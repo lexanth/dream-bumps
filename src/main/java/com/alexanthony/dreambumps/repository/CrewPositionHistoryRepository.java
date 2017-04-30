@@ -17,4 +17,5 @@ public interface CrewPositionHistoryRepository extends JpaRepository<CrewPositio
 
   CrewPositionHistory findFirstByCrewAndDay(Crew crew, int i);
 
+  List<CrewPositionHistory> findByDay(Integer day);
 }

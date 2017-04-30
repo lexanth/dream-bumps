@@ -3,6 +3,7 @@ package com.alexanthony.dreambumps.service;
 import com.alexanthony.dreambumps.domain.CrewPositionHistory;
 import com.alexanthony.dreambumps.domain.UserCrewMember;
 import com.alexanthony.dreambumps.domain.UserCrewPositionHistory;
+import com.alexanthony.dreambumps.domain.UserCrewPrice;
 import com.alexanthony.dreambumps.repository.UserCrewMemberRepository;
 import com.alexanthony.dreambumps.repository.UserCrewPositionHistoryRepository;
 import org.slf4j.Logger;
@@ -21,13 +22,15 @@ import java.util.List;
 public class UserCrewRacingHistoryService {
 
     private final Logger log = LoggerFactory.getLogger(UserCrewRacingHistoryService.class);
-    
+
     private final UserCrewPositionHistoryRepository userCrewPositionHistoryRepository;
     private final UserCrewMemberRepository userCrewMemberRepository;
+  private final UserCrewPriceService userCrewPriceService;
 
-    public UserCrewRacingHistoryService(UserCrewPositionHistoryRepository userCrewPositionHistoryRepository, UserCrewMemberRepository userCrewMemberRepository) {
+    public UserCrewRacingHistoryService(UserCrewPositionHistoryRepository userCrewPositionHistoryRepository, UserCrewMemberRepository userCrewMemberRepository, UserCrewPriceService userCrewPriceService) {
         this.userCrewPositionHistoryRepository = userCrewPositionHistoryRepository;
         this.userCrewMemberRepository = userCrewMemberRepository;
+      this.userCrewPriceService = userCrewPriceService;
     }
 
     /**
@@ -44,7 +47,7 @@ public class UserCrewRacingHistoryService {
 
     /**
      *  Get all the userCrewPositionHistories.
-     *  
+     *
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
@@ -89,4 +92,27 @@ public class UserCrewRacingHistoryService {
       }
       userCrewPositionHistoryRepository.save(userBumps);
     }
+
+    public void payDividends(Integer day) {
+      List<UserCrewPositionHistory> userBumps = userCrewPositionHistoryRepository.findByDay(day);
+
+      for (UserCrewPositionHistory bump : userBumps) {
+        UserCrewPrice userCrewPrice = userCrewPriceService.findForUserAndSex(bump.getUser().getId(), bump.getSex());
+        userCrewPrice.setCash(userCrewPrice.getCash().add(bump.getDividend()));
+        userCrewPriceService.save(userCrewPrice);
+      }
+    }
+
+  public void updateCrewsForUpdatedBumps(List<CrewPositionHistory> bumps) {
+    List<UserCrewPositionHistory> userBumpsToSave = new ArrayList<>();
+    for (CrewPositionHistory bump: bumps) {
+      List<UserCrewPositionHistory> userBumps = userCrewPositionHistoryRepository.findByCrewAndDay(bump.getCrew(), bump.getDay());
+      for (UserCrewPositionHistory userBump : userBumps) {
+        userBump.setBumps(bump.getBumps());
+        userBump.setDividend(bump.getDividend());
+        userBumpsToSave.add(userBump);
+      }
+    }
+    userCrewPositionHistoryRepository.save(userBumpsToSave);
+  }
 }

@@ -15,10 +15,12 @@ public class UserCrewPriceDTO implements Serializable {
   private Sex sex;
 
   private Long userId;
-  
+
   private BigDecimal value;
   private BigDecimal cash;
-  
+  private Integer bumps;
+  private BigDecimal dividends;
+
   public Long getId() {
     return id;
   }
@@ -49,7 +51,23 @@ public class UserCrewPriceDTO implements Serializable {
   public void setCash(BigDecimal cash) {
     this.cash = cash;
   }
-  
+
+  public Integer getBumps() {
+    return bumps;
+  }
+
+  public void setBumps(Integer bumps) {
+    this.bumps = bumps;
+  }
+
+  public BigDecimal getDividends() {
+    return dividends;
+  }
+
+  public void setDividends(BigDecimal dividends) {
+    this.dividends = dividends;
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;

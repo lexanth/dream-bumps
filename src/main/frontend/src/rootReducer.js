@@ -5,7 +5,7 @@ import { reducer as form } from 'redux-form';
 import auth, { _getCurrentUserId, _getCurrentUser } from './auth/reducer';
 import crews, { _getCrewMembers, _getCrew, _getCrewPriceHistory, _getCrewName, _getCrewMemberName, _getCrewPrice, _getCrewsForSex } from './crews/reducer';
 import config, { _getNumberOfDivisions, _getNumberOfCrews } from './config/reducer';
-import usercrews, { _getUserCrewMembers, _getUserCrewRanking, _getBuyMemberId, _getBuySex } from './usercrews/reducer';
+import usercrews, { _getUserCrewMembers, _getUserCrewRanking, _getBuyMemberId, _getBuySex, _getUserCrewRankings } from './usercrews/reducer';
 import users, {_getAllUsers, _getUser } from './admin/userReducer';
 import status, {_isMarketOpen, _getCurrentDay, _getCurrentStatus} from './status/reducer';
 
@@ -70,6 +70,7 @@ export const getCrewsByDivision = state => sex => {
 
 export const getUserCrewMembers = state => _getUserCrewMembers(state.usercrews);
 export const getUserCrewRanking = state => _getUserCrewRanking(state.usercrews);
+export const getUserCrewRankings = state => _getUserCrewRankings(state.usercrews);
 export const getBuyMemberId = state => _getBuyMemberId(state.usercrews);
 export const getBuySex = state => _getBuySex(state.usercrews);
 
