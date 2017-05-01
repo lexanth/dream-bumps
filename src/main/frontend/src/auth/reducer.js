@@ -2,34 +2,22 @@ import { combineReducers } from 'redux';
 import jwtDecode from 'jwt-decode';
 
 import * as types from '../actionTypes';
-import { tokenName } from '../constants/config';
 
 const authenticated = (
-  state = localStorage.getItem(tokenName) !== null,
+  state = false,
   action
 ) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
     case types.SIGNUP_SUCCESS:
     case types.LOGOUT_ERROR:
+    case types.FETCH_CURRENT_USER_SUCCESS:
       return true;
     case types.LOGIN_ERROR:
     case types.SIGNUP_ERROR:
     case types.LOGOUT_SUCCESS:
     case types.FETCH_CURRENT_USER_ERROR:
       return false;
-    default:
-      return state;
-  }
-};
-
-const token = (state = localStorage.getItem(tokenName), action) => {
-  switch (action.type) {
-    case types.LOGIN_SUCCESS:
-      return action.token;
-    case types.LOGIN_ERROR:
-    case types.LOGOUT_SUCCESS:
-      return null;
     default:
       return state;
   }
@@ -69,7 +57,6 @@ const loading = (state = false, action) => {
 const userReducer = combineReducers({
   loading,
   authenticated,
-  token,
   currentUser
 });
 

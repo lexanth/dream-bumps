@@ -3,6 +3,7 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
+import saveToken from './token';
 import rootReducer from '../rootReducer';
 
 function configureStoreProd(initialState) {
@@ -11,14 +12,13 @@ function configureStoreProd(initialState) {
       // https://github.com/gaearon/redux-thunk#injecting-a-custom-argument
       thunk,
     // Add other middleware on this line...
-
+    saveToken
 
   ];
 
   return createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares)
-    )
-  );
+  ));
 }
 
 function configureStoreDev(initialState) {
@@ -33,6 +33,7 @@ function configureStoreDev(initialState) {
     createLogger(),
     // Redux middleware that spits an error on you when you try to mutate your state either inside a dispatch or between dispatches.
     reduxImmutableStateInvariant(),
+    saveToken
 
   ];
 

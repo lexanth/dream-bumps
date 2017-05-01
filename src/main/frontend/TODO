@@ -6,5 +6,6 @@
 * Fill college list
 * User edit screen (self service)
 * When setting crew value after buy/sell, actually sum the crew value, don't just work it out (rounding)
-* Move to reselect
+* Move to reselect - hopefully sort the performance issues out
 * Saving college doesn't work
+* lock down the endpoints for the scrapers

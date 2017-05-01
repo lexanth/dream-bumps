@@ -10,7 +10,7 @@ import {Card, CardTitle, CardText, CardActions} from 'material-ui/Card';
 
 import {login} from './actions';
 
-const Login = ({handleSubmit}) => (
+export const Login = ({handleSubmit}) => (
   <form onSubmit={handleSubmit}>
     <Cell col={6} offset={3}>
       <Card>

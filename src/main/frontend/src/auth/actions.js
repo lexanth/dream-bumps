@@ -11,7 +11,7 @@ const beginLogin = login => ({
 });
 
 const loginSuccess = (token) => {
-  localStorage.setItem(tokenName, token);
+  // localStorage.setItem(tokenName, token);
   return {
     type: types.LOGIN_SUCCESS,
     token
@@ -93,7 +93,7 @@ export const signUp = (loginDetails) => (dispatch) => {
 export const logOut = () => dispatch => {
   dispatch(beginLogout());
 
-  localStorage.removeItem(tokenName);
+  // localStorage.removeItem(tokenName);
   dispatch(logoutSuccess());
 
   // somewhere presumably we could get a log out error?
