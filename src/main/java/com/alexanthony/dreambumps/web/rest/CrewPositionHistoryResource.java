@@ -53,20 +53,20 @@ public class CrewPositionHistoryResource {
    * @throws URISyntaxException
    *           if the Location URI syntax is incorrect
    */
-  @PostMapping("/crew-position-histories")
-  @Timed
-  public ResponseEntity<CrewPositionHistoryDTO> createCrewPositionHistory(
-      @Valid @RequestBody CrewPositionHistoryDTO crewPositionHistoryDTO) throws URISyntaxException {
-    log.debug("REST request to save CrewPositionHistory : {}", crewPositionHistoryDTO);
-    if (crewPositionHistoryDTO.getId() != null) {
-      return ResponseEntity.badRequest().headers(
-          HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new crewPositionHistory cannot already have an ID"))
-          .body(null);
-    }
-    CrewPositionHistoryDTO result = crewPositionHistoryService.save(crewPositionHistoryDTO);
-    return ResponseEntity.created(new URI("/api/crew-position-histories/" + result.getId()))
-        .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
-  }
+//  @PostMapping("/crew-position-histories")
+//  @Timed
+//  public ResponseEntity<CrewPositionHistoryDTO> createCrewPositionHistory(
+//      @Valid @RequestBody CrewPositionHistoryDTO crewPositionHistoryDTO) throws URISyntaxException {
+//    log.debug("REST request to save CrewPositionHistory : {}", crewPositionHistoryDTO);
+//    if (crewPositionHistoryDTO.getId() != null) {
+//      return ResponseEntity.badRequest().headers(
+//          HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new crewPositionHistory cannot already have an ID"))
+//          .body(null);
+//    }
+//    CrewPositionHistoryDTO result = crewPositionHistoryService.save(crewPositionHistoryDTO);
+//    return ResponseEntity.created(new URI("/api/crew-position-histories/" + result.getId()))
+//        .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString())).body(result);
+//  }
 
   @PostMapping("/bumps")
   @Timed
@@ -74,7 +74,7 @@ public class CrewPositionHistoryResource {
     log.debug("REST request to upload CrewPositionHistories");
     return crewPositionHistoryService.saveFullBumpSet(crewPositionHistoryDTOs);
   }
-  
+
   @PutMapping("/bumps")
   @Timed
   public List<CrewPositionHistoryDTO> changeBumps(@RequestBody List<CrewPositionHistoryDTO> crewPositionHistoryDTOs) {
@@ -94,19 +94,19 @@ public class CrewPositionHistoryResource {
    * @throws URISyntaxException
    *           if the Location URI syntax is incorrect
    */
-  @PutMapping("/crew-position-histories")
-  @Timed
-  public ResponseEntity<CrewPositionHistoryDTO> updateCrewPositionHistory(
-      @Valid @RequestBody CrewPositionHistoryDTO crewPositionHistoryDTO) throws URISyntaxException {
-    log.debug("REST request to update CrewPositionHistory : {}", crewPositionHistoryDTO);
-    if (crewPositionHistoryDTO.getId() == null) {
-      return createCrewPositionHistory(crewPositionHistoryDTO);
-    }
-    CrewPositionHistoryDTO result = crewPositionHistoryService.save(crewPositionHistoryDTO);
-    return ResponseEntity.ok()
-        .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, crewPositionHistoryDTO.getId().toString()))
-        .body(result);
-  }
+//  @PutMapping("/crew-position-histories")
+//  @Timed
+//  public ResponseEntity<CrewPositionHistoryDTO> updateCrewPositionHistory(
+//      @Valid @RequestBody CrewPositionHistoryDTO crewPositionHistoryDTO) throws URISyntaxException {
+//    log.debug("REST request to update CrewPositionHistory : {}", crewPositionHistoryDTO);
+//    if (crewPositionHistoryDTO.getId() == null) {
+//      return createCrewPositionHistory(crewPositionHistoryDTO);
+//    }
+//    CrewPositionHistoryDTO result = crewPositionHistoryService.save(crewPositionHistoryDTO);
+//    return ResponseEntity.ok()
+//        .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, crewPositionHistoryDTO.getId().toString()))
+//        .body(result);
+//  }
 
   /**
    * GET /crew-position-histories : get all the crewPositionHistories.
@@ -114,13 +114,13 @@ public class CrewPositionHistoryResource {
    * @return the ResponseEntity with status 200 (OK) and the list of
    *         crewPositionHistories in body
    */
-  @GetMapping("/crew-position-histories")
-  @Timed
-  public List<CrewPositionHistoryDTO> getAllCrewPositionHistories() {
-    log.debug("REST request to get all CrewPositionHistories");
-    List<CrewPositionHistoryDTO> crewPositionHistories = crewPositionHistoryService.findAll();
-    return crewPositionHistories;
-  }
+//  @GetMapping("/crew-position-histories")
+//  @Timed
+//  public List<CrewPositionHistoryDTO> getAllCrewPositionHistories() {
+//    log.debug("REST request to get all CrewPositionHistories");
+//    List<CrewPositionHistoryDTO> crewPositionHistories = crewPositionHistoryService.findAll();
+//    return crewPositionHistories;
+//  }
 
   /**
    * GET /crew-position-histories/:id : get the "id" crewPositionHistory.
@@ -130,13 +130,13 @@ public class CrewPositionHistoryResource {
    * @return the ResponseEntity with status 200 (OK) and with body the
    *         crewPositionHistory, or with status 404 (Not Found)
    */
-  @GetMapping("/crew-position-histories/{id}")
-  @Timed
-  public ResponseEntity<CrewPositionHistoryDTO> getCrewPositionHistory(@PathVariable Long id) {
-    log.debug("REST request to get CrewPositionHistory : {}", id);
-    CrewPositionHistoryDTO crewPositionHistoryDTO = crewPositionHistoryService.findOne(id);
-    return ResponseUtil.wrapOrNotFound(Optional.ofNullable(crewPositionHistoryDTO));
-  }
+//  @GetMapping("/crew-position-histories/{id}")
+//  @Timed
+//  public ResponseEntity<CrewPositionHistoryDTO> getCrewPositionHistory(@PathVariable Long id) {
+//    log.debug("REST request to get CrewPositionHistory : {}", id);
+//    CrewPositionHistoryDTO crewPositionHistoryDTO = crewPositionHistoryService.findOne(id);
+//    return ResponseUtil.wrapOrNotFound(Optional.ofNullable(crewPositionHistoryDTO));
+//  }
 
   /**
    * DELETE /crew-position-histories/:id : delete the "id" crewPositionHistory.
@@ -145,12 +145,12 @@ public class CrewPositionHistoryResource {
    *          the id of the crewPositionHistory to delete
    * @return the ResponseEntity with status 200 (OK)
    */
-  @DeleteMapping("/crew-position-histories/{id}")
-  @Timed
-  public ResponseEntity<Void> deleteCrewPositionHistory(@PathVariable Long id) {
-    log.debug("REST request to delete CrewPositionHistory : {}", id);
-    crewPositionHistoryService.delete(id);
-    return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-  }
+//  @DeleteMapping("/crew-position-histories/{id}")
+//  @Timed
+//  public ResponseEntity<Void> deleteCrewPositionHistory(@PathVariable Long id) {
+//    log.debug("REST request to delete CrewPositionHistory : {}", id);
+//    crewPositionHistoryService.delete(id);
+//    return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+//  }
 
 }

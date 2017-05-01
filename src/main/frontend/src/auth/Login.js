@@ -17,8 +17,7 @@ const Login = ({handleSubmit}) => (
         <CardTitle title="Login"/>
         <CardText>
           <div>
-            Not what you want? 
-            <Link to="/register">Register</Link>
+            Not got an account yet? <Link to="/register">Register</Link>
           </div>
           <Field name="username" component={TextField} floatingLabelText="Username" fullWidth/>
           <Field name="password" component={TextField} floatingLabelText="Password" type="password" fullWidth/>

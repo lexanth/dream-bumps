@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import jwtDecode from 'jwt-decode';
 
 import * as types from '../actionTypes';
 import { tokenName } from '../constants/config';
@@ -38,6 +39,16 @@ const currentUser = (state = {}, action) => {
   switch (action.type) {
     case types.FETCH_CURRENT_USER_SUCCESS:
       return action.user;
+    case types.LOGOUT_SUCCESS:
+      return {};
+    case types.LOGIN_SUCCESS:
+      // console.log(jwtDecode(action.token));
+      const token = jwtDecode(action.token);
+      return {
+        id: token.id,
+        authorities: token.auth.split(','),
+        login: token.sub
+      }
     default:
       return state;
   }
@@ -79,3 +90,5 @@ export const _getCurrentUserId = (state) => {
 };
 
 export const _getCurrentUser = state => state.currentUser;
+
+export const _isAdmin = state => () => (state.currentUser && state.currentUser.authorities && state.currentUser.authorities.indexOf('ROLE_ADMIN') > -1);

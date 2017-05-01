@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 // import { Grid } from 'react-flexbox-grid';
 // import { Grid } from 'material-grid/dist';
 
@@ -18,6 +19,18 @@ import { isLoading } from '../rootReducer';
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
+
+const OXFORD_BLUE = '#002147';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: OXFORD_BLUE
+  },
+  toolbar: {
+    backgroundColor: OXFORD_BLUE,
+    color: '#fff'
+  }
+})
 
 /*
  * React-router's <Router> component renders <Route>'s
@@ -36,7 +49,7 @@ class App extends Component {
   }
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <div>
           {/* <Meta /> */}
           <Navigation />

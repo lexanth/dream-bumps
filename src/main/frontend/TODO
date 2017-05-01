@@ -2,7 +2,5 @@
 * Tests
 * Authorities
 * Make sure can't buy/sell while market is closed
-* Styling, reduce some padding etc
-* Homepage
-* Rankings
-* Pay dividends
+* All those "// Throw an error" bits of validation in Java...
+* Loading/error notifications in UI

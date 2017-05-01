@@ -167,5 +167,11 @@ export const _getUserCrewRankings = state => sex => {
 export const _getUserScoreHistory = state => (userId, sex) => {
   if (!userId || !state.history.byUserAndSex[userId]) return [];
   const historyIds = state.history.byUserAndSex[userId][sex] || [];
-  return historyIds.map(id => state.history.byId[id]);
+  return historyIds
+          .map(id => state.history.byId[id])
+          .map(history => {
+            history.date = Date.parse(history.dateTime);
+            return history;
+          })
+          .sort((p1, p2) => (p1.date - p2.date));
 }

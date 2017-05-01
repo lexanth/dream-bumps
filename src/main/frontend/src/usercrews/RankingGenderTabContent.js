@@ -12,7 +12,7 @@ import RankingRow from './RankingRow';
 const SortableHeaderColumn = ({sortKey, label, onSort, currentSortKey, sortDescending}) => (
   <TableHeaderColumn
     onMouseUp={onSort}
-    style={currentSortKey === sortKey ? {fontWeight: 'bold'} : {}}
+    style={currentSortKey === sortKey ? {fontWeight: 'bold',paddingRight:0, width: '88px'} :  {paddingRight:0, width: '88px'}}
   >
     {label}
     {currentSortKey === sortKey && (sortDescending ? <DownArrow color="rgb(158, 158, 158)"/>:<UpArrow color="rgb(158, 158, 158)"/>)}
@@ -61,6 +61,10 @@ class RankingGenderTabContent extends Component {
     this.setState({sortBy: 'DIVIDEND', sortDescending: !(this.state.sortBy === 'DIVIDEND' && this.state.sortDescending)});
   }
 
+  onSortByTradingProfit() {
+    this.setState({sortBy: 'TRADING', sortDescending: !(this.state.sortBy === 'TRADING' && this.state.sortDescending)})
+  }
+
   render() {
     let sortedRankings = this.props.rankings || [];
     switch (this.state.sortBy) {
@@ -78,6 +82,9 @@ class RankingGenderTabContent extends Component {
         break;
       case 'DIVIDEND':
         sortedRankings = sortedRankings.sort((r1, r2) => (r2.dividends - r1.dividends));
+        break;
+      case 'TRADING':
+        sortedRankings = sortedRankings.sort((r1, r2) => (r2.value + r2.cash - r2.dividends - r1.value - r1.cash + r1.dividends));
         break;
       default:
         break;
@@ -98,7 +105,7 @@ class RankingGenderTabContent extends Component {
                   displaySelectAll={false}
                 >
                   <TableRow>
-                    <TableHeaderColumn>#</TableHeaderColumn>
+                    <TableHeaderColumn style={{paddingLeft:0, paddingRight:0, width: '45px'}}>#</TableHeaderColumn>
                     <TableHeaderColumn>Name</TableHeaderColumn>
                     <TableHeaderColumn>College</TableHeaderColumn>
                     <SortableHeaderColumn
@@ -130,6 +137,13 @@ class RankingGenderTabContent extends Component {
                       onSort={this.onSortByDividends.bind(this)}
                     />
                     <SortableHeaderColumn
+                      label="Trading Profit"
+                      sortKey="TRADING"
+                      currentSortKey={this.state.sortBy}
+                      sortDescending={this.state.sortDescending}
+                      onSort={this.onSortByTradingProfit.bind(this)}
+                    />
+                    <SortableHeaderColumn
                       label="Score"
                       sortKey="SCORE"
                       currentSortKey={this.state.sortBy}
@@ -145,7 +159,7 @@ class RankingGenderTabContent extends Component {
                     <RankingRow
                       number={index + 1}
                       ranking={ranking}
-                      key={ranking ? ranking.id : index}
+                      key={index}
                     />
                   )}
                 </TableBody>
@@ -170,7 +184,8 @@ const mapStateToProps = (state, ownProps) => {
     return {
       rankings: maleRankings.map(maleRanking => {
         const ranking = {...maleRanking};
-        const userId = maleRanking.userId || -1;
+        ranking.sex = 'combined';
+        const userId = maleRanking && maleRanking.userId ? maleRanking.userId : -1;
         const femaleRanking = femaleRankings.find(rank => userId === (rank ? rank.userId : -1) );
         if (femaleRanking) {
           ranking.value += femaleRanking.value;

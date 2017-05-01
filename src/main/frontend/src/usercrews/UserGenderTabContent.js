@@ -24,14 +24,10 @@ class UserGenderTabContent extends Component {
             userId={this.props.userId}
             sex={this.props.sex}
           />
-        </Cell>
-        <Cell col={6}>
-          
-        </Cell>
-        <Cell col={6}>
           <UserScoreHistory
             userId={this.props.userId}
             sex={this.props.sex}
+            style={{marginTop: '16px'}}
           />
         </Cell>
       </Grid>

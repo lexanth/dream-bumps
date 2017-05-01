@@ -1,6 +1,6 @@
 import request from 'axios';
 import { push } from 'react-router-redux';
-import requestWithAuth, { getToken } from './authorisedAxios';
+import requestWithAuth from './authorisedAxios';
 import * as types from '../actionTypes';
 import { tokenName } from '../constants/config';
 
@@ -93,14 +93,14 @@ export const signUp = (loginDetails) => (dispatch) => {
 export const logOut = () => dispatch => {
   dispatch(beginLogout());
 
-  localStorage.removeItem('token');
+  localStorage.removeItem(tokenName);
   dispatch(logoutSuccess());
 
   // somewhere presumably we could get a log out error?
 };
 
 export const fetchCurrentUser = () => (dispatch) => {
-  const token = getToken();
+  // const token = getToken();
   // if (token === undefined || token === null) {
   //   return dispatch(errorCurrentUser('Not logged in'));
   //   // return null;

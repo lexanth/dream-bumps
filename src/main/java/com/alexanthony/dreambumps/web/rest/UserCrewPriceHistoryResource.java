@@ -27,7 +27,7 @@ public class UserCrewPriceHistoryResource {
     private final Logger log = LoggerFactory.getLogger(UserCrewPriceHistoryResource.class);
 
     private static final String ENTITY_NAME = "userCrewPriceHistory";
-        
+
     private final UserCrewPriceHistoryService userCrewPriceHistoryService;
 
     public UserCrewPriceHistoryResource(UserCrewPriceHistoryService userCrewPriceHistoryService) {
@@ -81,12 +81,12 @@ public class UserCrewPriceHistoryResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of userCrewPriceHistories in body
      */
-    @GetMapping("/user-crew-price-histories")
-    @Timed
-    public List<UserCrewPriceHistory> getAllUserCrewPriceHistories() {
-        log.debug("REST request to get all UserCrewPriceHistories");
-        return userCrewPriceHistoryService.findAll();
-    }
+//    @GetMapping("/user-crew-price-histories")
+//    @Timed
+//    public List<UserCrewPriceHistory> getAllUserCrewPriceHistories() {
+//        log.debug("REST request to get all UserCrewPriceHistories");
+//        return userCrewPriceHistoryService.findAll();
+//    }
 
     /**
      * GET  /user-crew-price-histories/:id : get the "id" userCrewPriceHistory.
@@ -115,19 +115,19 @@ public class UserCrewPriceHistoryResource {
 //        userCrewPriceHistoryService.delete(id);
 //        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
 //    }
-    
+
 //    @GetMapping("/rankings")
 //    @Timed
 //    public List<UserCrewPriceHistory> getMostRecentRankingPerUser(@RequestParam Sex sex) {
 //    	return userCrewPriceHistoryService.findMostRecentPricePerUserForSex(sex);
 //    }
-    
+
     @GetMapping("/users/{userId}/price-history")
     @Timed
     public List<UserCrewPriceHistory> getAllUserCrewPriceHistories(@PathVariable Long userId, @RequestParam Sex sex) {
         log.debug("REST request to get all UserCrewPriceHistories for user: {}", userId);
         return userCrewPriceHistoryService.findAllForUserForSex(userId, sex);
     }
-    
+
 
 }

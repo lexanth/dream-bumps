@@ -3,6 +3,7 @@ import React, {PropTypes, Component} from 'react';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import FlatButton from 'material-ui/FlatButton';
 
 import { getUser } from '../rootReducer';
 
@@ -13,22 +14,37 @@ class RankingRow extends Component {
     }
     return (
       <TableRow>
-        <TableRowColumn>{this.props.number}</TableRowColumn>
+        <TableRowColumn style={{paddingLeft:0, paddingRight:0, width: '45px'}}>{this.props.number}</TableRowColumn>
         {this.props.user ?
-          <TableRowColumn><Link to={`/rankings/${this.props.user.id}`}>{`${this.props.user.firstName} ${this.props.user.lastName}`}</Link></TableRowColumn>
+          <TableRowColumn>
+            <FlatButton
+              containerElement={<Link to={`/rankings/${this.props.user.id}`}/>}
+              label={`${this.props.user.firstName} ${this.props.user.lastName}`}
+              labelStyle={{textTransform: ''}}
+              style={{paddingLeft: 0, textAlign: '', marginLeft: '-16px'}}
+            />
+          </TableRowColumn>
         :
-          <TableRowColumn><Link to={`/rankings/${this.props.ranking.userId}`}>{`User ${this.props.ranking.userId}`}</Link></TableRowColumn>
+          <TableRowColumn>
+            <FlatButton
+              containerElement={<Link to={`/rankings/${this.props.ranking.userId}`}/>}
+              label={`User ${this.props.ranking.userId}`}
+              labelStyle={{textTransform: ''}}
+              style={{paddingLeft: 0, textAlign: '', marginLeft: '-16px'}}
+            />
+          </TableRowColumn>
         }
         {this.props.user ?
           <TableRowColumn>{this.props.user.college}</TableRowColumn>
         :
           <TableRowColumn />
         }
-        <TableRowColumn>{this.props.ranking.bumps}</TableRowColumn>
-        <TableRowColumn>{this.props.ranking.cash}</TableRowColumn>
-        <TableRowColumn>{this.props.ranking.value}</TableRowColumn>
-        <TableRowColumn>{this.props.ranking.dividends}</TableRowColumn>
-        <TableRowColumn>{(this.props.ranking.cash + this.props.ranking.value).toFixed(2)}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.bumps}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.cash}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.value}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.dividends}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{(this.props.ranking.cash + this.props.ranking.value - (this.props.ranking.sex === 'combined' ? 2000 : 1000) - this.props.ranking.dividends).toFixed(2)}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{(this.props.ranking.cash + this.props.ranking.value).toFixed(2)}</TableRowColumn>
       </TableRow>
     );
   }
@@ -41,7 +57,8 @@ RankingRow.propTypes = {
     cash: PropTypes.number,
     value: PropTypes.number,
     bumps: PropTypes.number,
-    dividends: PropTypes.number
+    dividends: PropTypes.number,
+    sex: PropTypes.string
   }),
   user: PropTypes.shape({
     college: PropTypes.string,

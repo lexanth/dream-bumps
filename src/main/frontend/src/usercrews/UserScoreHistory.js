@@ -28,7 +28,7 @@ class UserScoreHistory extends Component {
 
   render() {
     return (
-      <Card>
+      <Card style={this.props.style}>
         <CardTitle title="Score History" />
         <CardText>
           <Line
@@ -59,7 +59,8 @@ UserScoreHistory.propTypes = {
   scoreHistory: PropTypes.array,
   userId: PropTypes.number,
   fetchUserCrewPriceHistory: PropTypes.func,
-  sex: PropTypes.string
+  sex: PropTypes.string,
+  style: PropTypes.object
 };
 
 const mapStateToProps = (state, ownProps) => ({

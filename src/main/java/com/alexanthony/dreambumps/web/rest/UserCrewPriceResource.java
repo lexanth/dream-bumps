@@ -94,12 +94,12 @@ public class UserCrewPriceResource {
    * @return the ResponseEntity with status 200 (OK) and the list of
    *         userCrewPrices in body
    */
-  @GetMapping("/user-crew-prices")
-  @Timed
-  public List<UserCrewPriceDTO> getAllUserCrewPrices() {
-    log.debug("REST request to get all UserCrewPrices");
-    return userCrewPriceService.findAll();
-  }
+//  @GetMapping("/user-crew-prices")
+//  @Timed
+//  public List<UserCrewPriceDTO> getAllUserCrewPrices() {
+//    log.debug("REST request to get all UserCrewPrices");
+//    return userCrewPriceService.findAll();
+//  }
 //
 //  /**
 //   * GET /user-crew-prices/:id : get the "id" userCrewPrice.
@@ -137,7 +137,7 @@ public class UserCrewPriceResource {
   public List<UserCrewPriceDTO> getMostRecentRankingPerUser(@RequestParam Sex sex) {
     return userCrewPriceService.findAllForSex(sex);
   }
-  
+
   @GetMapping("/users/{userId}/ranking")
   @Timed
   public UserCrewPriceDTO getMostRecentForUserForSex(@PathVariable Long userId, @RequestParam Sex sex) {

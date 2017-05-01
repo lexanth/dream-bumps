@@ -103,7 +103,17 @@ export default combineReducers({
 
 export const _getCrewMembers = state => crewId => (state.members.byCrewId[crewId] ? state.members.byCrewId[crewId].map(id => state.members.byId[id]) : []).sort((a,b) => a.seat > b.seat);
 export const _getCrew = state => crewId => (state.crews.byId[crewId]);
-export const _getCrewPriceHistory = state => crewId => (state.priceHistory.byCrewId[crewId] ? state.priceHistory.byCrewId[crewId].map(id => state.priceHistory.byId[id]) : []);
+export const _getCrewPriceHistory = state => crewId =>
+  (state.priceHistory.byCrewId[crewId] ?
+    state.priceHistory.byCrewId[crewId]
+      .map(id => state.priceHistory.byId[id])
+      .map(history => {
+        history.date = Date.parse(history.dateTime);
+        return history;
+      })
+      .sort((p1, p2) => (p1.date - p2.date))
+  :
+    []);
 
 export const _getCrewName = state => crewId => {
   if (crewId === null) return '';

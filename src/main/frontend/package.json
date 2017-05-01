@@ -40,6 +40,7 @@
     "flow": "^0.2.3",
     "flow-bin": "^0.42.0",
     "flow-typed": "^2.0.0",
+    "jwt-decode": "^2.2.0",
     "material-grid": "^0.1.0",
     "material-ui": "^0.17.0",
     "material-ui-superselectfield": "^1.5.1",

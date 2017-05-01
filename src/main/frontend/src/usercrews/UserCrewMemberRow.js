@@ -43,8 +43,8 @@ class UserCrewMemberRow extends Component {
     } = this.props;
     return (
       <TableRow>
-        <TableRowColumn>{seatNumberToName(member.seat)}</TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{paddingLeft:0, paddingRight:0, width: '45px'}}>{seatNumberToName(member.seat)}</TableRowColumn>
+        <TableRowColumn style={{paddingLeft:0, paddingRight:'5px'}}>
           {
             crew ?
               crew.name
@@ -52,29 +52,29 @@ class UserCrewMemberRow extends Component {
               '-'
           }
         </TableRowColumn>
-        <TableRowColumn>{crewMemberName}</TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{paddingLeft:0, paddingRight: 0}}>{crewMemberName}</TableRowColumn>
+        <TableRowColumn style={{paddingLeft:0, paddingRight: '5px', width: '75px', textAlign: 'right'}}>
           {
-            crew ?
-              crew.price
+            crew && crew.price && crew.price.toFixed ?
+              crew.price.toFixed(2)
             :
               ''
           }
         </TableRowColumn>
         {
           marketOpen && canBuySell ?
-            <TableRowColumn>
+            <TableRowColumn style={{paddingLeft:0, paddingRight:0, width: '75px'}}>
               {
-                member.crewId ?
-                  <RaisedButton label="Sell" onClick={e => doSellRower(member.crewId, member.id)}/>
+                member.crewId && !buyMemberId ?
+                  <RaisedButton primary label="Sell" style={{minWidth: '70px'}} onClick={e => doSellRower(member.crewId, member.id)}/>
                 :
                   member.id === buyMemberId ?
-                    <RaisedButton label="Cancel" onClick={cancelBuyMember}/>
+                    <RaisedButton primary label="Cancel" style={{minWidth: '70px'}} labelStyle={{paddingLeft: '2px', paddingRight:0}}  onClick={cancelBuyMember}/>
                   :
                     buyMemberId ?
                       null
                     :
-                      <RaisedButton label="Buy" onClick={onClickBuy}/>
+                      <RaisedButton primary label="Buy" style={{minWidth: '70px'}} onClick={onClickBuy}/>
               }
             </TableRowColumn>
           :

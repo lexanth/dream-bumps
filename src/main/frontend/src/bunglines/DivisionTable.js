@@ -36,12 +36,12 @@ class DivisionTable extends Component { // eslint-disable-line react/prefer-stat
             >
               <TableRowColumn>{crew.position}</TableRowColumn>
               <TableRowColumn>{crew.name}</TableRowColumn>
-              <TableRowColumn>{crew.price}</TableRowColumn>
+              <TableRowColumn>{crew.price && crew.price.toFixed ? crew.price.toFixed(2) : ''}</TableRowColumn>
               <TableRowColumn><FlatButton containerElement={<Link to={`/crews/${crew.id}`} />} icon={<ActionInfo />} /></TableRowColumn>
               {
                 this.props.buySex === this.props.sex ?
                 <TableRowColumn>
-                  <RaisedButton label="Buy" disabled={crew.price > this.props.crewRanking.cash} onClick={e => this.props.doBuyRower(crew.id, this.props.buyMemberId)} />
+                  <RaisedButton label="Buy" primary disabled={crew.price > this.props.crewRanking.cash} onClick={e => this.props.doBuyRower(crew.id, this.props.buyMemberId)} />
                 </TableRowColumn>
                 :
                 null
@@ -59,7 +59,9 @@ DivisionTable.propTypes = {
   division: PropTypes.string,
   crews: PropTypes.array,
   buySex: PropTypes.string,
-  crewRanking: PropTypes.array,
+  crewRanking: PropTypes.shape({
+    cash: PropTypes.number
+  }),
   doBuyRower: PropTypes.func,
   buyMemberId: PropTypes.number
 };

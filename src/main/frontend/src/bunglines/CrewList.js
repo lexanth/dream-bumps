@@ -41,7 +41,7 @@ CrewList.propTypes = {
   fetchCrews: PropTypes.func,
   sex: PropTypes.string,
   numberOfDivisions: PropTypes.number,
-  crews: PropTypes.array,
+  crews: PropTypes.object,
   day: PropTypes.number,
   marketOpen: PropTypes.bool
 };

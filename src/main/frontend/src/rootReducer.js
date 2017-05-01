@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer as routing } from 'react-router-redux';
 import { reducer as form } from 'redux-form';
 
-import auth, { _getCurrentUserId, _getCurrentUser } from './auth/reducer';
+import auth, { _getCurrentUserId, _getCurrentUser, _isAdmin } from './auth/reducer';
 import crews, { _getCrewMembers, _getCrew, _getCrewPriceHistory, _getCrewName, _getCrewMemberName, _getCrewPrice, _getCrewsForSex } from './crews/reducer';
 import config, { _getNumberOfDivisions, _getNumberOfCrews } from './config/reducer';
 import usercrews, { _getUserCrewMembers, _getUserCrewRanking, _getBuyMemberId, _getBuySex, _getUserCrewRankings, _getUserScoreHistory } from './usercrews/reducer';
@@ -29,6 +29,7 @@ export const isLoading = (state) => (
 // auth
 export const getCurrentUserId = state => _getCurrentUserId(state.auth);
 export const getCurrentUser = state => _getCurrentUser(state.auth);
+export const isAdmin = state => _isAdmin(state.auth);
 // crews
 export const getCrewMembers = state => _getCrewMembers(state.crews);
 export const getCrew = state => _getCrew(state.crews);
