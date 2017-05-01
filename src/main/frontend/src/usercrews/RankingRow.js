@@ -20,7 +20,7 @@ class RankingRow extends Component {
             <FlatButton
               containerElement={<Link to={`/rankings/${this.props.user.id}`}/>}
               label={`${this.props.user.firstName} ${this.props.user.lastName}`}
-              labelStyle={{textTransform: ''}}
+              labelStyle={{textTransform: '', fontSize: '13px'}}
               style={{paddingLeft: 0, textAlign: '', marginLeft: '-16px'}}
             />
           </TableRowColumn>
@@ -29,7 +29,7 @@ class RankingRow extends Component {
             <FlatButton
               containerElement={<Link to={`/rankings/${this.props.ranking.userId}`}/>}
               label={`User ${this.props.ranking.userId}`}
-              labelStyle={{textTransform: ''}}
+              labelStyle={{textTransform: '', fontSize: '13px'}}
               style={{paddingLeft: 0, textAlign: '', marginLeft: '-16px'}}
             />
           </TableRowColumn>

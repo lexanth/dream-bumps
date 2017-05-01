@@ -1,6 +1,9 @@
 * Flow everything
 * Tests
-* Authorities
 * Make sure can't buy/sell while market is closed
 * All those "// Throw an error" bits of validation in Java...
 * Loading/error notifications in UI
+* Display expected dividend
+* Fill college list
+* User edit screen (self service)
+* Change constants for eights

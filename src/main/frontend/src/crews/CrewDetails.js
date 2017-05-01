@@ -16,7 +16,7 @@ const percentChange = (now, original) => {
 
 const stepChange = (now, original) => {
   // Looks slightly backwards, because lower position is upwards
-  if (now - original < 0) {
+  if (now - original <= 0) {
     return `+${original-now}`;
   }
   return `-${now - original}`;

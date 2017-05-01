@@ -41,6 +41,8 @@ export const getCrewsForSex = state => _getCrewsForSex(state.crews);
 
 // config
 export const getNumberOfDivisions = state => _getNumberOfDivisions(state.config);
+export const getNumberOfCrews = state => _getNumberOfCrews(state.config);
+export const getCrewsPerDivision = state => () => state.config.config.crewsPerDivision;
 
 export const getCrewsForDivision = state => (sex, division) => {
   const crewsPerDivision = state.config.config.crewsPerDivision;

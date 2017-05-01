@@ -27,6 +27,7 @@ class CrewList extends React.Component {
                   division={key}
                   key={key}
                   crews={this.props.crews[key]}
+                  day={this.props.day}
                 />
               )
             )

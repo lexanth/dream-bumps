@@ -147,7 +147,7 @@ public class CrewPositionHistoryService {
     Integer bumps = endPosition - startPosition;
     crewPositionHistory.setBumps(bumps);
 
-    if (startPosition == 1 && endPosition == 1) {
+    if (startPosition == 1 && endPosition == 1 && crewPositionHistory.getDay() >= 4) {
       // headship rowover
       crewPositionHistory.setDividend(Constants.HEADSHIP_MULTIPLIER.multiply(calculateRowOverDividendForPosition(startPosition)));
     } else if (bumps == 0) {
@@ -158,7 +158,9 @@ public class CrewPositionHistoryService {
       crewPositionHistory.setDividend(BigDecimal.ZERO);
     } else {
       // bump
-      if (isPositionSandwichBoat(startPosition, crewPositionHistory.getCrew().getSex())) {
+      if (endPosition == 1 && crewPositionHistory.getDay() >= 4) {
+        crewPositionHistory.setDividend(calculateBumpDividend(startPosition, bumps)).add(Constants.HEADSHIP_MULTIPLIER.subtract(BigDecimal.ONE).multiply(calculateRowOverDividendForPosition(startPosition)))
+      } else if (isPositionSandwichBoat(startPosition, crewPositionHistory.getCrew().getSex())) {
         crewPositionHistory.setDividend(calculateBumpDividend(startPosition, bumps).add(calculateRowOverDividendForPosition(startPosition)));
       } else {
         crewPositionHistory.setDividend(calculateBumpDividend(startPosition, bumps));

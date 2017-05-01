@@ -4,10 +4,12 @@ import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowCol
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
-import ActionInfo from 'material-ui/svg-icons/action/info';
+import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward';
+import RightArrow from 'material-ui/svg-icons/navigation/arrow-forward';
 
-import { getCurrentUserId, getUserCrewRanking, getBuySex, getBuyMemberId } from '../rootReducer';
+import { getCurrentUserId, getUserCrewRanking, getBuySex, getBuyMemberId, getNumberOfCrews, getCrewsPerDivision } from '../rootReducer';
 import { doBuyRower } from '../usercrews/actions';
+import {calculateRowOverDividendForPosition, calculateBumpDividend} from '../utils/dividends';
 /**
  * DivisionTable
  */
@@ -34,10 +36,15 @@ class DivisionTable extends Component { // eslint-disable-line react/prefer-stat
             <TableRow
               key={crew.id}
             >
-              <TableRowColumn>{crew.position}</TableRowColumn>
-              <TableRowColumn>{crew.name}</TableRowColumn>
-              <TableRowColumn>{crew.price && crew.price.toFixed ? crew.price.toFixed(2) : ''}</TableRowColumn>
-              <TableRowColumn><FlatButton containerElement={<Link to={`/crews/${crew.id}`} />} icon={<ActionInfo />} /></TableRowColumn>
+              <TableRowColumn style={{paddingLeft:0, paddingRight:0, width: '45px'}}>{crew.position}</TableRowColumn>
+              <TableRowColumn>
+                <FlatButton
+                  containerElement={<Link to={`/crews/${crew.id}`} />}
+                  label={crew.name}
+                  labelStyle={{textTransform: '', fontSize: '13px'}}
+                  style={{paddingLeft: 0, textAlign: '', marginLeft: '-16px'}}
+                />
+              </TableRowColumn>
               {
                 this.props.buySex === this.props.sex ?
                 <TableRowColumn>
@@ -46,6 +53,9 @@ class DivisionTable extends Component { // eslint-disable-line react/prefer-stat
                 :
                 null
               }
+              <TableRowColumn style={{width: '100px'}}>{crew.price && crew.price.toFixed ? crew.price.toFixed(2) : ''}</TableRowColumn>
+              <TableRowColumn style={{width: '100px'}}>{crew.position > 1 && <UpArrow />}{ crew.position > 1 && calculateBumpDividend(crew.position, this.props.numberOfCrews, this.props.crewsPerDivision, this.props.day)}</TableRowColumn>
+              <TableRowColumn style={{width: '100px'}}><RightArrow /> { calculateRowOverDividendForPosition(crew.position, this.props.day)}</TableRowColumn>
             </TableRow>
           ))}
         </TableBody>
@@ -63,7 +73,10 @@ DivisionTable.propTypes = {
     cash: PropTypes.number
   }),
   doBuyRower: PropTypes.func,
-  buyMemberId: PropTypes.number
+  buyMemberId: PropTypes.number,
+  crewsPerDivision: PropTypes.number,
+  numberOfCrews: PropTypes.number,
+  day: PropTypes.number
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -74,6 +87,8 @@ const mapStateToProps = (state, ownProps) => {
     buyMemberId: getBuyMemberId(state)
   };
   mapping.crewRanking = getUserCrewRanking(state)(mapping.currentUserId, ownProps.sex) || {};
+  mapping.crewsPerDivision = getCrewsPerDivision(state)();
+  mapping.numberOfCrews = getNumberOfCrews(state)(ownProps.sex)
   return mapping;
 };
 
