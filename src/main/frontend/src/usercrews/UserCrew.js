@@ -54,9 +54,9 @@ class UserCrew extends Component {
           <CardText>
             <dl className="dl-horizontal">
               <dt>Cash</dt>
-              <dd>{this.props.crewRanking.cash}</dd>
+              <dd>{this.props.crewRanking.cash ? this.props.crewRanking.cash.toFixed(2) : ''}</dd>
               <dt>Crew Value</dt>
-              <dd>{this.props.crewRanking.value}</dd>
+              <dd>{this.props.crewRanking.value ? this.props.crewRanking.value.toFixed(2): ''}</dd>
             </dl>
           </CardText>
         }

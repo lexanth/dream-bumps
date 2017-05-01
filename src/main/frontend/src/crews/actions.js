@@ -97,7 +97,6 @@ const fetchCrewPriceHistoryError = errorMessage => ({
   errorMessage
 });
 
-
 export const fetchCrewPriceHistory = crewId => dispatch => {
   dispatch(fetchCrewPriceHistoryStart(crewId));
   return requestWithAuth.get(`/api/crews/${crewId}/price-history`)
@@ -113,6 +112,29 @@ export const updateCrew = crew => dispatch => {
   console.log(crew);
 }
 
+const updateCrewMembersStart = members => ({
+  type: types.UPDATE_CREW_MEMBERS_REQUEST,
+  members
+});
+
+const updateCrewMembersSuccess = crewMembers => ({
+  type: types.UPDATE_CREW_MEMBERS_SUCCESS,
+  crewMembers
+});
+
+const updateCrewMembersError = errorMessage => ({
+  type: types.UPDATE_CREW_MEMBERS_ERROR,
+  errorMessage
+});
+
+
 export const updateCrewMembers = crew => dispatch => {
-  console.log(crew);
-}
+  dispatch(updateCrewMembersStart(crew.members));
+  return requestWithAuth.put(`/api/crews/${crew.id}/members`, crew.members)
+    .then(response => {
+      dispatch(updateCrewMembersSuccess(response.data));
+    },
+    error => {
+      dispatch(updateCrewMembersError(error));
+    });
+};

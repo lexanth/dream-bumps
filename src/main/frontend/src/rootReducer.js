@@ -63,8 +63,8 @@ export const getCrewsByDivision = state => sex => {
   const crewsPerDivision = state.config.config.crewsPerDivision;
   for (let i = 0; i < crewsForSex.length; i++) {
     result[currentDivision].push(crewsForSex[i]);
-    if (result[currentDivision].length >= crewsPerDivision + 1) {
-      currentDivision = currentDivision++;
+    if (result[currentDivision].length >= crewsPerDivision && i < (crewsForSex.length - 2)) {
+      currentDivision++;
       result[currentDivision] = [];
     }
   }

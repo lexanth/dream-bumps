@@ -1,6 +1,7 @@
 package com.alexanthony.dreambumps.service;
 
 import com.alexanthony.dreambumps.domain.Crew;
+import com.alexanthony.dreambumps.domain.CrewMember;
 import com.alexanthony.dreambumps.domain.CrewPositionHistory;
 import com.alexanthony.dreambumps.domain.CrewPriceHistory;
 import com.alexanthony.dreambumps.domain.enumeration.Sex;
@@ -8,14 +9,19 @@ import com.alexanthony.dreambumps.repository.CrewRepository;
 import com.alexanthony.dreambumps.service.dto.CrewDTO;
 import com.alexanthony.dreambumps.service.dto.CrewPositionHistoryDTO;
 import com.alexanthony.dreambumps.service.mapper.CrewMapper;
+import org.apache.commons.lang3.text.WordUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -30,11 +36,11 @@ public class CrewService {
   private final CrewRepository crewRepository;
 
   private final CrewMapper crewMapper;
-  
+
   private final CrewMemberService crewMemberService;
-  
+
   private final CrewPositionHistoryService crewPositionHistoryService;
-  
+
   private final CrewPriceHistoryService crewPriceHistoryService;
 
   public CrewService(CrewRepository crewRepository, CrewMapper crewMapper, CrewMemberService crewMemberService, CrewPositionHistoryService crewPositionHistoryService, CrewPriceHistoryService crewPriceHistoryService) {
@@ -62,7 +68,7 @@ public class CrewService {
     crewPositionHistoryService.save(crewPositionHistory);
     return result;
   }
-  
+
   public CrewDTO save(CrewDTO crewDTO) {
     log.debug("Request to save Crew : {}", crewDTO);
     Crew crew = crewMapper.crewDTOToCrew(crewDTO);
@@ -83,7 +89,7 @@ public class CrewService {
 
   /**
    * Get all the crews.
-   * 
+   *
    * @return the list of entities
    */
   @Transactional(readOnly = true)
@@ -107,17 +113,17 @@ public class CrewService {
     log.debug("Request to get CrewDTO : {}", id);
     Crew crew = crewRepository.findOne(id);
     CrewDTO crewDTO = crewMapper.crewToCrewDTO(crew);
-    
+
     return populatePositionsAndPrices(crewDTO);
   }
-  
+
   @Transactional(readOnly = true)
   public Crew findOne(Long id) {
     log.debug("Request to get Crew : {}", id);
     return crewRepository.findOne(id);
-    
+
   }
-  
+
   private CrewDTO populatePositionsAndPrices(CrewDTO crewDTO) {
     List<CrewPositionHistoryDTO> positionHistories = crewPositionHistoryService.findAllByCrew(crewDTO.getId());
     Optional<CrewPositionHistoryDTO> zeroDay = positionHistories.stream().filter(a -> a.getDay().equals(0)).findFirst();
@@ -134,7 +140,7 @@ public class CrewService {
     if (oldestPriceHistory != null) {
       crewDTO.setStartPrice(oldestPriceHistory.getPrice());
     }
-    
+
     return crewDTO;
   }
 
@@ -153,5 +159,149 @@ public class CrewService {
     log.debug("Request to find all Crews for : {}", sex);
     return crewRepository.findBySex(sex).stream().map(crewMapper::crewToCrewDTO).map(this::populatePositionsAndPrices)
         .collect(Collectors.toCollection(LinkedList::new));
+  }
+
+  public List<CrewDTO> populateCrewsFromOurcs(String url) throws IOException {
+    log.debug("Populating all crews from OURCs");
+    log.debug(url);
+    if (!crewRepository.findAll().isEmpty()) {
+      // throw an error
+    }
+    Document entriesPage = Jsoup.connect(url).get();
+    Elements tables = entriesPage.getElementsByTag("table");
+//    for (Element table: tables) {
+//      System.out.println(table.text());
+//    }
+    Element crewListTable = tables.get(1);
+    Elements alternatingHeadersAndCrewListsAndReturnToTop = crewListTable.getElementsByTag("tr");
+    String college = null;
+
+    List<Crew> crewList = new ArrayList<>();
+    for (Element row: alternatingHeadersAndCrewListsAndReturnToTop) {
+      if (row.children().size() > 0) {
+        Elements collegeHeaders = row.getElementsByTag("h2");
+        if (collegeHeaders.size() > 0) {
+          college = collegeHeaders.get(0).text();
+//          System.out.println("College: "+college);
+        } else {
+          Elements crewTables = row.getElementsByClass("entry_list");
+          if (crewTables.size() > 0) {
+            Elements mensCrews = row.children().get(0).children();
+            String crewName = null;
+            for (Element item: mensCrews) {
+              if (item.tagName().equals("h3")) {
+                crewName = "M"+item.text().split("n's ")[1].substring(0,1);
+//                System.out.println("Crew: "+crewName);
+              } else {
+                Crew crew = new Crew();
+                crewList.add(crew);
+                crew.setName(college+" "+crewName);
+                crew.setSex(Sex.male);
+                crew.setCrewMembers(new HashSet<>());
+                crew.setPrice(BigDecimal.ZERO);
+
+                for (Element memberRow : item.getElementsByTag("tr")) {
+                  String seat = memberRow.child(0).text();
+                  String name = memberRow.child(1).text();
+                  name = name.split("\\(")[0];
+                  if (!seat.equals("Coach")) {
+                    CrewMember member = new CrewMember();
+                    member.setName(WordUtils.capitalizeFully(name, ' ', '-'));
+                    member.setCrew(crew);
+                    if (seat.equals("Bow")) {
+                      member.setSeat(1);
+                    } else if (seat.equals("Stroke")) {
+                      member.setSeat(8);
+                    } else if (seat.equals("Cox")) {
+                      member.setSeat(9);
+                    } else {
+                      member.setSeat(Integer.parseInt(seat));
+                    }
+                    if (name.trim().isEmpty()) {
+                      member.setName("Unnamed "+seat);
+                    }
+                    crew.getCrewMembers().add(member);
+                  }
+                }
+                if (crew.getCrewMembers().size() < 9) {
+                  fillCrew(crew);
+                }
+              }
+            }
+
+
+            Elements womensCrews = row.children().get(1).children();
+            crewName = null;
+            for (Element item: womensCrews) {
+              if (item.tagName().equals("h3")) {
+                crewName = "W"+item.text().split("n's ")[1].substring(0,1);
+                System.out.println("Crew: "+crewName);
+              } else {
+                Crew crew = new Crew();
+                crewList.add(crew);
+                crew.setName(college+" "+crewName);
+                crew.setSex(Sex.female);
+                crew.setCrewMembers(new HashSet<>());
+                crew.setPrice(BigDecimal.ZERO);
+
+                for (Element memberRow : item.getElementsByTag("tr")) {
+                  String seat = memberRow.child(0).text();
+                  String name = memberRow.child(1).text();
+                  name = name.split("\\(")[0];
+                  if (!seat.equals("Coach")) {
+                    CrewMember member = new CrewMember();
+                    member.setName(WordUtils.capitalizeFully(name, ' ', '-'));
+                    member.setCrew(crew);
+                    if (seat.equals("Bow")) {
+                      member.setSeat(1);
+                    } else if (seat.equals("Stroke")) {
+                      member.setSeat(8);
+                    } else if (seat.equals("Cox")) {
+                      member.setSeat(9);
+                    } else {
+                      member.setSeat(Integer.parseInt(seat));
+                    }
+                    if (name.trim().isEmpty()) {
+                      member.setName("Unnamed "+seat);
+                    }
+                    crew.getCrewMembers().add(member);
+                  }
+                }
+                if (crew.getCrewMembers().size() < 9) {
+                  fillCrew(crew);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    crewList = crewRepository.save(crewList);
+    List<CrewMember> membersToSave = new ArrayList<>();
+    for (Crew crew: crewList) {
+      for (CrewMember member: crew.getCrewMembers()) {
+        member.setCrew(crew);
+        membersToSave.add(member);
+      }
+    }
+    crewMemberService.saveMembers(membersToSave);
+    return crewMapper.crewsToCrewDTOs(crewList);
+  }
+
+  private void fillCrew(Crew crew) {
+    for (int seat = 1; seat <= 9; seat++) {
+      Optional<CrewMember> member = findMemberForSeat(crew.getCrewMembers(), seat);
+      if (!member.isPresent()) {
+        CrewMember newMember = new CrewMember()
+          .name("Unnamed "+Integer.toString(seat))
+          .crew(crew)
+          .seat(seat);
+        crew.getCrewMembers().add(newMember);
+      }
+    }
+  }
+
+  private Optional<CrewMember> findMemberForSeat(Set<CrewMember> crewMembers, int seat) {
+    return crewMembers.stream().filter(member -> member.getSeat() == seat).findFirst();
   }
 }

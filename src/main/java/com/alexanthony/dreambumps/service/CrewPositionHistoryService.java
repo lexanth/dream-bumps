@@ -9,14 +9,21 @@ import com.alexanthony.dreambumps.repository.CrewRepository;
 import com.alexanthony.dreambumps.service.dto.CrewPositionHistoryDTO;
 import com.alexanthony.dreambumps.service.mapper.CrewPositionHistoryMapper;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -33,12 +40,19 @@ public class CrewPositionHistoryService {
   private final CrewPositionHistoryMapper crewPositionHistoryMapper;
   private final CrewRepository crewRepository;
   private final UserCrewRacingHistoryService userCrewRacingHistoryService;
+  private final CrewPriceHistoryService crewPriceHistoryService;
 
-  public CrewPositionHistoryService(CrewPositionHistoryRepository crewPositionHistoryRepository, CrewPositionHistoryMapper crewPositionHistoryMapper, CrewRepository crewRepository, UserCrewRacingHistoryService userCrewRacingHistoryService) {
+  public CrewPositionHistoryService(
+    CrewPositionHistoryRepository crewPositionHistoryRepository,
+    CrewPositionHistoryMapper crewPositionHistoryMapper,
+    CrewRepository crewRepository,
+    UserCrewRacingHistoryService userCrewRacingHistoryService,
+    CrewPriceHistoryService crewPriceHistoryService) {
     this.crewPositionHistoryRepository = crewPositionHistoryRepository;
     this.crewPositionHistoryMapper = crewPositionHistoryMapper;
     this.crewRepository = crewRepository;
     this.userCrewRacingHistoryService = userCrewRacingHistoryService;
+    this.crewPriceHistoryService = crewPriceHistoryService;
   }
 
   /**
@@ -159,7 +173,7 @@ public class CrewPositionHistoryService {
     } else {
       // bump
       if (endPosition == 1 && crewPositionHistory.getDay() >= 4) {
-        crewPositionHistory.setDividend(calculateBumpDividend(startPosition, bumps)).add(Constants.HEADSHIP_MULTIPLIER.subtract(BigDecimal.ONE).multiply(calculateRowOverDividendForPosition(startPosition)))
+        crewPositionHistory.setDividend(calculateBumpDividend(startPosition, bumps).add(Constants.HEADSHIP_MULTIPLIER.subtract(BigDecimal.ONE).multiply(calculateRowOverDividendForPosition(startPosition))));
       } else if (isPositionSandwichBoat(startPosition, crewPositionHistory.getCrew().getSex())) {
         crewPositionHistory.setDividend(calculateBumpDividend(startPosition, bumps).add(calculateRowOverDividendForPosition(startPosition)));
       } else {
@@ -219,5 +233,124 @@ public class CrewPositionHistoryService {
     List<CrewPositionHistory> bumps = crewPositionHistoryRepository.findByDay(day);
     List<Crew> crews = crewRepository.findAll();
     return bumps.size() == crews.size();
+  }
+
+  public List<CrewPositionHistoryDTO> parseStartingPositionsFromAnu(String url) throws IOException {
+    Document entriesPage = Jsoup.connect(url).get();
+    Element bodyTableTbody = entriesPage.getElementsByTag("table").get(1).child(0);
+
+    List<Crew> crews = crewRepository.findAll();
+    List<CrewPositionHistory> positionHistories = new ArrayList<>();
+
+    for (Element divisionTable: bodyTableTbody.getElementsByTag("table")) {
+      Elements rows = divisionTable.getElementsByTag("tr");
+      if (rows.size() > 0) {
+        String divisionName = rows.get(0).text();
+        System.out.println(divisionName);
+        Sex sex;
+        if (divisionName.startsWith("Men")) {
+          sex = Sex.male;
+        } else {
+          sex = Sex.female;
+        }
+
+        String divNameWithoutTime = divisionName.split(" \\(")[0].trim();
+        String[] divNameComponents = divNameWithoutTime.split(" ");
+        String divNumber = divNameComponents[divNameComponents.length-1];
+        int divNum = parseNumeral(divNumber);
+
+        for (int i = 1; i < rows.size(); i++) {
+          String crewName = rows.get(i).getElementsByTag("a").text();
+          int overallPosition = (divNum - 1)* Constants.CREWS_PER_DIVISION+i;
+          System.out.println(Integer.toString(i) +"("+Integer.toString(overallPosition)+")"+ ": " + crewName);
+          CrewPositionHistory crewPositionHistory = new CrewPositionHistory();
+          crewPositionHistory.day(0).dividend(BigDecimal.ZERO).bumps(0).position(overallPosition);
+          Crew crew = findCrew(crewName, sex, crews);
+          if (crew != null) {
+            crewPositionHistory.setCrew(crew);
+            positionHistories.add(crewPositionHistory);
+            crew.setPrice(calculateStartPriceForPosition(overallPosition));
+            crewRepository.save(crew);
+            crewPriceHistoryService.createForCrew(crew);
+          }
+        }
+      }
+    }
+    positionHistories = crewPositionHistoryRepository.save(positionHistories);
+    return crewPositionHistoryMapper.crewPositionHistorysToCrewPositionHistoryDTOs(positionHistories);
+  }
+
+  private Crew findCrew(String crewNameFromAnu, Sex sex, List<Crew> allCrews) {
+    String[] crewNameComponents = crewNameFromAnu.split(" ");
+    String crewNumberString = crewNameComponents[crewNameComponents.length-1];
+    int crewNumber = parseNumeral(crewNumberString);
+    if (crewNumber == 0) {
+      crewNumber = 1;
+    }
+
+    for (Crew crew: allCrews) {
+      if (crew.getSex() == sex && crew.getName().endsWith(Integer.toString(crewNumber))) {
+        // Narrowed it down to correct sex and crew number, now "just" college...
+        if (collegeMatch(crewNameFromAnu, crew.getName(), crewNumber == 1)) {
+          return crew;
+        }
+      }
+    }
+
+
+    return null;
+  }
+
+  private boolean collegeMatch(String crewNameFromAnu, String nameFromOurcs, boolean isFirstBoat) {
+    String anuCollegeName;
+    if (isFirstBoat) {
+      anuCollegeName = crewNameFromAnu;
+    } else {
+      anuCollegeName = crewNameFromAnu.substring(0, crewNameFromAnu.trim().lastIndexOf(" "));
+    }
+    String collegeNameFromOurcs = nameFromOurcs.substring(0, nameFromOurcs.trim().lastIndexOf(" "));
+    if (anuCollegeName.equals(collegeNameFromOurcs)) {
+      return true;
+    }
+    Map<String, String> anuToOurcsCollegeNames = new HashMap<>();
+    anuToOurcsCollegeNames.put("New College", "New");
+    anuToOurcsCollegeNames.put("S.E.H.", "St Edmund Hall");
+    anuToOurcsCollegeNames.put("L.M.H.", "Lady Margaret Hall");
+    anuToOurcsCollegeNames.put("St Benet's Hall", "St Benet's");
+
+    String mappedName = anuToOurcsCollegeNames.get(anuCollegeName);
+    if (mappedName != null && mappedName.equals(collegeNameFromOurcs)) {
+      return true;
+    }
+    return false;
+
+  }
+
+  private int parseNumeral(String divNumber) {
+    int divNum = 0;
+    switch (divNumber) {
+      case "I":
+        divNum = 1;
+        break;
+      case "II":
+        divNum = 2;
+        break;
+      case "III":
+        divNum = 3;
+        break;
+      case "IV":
+        divNum = 4;
+        break;
+      case "V":
+        divNum = 5;
+        break;
+      case "VI":
+        divNum = 6;
+        break;
+      case "VII":
+        divNum = 7;
+        break;
+    }
+    return divNum;
   }
 }

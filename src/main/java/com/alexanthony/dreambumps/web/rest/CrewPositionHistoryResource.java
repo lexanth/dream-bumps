@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -80,6 +81,11 @@ public class CrewPositionHistoryResource {
   public List<CrewPositionHistoryDTO> changeBumps(@RequestBody List<CrewPositionHistoryDTO> crewPositionHistoryDTOs) {
     log.debug("REST request to upload CrewPositionHistories");
     return crewPositionHistoryService.updateFullBumps(crewPositionHistoryDTOs);
+  }
+
+  @GetMapping("/crews/parse-positions")
+  public List<CrewPositionHistoryDTO> parseStartingPositions(@RequestParam("url") String url) throws IOException {
+    return crewPositionHistoryService.parseStartingPositionsFromAnu(url);
   }
 
   /**

@@ -40,9 +40,9 @@ class RankingRow extends Component {
           <TableRowColumn />
         }
         <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.bumps}</TableRowColumn>
-        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.cash}</TableRowColumn>
-        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.value}</TableRowColumn>
-        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.dividends}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.cash.toFixed(2)}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.value.toFixed(2)}</TableRowColumn>
+        <TableRowColumn style={{paddingRight:0, width: '88px'}}>{this.props.ranking.dividends.toFixed(2)}</TableRowColumn>
         <TableRowColumn style={{paddingRight:0, width: '88px'}}>{(this.props.ranking.cash + this.props.ranking.value - (this.props.ranking.sex === 'combined' ? 2000 : 1000) - this.props.ranking.dividends).toFixed(2)}</TableRowColumn>
         <TableRowColumn style={{paddingRight:0, width: '88px'}}>{(this.props.ranking.cash + this.props.ranking.value).toFixed(2)}</TableRowColumn>
       </TableRow>

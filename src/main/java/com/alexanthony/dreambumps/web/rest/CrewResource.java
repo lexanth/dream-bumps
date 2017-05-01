@@ -1,5 +1,6 @@
 package com.alexanthony.dreambumps.web.rest;
 
+import com.alexanthony.dreambumps.domain.Crew;
 import com.codahale.metrics.annotation.Timed;
 import com.alexanthony.dreambumps.domain.enumeration.Sex;
 import com.alexanthony.dreambumps.service.CrewService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
@@ -29,7 +31,7 @@ public class CrewResource {
     private final Logger log = LoggerFactory.getLogger(CrewResource.class);
 
     private static final String ENTITY_NAME = "crew";
-        
+
     private final CrewService crewService;
 
     public CrewResource(CrewService crewService) {
@@ -116,6 +118,11 @@ public class CrewResource {
         log.debug("REST request to delete Crew : {}", id);
         crewService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @GetMapping("/crews/parse-members")
+    public List<CrewDTO> parseCrewsFromOurcs(@RequestParam("url") String url) throws IOException {
+      return crewService.populateCrewsFromOurcs(url);
     }
 
 }

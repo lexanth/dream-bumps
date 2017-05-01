@@ -75,6 +75,7 @@ const AdminEditUser = ({user, handleSubmit, params}) => (
           <Field
             name="college"
             fullWidth
+            floatingLabelText="College"
             component={SelectField}
           >
             {colleges.map(college =>

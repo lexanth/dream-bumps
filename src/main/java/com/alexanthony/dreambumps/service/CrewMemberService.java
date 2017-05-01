@@ -28,7 +28,7 @@ import java.util.stream.IntStream;
 public class CrewMemberService {
 
   private final Logger log = LoggerFactory.getLogger(CrewMemberService.class);
-  
+
   private static final Set<Integer> seats = new HashSet<>(Arrays.asList(1,2,3,4,5,6,7,8,9));
 
   private final CrewMemberRepository crewMemberRepository;
@@ -57,7 +57,7 @@ public class CrewMemberService {
 
   /**
    * Get all the crewMembers.
-   * 
+   *
    * @return the list of entities
    */
   @Transactional(readOnly = true)
@@ -109,5 +109,9 @@ public class CrewMemberService {
 
   public List<CrewMemberDTO> save(List<CrewMemberDTO> crewMemberDTOs) {
     return crewMemberDTOs.stream().map(this::save).collect(Collectors.toCollection(LinkedList::new));
+  }
+
+  public List<CrewMember> saveMembers(List<CrewMember> crewMembers) {
+    return crewMemberRepository.save(crewMembers);
   }
 }

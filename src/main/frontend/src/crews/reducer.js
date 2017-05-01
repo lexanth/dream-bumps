@@ -7,6 +7,7 @@ const membersById = (state = {}, action) => {
   let newState = {...state};
   switch (action.type) {
     case types.FETCH_CREW_MEMBERS_SUCCESS:
+    case types.UPDATE_CREW_MEMBERS_SUCCESS:
       action.crewMembers.forEach(member => {newState[member.id] = member;});
       return newState;
     default:
@@ -18,6 +19,7 @@ const membersByCrewId = (state = {}, action) => {
   let newState = {...state};
   switch (action.type) {
     case types.FETCH_CREW_MEMBERS_SUCCESS:
+    case types.UPDATE_CREW_MEMBERS_SUCCESS:
       action.crewMembers.forEach(member => {newState[member.crewId] = copyAndAddIfNotPresent(newState[member.crewId], member.id);});
       return newState;
     default:
