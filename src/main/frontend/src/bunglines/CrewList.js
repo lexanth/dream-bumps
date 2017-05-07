@@ -47,7 +47,7 @@ CrewList.propTypes = {
   marketOpen: PropTypes.bool
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   crews: getCrewsByDivision(state)(ownProps.sex),
   numberOfDivisions: getNumberOfDivisions(state)(ownProps.sex),
   day: getCurrentDay(state),

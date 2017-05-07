@@ -79,7 +79,7 @@ DivisionTable.propTypes = {
   day: PropTypes.number
 };
 
-const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state, ownProps) => {
   const mapping = {
     // crews: getCrewsForDivision(state)(ownProps.sex, ownProps.division),
     currentUserId: getCurrentUserId(state),

@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { MarketStatusPage } from './MarketStatusPage';
+import { MarketStatusPage, mapStateToProps } from './MarketStatusPage';
 import toJson from 'enzyme-to-json';
 
 test('Renders properly', () => {
@@ -29,8 +29,20 @@ test('Renders properly', () => {
   expect(toJson(component)).toMatchSnapshot()
 });
 
-// MarketStatusPage.propTypes = {
-//   status: PropTypes.object,
-//   updateMarketStatus: PropTypes.func,
-//   day: PropTypes.number
-// };
+test('mapStateToProps', () => {
+  const reduxState = {
+    status: {
+      status: {
+        open: true,
+        day: 3,
+        dateTime: '2017-05-05T17:51:15.123Z'
+      }
+    }
+  };
+
+  const componentStateProps = mapStateToProps(reduxState);
+
+  expect(componentStateProps).toEqual({
+    status: {open: true, day: 3, dateTime: '2017-05-05T17:51:15.123Z'}
+  });
+});

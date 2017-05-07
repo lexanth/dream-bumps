@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { DivisionTable } from './DivisionTable';
+import { DivisionTable, mapStateToProps } from './DivisionTable';
 import toJson from 'enzyme-to-json';
 
 test('Renders properly not buy', () => {
@@ -43,4 +43,59 @@ test('Renders properly buy', () => {
   );
   expect(component).toBeDefined();
   expect(toJson(component)).toMatchSnapshot()
+});
+
+test('mapStateToProps', () => {
+  const reduxState = {
+    auth: {
+      authenticated: true,
+      currentUser: {
+        authorities: ['ROLE_USER'],
+        id: 2
+      }
+    },
+    config: {
+      config: {
+        crewsPerDivision: 3,
+        mensCrews: 13,
+        womensCrews: 10
+      }
+    },
+    usercrews: {
+      purchase: {
+        buyMember: 5,
+        buySex: 'male'},
+      rankings: {
+        byId: {
+          6: {id: 6, cash: 123},
+          7: {id: 7, cash: 456},
+          8: {id: 8, cash: 789},
+          9: {id: 9, cash: 987}
+        },
+        byUserId: {
+          1: {
+            male: 6,
+            female: 7
+          },
+          2: {
+            male: 8,
+            female: 9
+          }
+        }
+      }
+    }
+  };
+
+  const ownProps = {sex: 'male'};
+
+  const componentStateProps = mapStateToProps(reduxState, ownProps);
+
+  expect(componentStateProps).toEqual({
+    currentUserId: 2,
+    buySex: 'male',
+    buyMemberId: 5,
+    crewRanking: {id: 8, cash: 789},
+    crewsPerDivision: 3,
+    numberOfCrews: 13
+  });
 });

@@ -180,7 +180,7 @@ BumpsAdminPage.propTypes = {
   params: PropTypes.object
 }
 
-const mapStateToProps = (state, {params}) => ({
+export const mapStateToProps = (state, {params}) => ({
   crews: getCrewsByDivision(state)(params.sex),
   day: getCurrentDay(state)
 });

@@ -1,0 +1,421 @@
+exports[`test Renders properly 1`] = `
+<Toolbar
+  noGutter={false}>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={false}>
+    <FlatButton
+      containerElement={
+        <IndexLink
+          onlyActiveOnIndex={true}
+          to="/" />
+      }
+      disabled={false}
+      label="Dream Bumps"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+  </ToolbarGroup>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={true}>
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/logout" />
+      }
+      disabled={false}
+      label="Log out"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/docs" />
+      }
+      disabled={false}
+      label="API"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+    <DropDownMenu
+      animated={true}
+      autoWidth={true}
+      disabled={false}
+      iconButton={<NavigationArrowDropDown />}
+      labelStyle={
+        Object {
+          "color": "#fff",
+        }
+      }
+      maxHeight={500}
+      openImmediately={false}
+      style={
+        Object {
+          "textTransform": "uppercase",
+          "top": "-4px",
+        }
+      }
+      value={1}>
+      <MenuItem
+        checked={false}
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/admin/users" />
+        }
+        desktop={false}
+        disabled={false}
+        focusState="none"
+        insetChildren={false}
+        label="Manage"
+        primaryText="Users"
+        value={1} />
+      <MenuItem
+        checked={false}
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/admin/crews" />
+        }
+        desktop={false}
+        disabled={false}
+        focusState="none"
+        insetChildren={false}
+        label="Manage"
+        primaryText="Crews"
+        value={2} />
+      <MenuItem
+        checked={false}
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/admin/market" />
+        }
+        desktop={false}
+        disabled={false}
+        focusState="none"
+        insetChildren={false}
+        label="Manage"
+        primaryText="Market Status"
+        value={3} />
+      <Divider
+        inset={false} />
+      <MenuItem
+        checked={false}
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/admin/bumps/male" />
+        }
+        desktop={false}
+        disabled={false}
+        focusState="none"
+        insetChildren={false}
+        label="Manage"
+        primaryText="Bumps - Men"
+        value={4} />
+      <MenuItem
+        checked={false}
+        containerElement={
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/admin/bumps/female" />
+        }
+        desktop={false}
+        disabled={false}
+        focusState="none"
+        insetChildren={false}
+        label="Manage"
+        primaryText="Bumps - Women"
+        value={5} />
+    </DropDownMenu>
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/bunglines" />
+      }
+      disabled={false}
+      label="Bunglines"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/rankings" />
+      }
+      disabled={false}
+      label="Rankings"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+  </ToolbarGroup>
+</Toolbar>
+`;
+
+exports[`test Renders properly 2`] = `
+<Toolbar
+  noGutter={false}>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={false}>
+    <FlatButton
+      containerElement={
+        <IndexLink
+          onlyActiveOnIndex={true}
+          to="/" />
+      }
+      disabled={false}
+      label="Dream Bumps"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+  </ToolbarGroup>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={true}>
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/login" />
+      }
+      disabled={false}
+      label="Log in"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/bunglines" />
+      }
+      disabled={false}
+      label="Bunglines"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/rankings" />
+      }
+      disabled={false}
+      label="Rankings"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+  </ToolbarGroup>
+</Toolbar>
+`;
+
+exports[`test Renders properly 3`] = `
+<Toolbar
+  noGutter={false}>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={false}>
+    <FlatButton
+      containerElement={
+        <IndexLink
+          onlyActiveOnIndex={true}
+          to="/" />
+      }
+      disabled={false}
+      label="Dream Bumps"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+  </ToolbarGroup>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={true}>
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/logout" />
+      }
+      disabled={false}
+      label="Log out"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/bunglines" />
+      }
+      disabled={false}
+      label="Bunglines"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/rankings" />
+      }
+      disabled={false}
+      label="Rankings"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "#fff",
+        }
+      } />
+  </ToolbarGroup>
+</Toolbar>
+`;

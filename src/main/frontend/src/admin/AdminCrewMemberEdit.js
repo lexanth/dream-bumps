@@ -60,7 +60,7 @@ AdminCrewMemberEdit.propTypes = {
 
 const selector = formValueSelector('edit-crew-members');
 
-const mapStateToProps = (state, {crewId}) => ({
+export const mapStateToProps = (state, {crewId}) => ({
   initialValues: {members: getCrewMembers(state)(crewId)},
   currentMembers: selector(state, 'members')
 });

@@ -1,0 +1,13 @@
+exports[`test Renders properly 1`] = `
+<div>
+  <h4>
+    404 Page Not Found
+  </h4>
+  <Link
+    onlyActiveOnIndex={false}
+    style={Object {}}
+    to="/">
+     Go back to homepage 
+  </Link>
+</div>
+`;

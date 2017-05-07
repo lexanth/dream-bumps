@@ -67,7 +67,7 @@ MarketStatusPage.propTypes = {
   day: PropTypes.number
 };
 
-const mapStateToProps: Object = (state: Object) => ({
+export const mapStateToProps: Object = (state: Object) => ({
   status: getCurrentStatus(state)
 });
 

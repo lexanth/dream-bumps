@@ -48,7 +48,7 @@ AdminCrewDetailsEdit.propTypes = {
   handleSubmit: PropTypes.func
 }
 
-const mapStateToProps = (state: Object, {crewId}) => ({
+export const mapStateToProps = (state: Object, {crewId}) => ({
   initialValues: getCrew(state)(crewId)
 });
 

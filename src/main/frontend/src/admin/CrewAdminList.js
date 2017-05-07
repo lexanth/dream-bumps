@@ -20,7 +20,7 @@ CrewAdminList.propTypes = {
   crews: PropTypes.array
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   crews: getCrewsForSex(state)(ownProps.sex)
 });
 

@@ -23,9 +23,8 @@ BunglineGenderTabContent.propTypes = {
   authenticated: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   authenticated: state.auth.authenticated
 });
 
 export default connect(mapStateToProps)(BunglineGenderTabContent);
-// export default connect(null, { null })(BunglineGenderTabContent);

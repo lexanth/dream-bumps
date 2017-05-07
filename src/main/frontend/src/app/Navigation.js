@@ -9,7 +9,7 @@ import Divider from 'material-ui/Divider';
 
 import {isAdmin} from '../rootReducer';
 
-const Navigation = ({ authenticated, isAdmin }) => (
+export const Navigation = ({ authenticated, isAdmin }) => (
       <Toolbar>
         <ToolbarGroup>
           <FlatButton
@@ -52,7 +52,7 @@ Navigation.propTypes = {
   isAdmin: PropTypes.bool
 };
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   authenticated: state.auth.authenticated,
   isAdmin: isAdmin(state)()
 });

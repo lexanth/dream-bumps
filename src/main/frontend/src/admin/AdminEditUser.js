@@ -98,7 +98,7 @@ AdminEditUser.propTypes = {
 
 // todo - activated and authorities
 
-const mapStateToProps = (state, {params}) => ({
+export const mapStateToProps = (state, {params}) => ({
   initialValues: getUser(state)(params.userId)
 });
 export {AdminEditUser};

@@ -56,7 +56,7 @@ UserList.propTypes = {
   users: PropTypes.array
 }
 
-const mapStateToProps = state => ({users: getAllUsers(state)});
+export const mapStateToProps = state => ({users: getAllUsers(state)});
 
 export {UserList};
 
