@@ -44,7 +44,7 @@ CrewMemberList.propTypes = {
   crewMembers: PropTypes.array
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   crewMembers: getCrewMembers(state)(ownProps.crewId)
 });
 

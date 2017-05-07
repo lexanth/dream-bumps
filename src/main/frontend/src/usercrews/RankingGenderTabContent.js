@@ -177,14 +177,13 @@ RankingGenderTabContent.propTypes = {
   rankings: PropTypes.array
 }
 
-const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state, ownProps) => {
   if (ownProps.sex === 'combined') {
     const maleRankings = getUserCrewRankings(state)('male');
     const femaleRankings = getUserCrewRankings(state)('female');
     return {
       rankings: maleRankings.map(maleRanking => {
-        const ranking = {...maleRanking};
-        ranking.sex = 'combined';
+        const ranking = {...maleRanking, 'sex': 'combined'};
         const userId = maleRanking && maleRanking.userId ? maleRanking.userId : -1;
         const femaleRanking = femaleRankings.find(rank => userId === (rank ? rank.userId : -1) );
         if (femaleRanking) {

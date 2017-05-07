@@ -23,7 +23,7 @@ CurrentUserCrew.propTypes = {
   sex: PropTypes.string
 }
 
-const mapStateToProps = (state) => ({
+export const mapStateToProps = (state) => ({
   userId: getCurrentUserId(state)
 });
 

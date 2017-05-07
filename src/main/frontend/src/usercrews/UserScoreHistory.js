@@ -63,7 +63,7 @@ UserScoreHistory.propTypes = {
   style: PropTypes.object
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   scoreHistory: getUserScoreHistory(state)(ownProps.userId, ownProps.sex) || []
 });
 

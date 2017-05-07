@@ -63,7 +63,7 @@ UserCurrentScore.propTypes = {
   sex: PropTypes.string
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   ranking: getUserCrewRanking(state)(ownProps.userId, ownProps.sex)
 });
 

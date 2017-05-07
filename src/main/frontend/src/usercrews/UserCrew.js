@@ -78,7 +78,7 @@ UserCrew.propTypes = {
   showCashAndValue: PropTypes.bool
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   crewMembers : getUserCrewMembers(state)(ownProps.userId, ownProps.sex),
   crewRanking : getUserCrewRanking(state)(ownProps.userId, ownProps.sex) || {}
 });

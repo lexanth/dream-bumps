@@ -1,0 +1,11 @@
+exports[`test Renders properly 1`] = `
+<iframe
+  frameBorder="0"
+  height="900"
+  marginHeight="0"
+  marginWidth="0"
+  scrolling="auto"
+  src="swagger-ui/index.html"
+  target="_top"
+  width="100%" />
+`;

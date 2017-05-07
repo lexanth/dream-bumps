@@ -85,59 +85,6 @@ class UserCrewMemberRow extends Component {
   }
 }
 
-// const CurrentUserCrewMemberRow = ({
-//   member,
-//   crew,
-//   crewMemberName,
-//   onClickBuy,
-//   onClickCancel,
-//   buyMemberId,
-//   cancelBuyMember,
-//   doSellRower,
-//   marketOpen,
-//   canBuySell
-// }) => (
-//   <TableRow>
-//     <TableRowColumn>{seatNumberToName(member.seat)}</TableRowColumn>
-//     <TableRowColumn>
-//       {
-//         crew ?
-//           crew.name
-//         :
-//           '-'
-//       }
-//     </TableRowColumn>
-//     {/*<TableRowColumn>{crewMemberName}</TableRowColumn>*/}
-//     <TableRowColumn>
-//       {
-//         crew ?
-//           crew.price
-//         :
-//           ''
-//       }
-//     </TableRowColumn>
-//     {
-//       marketOpen && canBuySell ?
-//         <TableRowColumn>
-//           {
-//             member.crewId ?
-//               <RaisedButton label="Sell" onClick={e => doSellRower(member.crewId, member.id)}/>
-//             :
-//               member.id === buyMemberId ?
-//                 <RaisedButton label="Cancel" onClick={cancelBuyMember}/>
-//               :
-//                 buyMemberId ?
-//                   null
-//                 :
-//                   <RaisedButton label="Buy" onClick={onClickBuy}/>
-//           }
-//         </TableRowColumn>
-//       :
-//         null
-//     }
-//   </TableRow>
-// );
-
 UserCrewMemberRow.propTypes = {
   member: PropTypes.object,
   crew: PropTypes.object,
@@ -152,7 +99,7 @@ UserCrewMemberRow.propTypes = {
   fetchCrew: PropTypes.func
 };
 
-const mapStateToProps = (state, {member}) => ({
+export const mapStateToProps = (state, {member}) => ({
   crew: getCrew(state)(member.crewId),
   crewMemberName: getCrewMemberName(state)(member.crewId, member.seat) || '',
   buyMemberId: getBuyMemberId(state),

@@ -68,7 +68,7 @@ RankingRow.propTypes = {
   })
 }
 
-const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state, ownProps) => {
   if (ownProps.ranking) {
     return {user: getUser(state)(ownProps.ranking.userId)}
   }

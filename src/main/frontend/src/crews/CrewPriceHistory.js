@@ -54,7 +54,7 @@ CrewPriceHistory.propTypes = {
   fetchCrewPriceHistory: PropTypes.func
 };
 
-const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state, ownProps) => ({
   crewPriceHistory: getCrewPriceHistory(state)(ownProps.crewId)
 });
 

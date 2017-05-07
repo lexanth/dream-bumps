@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { CurrentUserCrew } from './CurrentUserCrew';
+import { CurrentUserCrew, mapStateToProps } from './CurrentUserCrew';
 import toJson from 'enzyme-to-json';
 
 test('Renders properly', () => {
@@ -12,4 +12,22 @@ test('Renders properly', () => {
   );
   expect(component).toBeDefined();
   expect(toJson(component)).toMatchSnapshot()
+});
+
+test('mapStateToProps', () => {
+  const reduxState = {
+    auth: {
+      authenticated: true,
+      currentUser: {
+        authorities: ['ROLE_USER'],
+        id: 2
+      }
+    }
+  };
+
+  const componentStateProps = mapStateToProps(reduxState);
+
+  expect(componentStateProps).toEqual({
+    userId: 2
+  });
 });
