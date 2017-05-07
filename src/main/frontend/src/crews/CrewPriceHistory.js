@@ -58,4 +58,6 @@ const mapStateToProps = (state, ownProps) => ({
   crewPriceHistory: getCrewPriceHistory(state)(ownProps.crewId)
 });
 
+export {CrewPriceHistory};
+
 export default connect(mapStateToProps, { fetchCrewPriceHistory })(CrewPriceHistory);

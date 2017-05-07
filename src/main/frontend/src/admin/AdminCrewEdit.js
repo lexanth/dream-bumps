@@ -20,5 +20,6 @@ AdminCrewEdit.propTypes = {
 }
 // todo - activated and authorities
 
+export {AdminCrewEdit};
 
 export default AdminCrewEdit;

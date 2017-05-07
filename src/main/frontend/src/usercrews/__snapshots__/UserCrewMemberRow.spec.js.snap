@@ -1,0 +1,213 @@
+exports[`test Renders properly 1`] = `
+<TableRow
+  displayBorder={true}
+  hoverable={false}
+  hovered={false}
+  selectable={true}
+  selected={false}
+  striped={false}>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "width": "45px",
+      }
+    }>
+    Cox
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": "5px",
+      }
+    }>
+    Crew Name
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+      }
+    }>
+    Something
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": "5px",
+        "textAlign": "right",
+        "width": "75px",
+      }
+    }>
+    123.56
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "width": "75px",
+      }
+    }>
+    <RaisedButton
+      disabled={false}
+      fullWidth={false}
+      label="Cancel"
+      labelPosition="after"
+      labelStyle={
+        Object {
+          "paddingLeft": "2px",
+          "paddingRight": 0,
+        }
+      }
+      onClick={[Function]}
+      primary={true}
+      secondary={false}
+      style={
+        Object {
+          "minWidth": "70px",
+        }
+      } />
+  </TableRowColumn>
+</TableRow>
+`;
+
+exports[`test Renders properly 2`] = `
+<TableRow
+  displayBorder={true}
+  hoverable={false}
+  hovered={false}
+  selectable={true}
+  selected={false}
+  striped={false}>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "width": "45px",
+      }
+    }>
+    Cox
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": "5px",
+      }
+    }>
+    Crew Name
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+      }
+    }>
+    Something
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": "5px",
+        "textAlign": "right",
+        "width": "75px",
+      }
+    }>
+    123.56
+  </TableRowColumn>
+</TableRow>
+`;
+
+exports[`test Renders properly 3`] = `
+<TableRow
+  displayBorder={true}
+  hoverable={false}
+  hovered={false}
+  selectable={true}
+  selected={false}
+  striped={false}>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "width": "45px",
+      }
+    }>
+    Cox
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": "5px",
+      }
+    }>
+    Crew Name
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+      }
+    }>
+    Something
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": "5px",
+        "textAlign": "right",
+        "width": "75px",
+      }
+    }>
+    123.56
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "width": "75px",
+      }
+    }>
+    <RaisedButton
+      disabled={false}
+      fullWidth={false}
+      label="Sell"
+      labelPosition="after"
+      onClick={[Function]}
+      primary={true}
+      secondary={false}
+      style={
+        Object {
+          "minWidth": "70px",
+        }
+      } />
+  </TableRowColumn>
+</TableRow>
+`;

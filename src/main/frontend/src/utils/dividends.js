@@ -16,7 +16,7 @@ const _calculateRowOverDividend = (position, day) => {
   return getBaseRowOverDividend(position);
 }
 
-export const calculateRowOverDividendForPosition = position => round(_calculateRowOverDividend(position), 2).toFixed(2);
+export const calculateRowOverDividendForPosition = (position, day) => round(_calculateRowOverDividend(position, day), 2).toFixed(2);
 
 const _calculateBumpDividend = (position, numberOfCrews, crewsPerDivision, day) => {
   if (position === 2 && day >= 3) {
@@ -28,4 +28,4 @@ const _calculateBumpDividend = (position, numberOfCrews, crewsPerDivision, day) 
   return 3 * getBaseRowOverDividend(position);
 }
 
-export const calculateBumpDividend = (position, numberOfCrews, crewsPerDivision) => round(_calculateBumpDividend(position, numberOfCrews, crewsPerDivision), 2).toFixed(2);
+export const calculateBumpDividend = (position, numberOfCrews, crewsPerDivision, day) => round(_calculateBumpDividend(position, numberOfCrews, crewsPerDivision, day), 2).toFixed(2);

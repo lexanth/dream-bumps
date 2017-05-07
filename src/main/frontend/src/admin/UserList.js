@@ -58,4 +58,6 @@ UserList.propTypes = {
 
 const mapStateToProps = state => ({users: getAllUsers(state)});
 
+export {UserList};
+
 export default connect(mapStateToProps)(UserList);

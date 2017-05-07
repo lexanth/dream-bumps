@@ -1,0 +1,14 @@
+exports[`test Renders properly 1`] = `
+<Grid>
+  <Cell
+    col="6">
+    <Connect(ReduxForm)
+      crewId="17" />
+  </Cell>
+  <Cell
+    col="6">
+    <Connect(ReduxForm)
+      crewId="17" />
+  </Cell>
+</Grid>
+`;

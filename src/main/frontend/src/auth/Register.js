@@ -6,11 +6,11 @@ import {Field, reduxForm} from 'redux-form';
 import {TextField} from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Card, CardTitle, CardText, CardActions} from 'material-ui/Card';
-import {Grid, Cell} from 'material-grid/dist';
+import {Cell} from 'material-grid/dist';
 
 import {signUp} from './actions';
 
-const Register = ({handleSubmit}) => (
+export const Register = ({handleSubmit}) => (
   <form onSubmit={handleSubmit}>
     <Cell col={6} offset={3}>
       <Card>

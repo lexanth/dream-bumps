@@ -67,4 +67,6 @@ const mapStateToProps = (state, ownProps) => ({
   scoreHistory: getUserScoreHistory(state)(ownProps.userId, ownProps.sex) || []
 });
 
+export {UserScoreHistory};
+
 export default connect(mapStateToProps, { fetchUserCrewPriceHistory })(UserScoreHistory);

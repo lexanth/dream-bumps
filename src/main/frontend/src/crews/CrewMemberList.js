@@ -48,4 +48,6 @@ const mapStateToProps = (state, ownProps) => ({
   crewMembers: getCrewMembers(state)(ownProps.crewId)
 });
 
+export {CrewMemberList};
+
 export default connect(mapStateToProps, { fetchCrewMembers })(CrewMemberList);

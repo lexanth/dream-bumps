@@ -1,0 +1,417 @@
+exports[`test Renders properly buy 1`] = `
+<Table
+  allRowsSelected={false}
+  fixedFooter={true}
+  fixedHeader={true}
+  height="inherit"
+  multiSelectable={false}
+  selectable={false}>
+  <TableHeader
+    adjustForCheckbox={false}
+    displaySelectAll={false}
+    enableSelectAll={true}
+    selectAllSelected={false}>
+    <TableRow
+      displayBorder={true}
+      hoverable={false}
+      hovered={false}
+      selectable={true}
+      selected={false}
+      striped={false}>
+      <TableHeaderColumn>
+        <h2>
+          Division 3
+        </h2>
+      </TableHeaderColumn>
+    </TableRow>
+  </TableHeader>
+  <TableBody
+    allRowsSelected={false}
+    deselectOnClickaway={true}
+    displayRowCheckbox={false}
+    multiSelectable={false}
+    preScanRows={true}
+    selectable={true}
+    style={Object {}}>
+    <TableRow
+      displayBorder={true}
+      hoverable={false}
+      hovered={false}
+      selectable={true}
+      selected={false}
+      striped={false}>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "width": "45px",
+          }
+        }>
+        1
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}>
+        <FlatButton
+          containerElement={
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/crews/1" />
+          }
+          disabled={false}
+          label="Crew 1"
+          labelPosition="after"
+          labelStyle={
+            Object {
+              "fontSize": "13px",
+              "textTransform": "",
+            }
+          }
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={false}
+          style={
+            Object {
+              "marginLeft": "-16px",
+              "paddingLeft": 0,
+              "textAlign": "",
+            }
+          } />
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}>
+        <RaisedButton
+          disabled={false}
+          fullWidth={false}
+          label="Buy"
+          labelPosition="after"
+          onClick={[Function]}
+          primary={true}
+          secondary={false} />
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        123.46
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        } />
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        <NavigationArrowForward />
+         
+        90.00
+      </TableRowColumn>
+    </TableRow>
+    <TableRow
+      displayBorder={true}
+      hoverable={false}
+      hovered={false}
+      selectable={true}
+      selected={false}
+      striped={false}>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "width": "45px",
+          }
+        }>
+        2
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}>
+        <FlatButton
+          containerElement={
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/crews/3" />
+          }
+          disabled={false}
+          label="Crew 2"
+          labelPosition="after"
+          labelStyle={
+            Object {
+              "fontSize": "13px",
+              "textTransform": "",
+            }
+          }
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={false}
+          style={
+            Object {
+              "marginLeft": "-16px",
+              "paddingLeft": 0,
+              "textAlign": "",
+            }
+          } />
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}>
+        <RaisedButton
+          disabled={true}
+          fullWidth={false}
+          label="Buy"
+          labelPosition="after"
+          onClick={[Function]}
+          primary={true}
+          secondary={false} />
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        153.40
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        <NavigationArrowUpward />
+        228.83
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        <NavigationArrowForward />
+         
+        76.28
+      </TableRowColumn>
+    </TableRow>
+  </TableBody>
+</Table>
+`;
+
+exports[`test Renders properly not buy 1`] = `
+<Table
+  allRowsSelected={false}
+  fixedFooter={true}
+  fixedHeader={true}
+  height="inherit"
+  multiSelectable={false}
+  selectable={false}>
+  <TableHeader
+    adjustForCheckbox={false}
+    displaySelectAll={false}
+    enableSelectAll={true}
+    selectAllSelected={false}>
+    <TableRow
+      displayBorder={true}
+      hoverable={false}
+      hovered={false}
+      selectable={true}
+      selected={false}
+      striped={false}>
+      <TableHeaderColumn>
+        <h2>
+          Division 3
+        </h2>
+      </TableHeaderColumn>
+    </TableRow>
+  </TableHeader>
+  <TableBody
+    allRowsSelected={false}
+    deselectOnClickaway={true}
+    displayRowCheckbox={false}
+    multiSelectable={false}
+    preScanRows={true}
+    selectable={true}
+    style={Object {}}>
+    <TableRow
+      displayBorder={true}
+      hoverable={false}
+      hovered={false}
+      selectable={true}
+      selected={false}
+      striped={false}>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "width": "45px",
+          }
+        }>
+        1
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}>
+        <FlatButton
+          containerElement={
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/crews/1" />
+          }
+          disabled={false}
+          label="Crew 1"
+          labelPosition="after"
+          labelStyle={
+            Object {
+              "fontSize": "13px",
+              "textTransform": "",
+            }
+          }
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={false}
+          style={
+            Object {
+              "marginLeft": "-16px",
+              "paddingLeft": 0,
+              "textAlign": "",
+            }
+          } />
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        123.46
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        } />
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        <NavigationArrowForward />
+         
+        90.00
+      </TableRowColumn>
+    </TableRow>
+    <TableRow
+      displayBorder={true}
+      hoverable={false}
+      hovered={false}
+      selectable={true}
+      selected={false}
+      striped={false}>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "width": "45px",
+          }
+        }>
+        2
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}>
+        <FlatButton
+          containerElement={
+            <Link
+              onlyActiveOnIndex={false}
+              style={Object {}}
+              to="/crews/3" />
+          }
+          disabled={false}
+          label="Crew 2"
+          labelPosition="after"
+          labelStyle={
+            Object {
+              "fontSize": "13px",
+              "textTransform": "",
+            }
+          }
+          onKeyboardFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onTouchStart={[Function]}
+          primary={false}
+          secondary={false}
+          style={
+            Object {
+              "marginLeft": "-16px",
+              "paddingLeft": 0,
+              "textAlign": "",
+            }
+          } />
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        153.40
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        <NavigationArrowUpward />
+        228.83
+      </TableRowColumn>
+      <TableRowColumn
+        hoverable={false}
+        style={
+          Object {
+            "width": "100px",
+          }
+        }>
+        <NavigationArrowForward />
+         
+        76.28
+      </TableRowColumn>
+    </TableRow>
+  </TableBody>
+</Table>
+`;

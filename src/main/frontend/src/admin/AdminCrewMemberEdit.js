@@ -65,4 +65,6 @@ const mapStateToProps = (state, {crewId}) => ({
   currentMembers: selector(state, 'members')
 });
 
+export {AdminCrewMemberEdit};
+
 export default connect(mapStateToProps, {onSubmit: updateCrewMembers, fetchCrewMembers})(reduxForm({form: 'edit-crew-members', enableReinitialize: true})(AdminCrewMemberEdit));

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CrewList from './CrewList';
 import CurrentUserCrew from '../usercrews/CurrentUserCrew';
 
-const BunglineGenderTabContent = ({ sex, authenticated }) => (
+export const BunglineGenderTabContent = ({ sex, authenticated }) => (
   <Grid>
     { authenticated &&
       <Cell col={4}>

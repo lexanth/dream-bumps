@@ -36,6 +36,7 @@
     "chart.js": "^2.5.0",
     "classnames": "^2.2.5",
     "copy-webpack-plugin": "^4.0.1",
+    "enzyme-to-json": "^1.5.1",
     "flexboxgrid": "^6.3.1",
     "flow": "^0.2.3",
     "flow-bin": "^0.42.0",
@@ -122,6 +123,12 @@
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
       "^.+\\.(gif|ttf|eot|svg|woff|woff2|ico)$": "<rootDir>/tools/fileMock.js"
-    }
+    },
+    "setupFiles": [
+      "./src/testutils/jestsetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

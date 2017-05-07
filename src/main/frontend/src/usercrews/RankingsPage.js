@@ -36,4 +36,6 @@ RankingsPage.propTypes = {
   fetchUserCrewRankings: PropTypes.func
 }
 
+export {RankingsPage};
+
 export default connect(null, {fetchUserCrewRankings, fetchUsers})(RankingsPage);

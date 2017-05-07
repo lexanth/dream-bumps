@@ -1,0 +1,16 @@
+exports[`test Renders properly 1`] = `
+<Tabs
+  initialSelectedIndex={0}
+  onChange={[Function]}>
+  <Tab
+    label="Men">
+    <Connect(BunglineGenderTabContent)
+      sex="male" />
+  </Tab>
+  <Tab
+    label="Women">
+    <Connect(BunglineGenderTabContent)
+      sex="female" />
+  </Tab>
+</Tabs>
+`;

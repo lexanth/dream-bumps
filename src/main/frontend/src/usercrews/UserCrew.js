@@ -83,4 +83,6 @@ const mapStateToProps = (state, ownProps) => ({
   crewRanking : getUserCrewRanking(state)(ownProps.userId, ownProps.sex) || {}
 });
 
+export {UserCrew};
+
 export default connect(mapStateToProps, { fetchUserCrewMembers, fetchUserCrewRanking, onClickBuy: setBuyMember })(UserCrew);

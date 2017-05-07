@@ -1,0 +1,9 @@
+exports[`test Renders properly 1`] = `
+<Grid>
+  <Cell
+    col={12}>
+    <div
+      className="random div" />
+  </Cell>
+</Grid>
+`;

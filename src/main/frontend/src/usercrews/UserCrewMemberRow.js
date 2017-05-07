@@ -159,4 +159,6 @@ const mapStateToProps = (state, {member}) => ({
   marketOpen: isMarketOpen(state)
 });
 
+export {UserCrewMemberRow};
+
 export default connect(mapStateToProps, {cancelBuyMember, doSellRower, fetchCrewMembers, fetchCrew})(UserCrewMemberRow);

@@ -1,0 +1,36 @@
+exports[`test Renders properly 1`] = `
+<Grid>
+  <Cell
+    col={4}>
+    <RaisedButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/admin/crews/1" />
+      }
+      disabled={false}
+      fullWidth={false}
+      label="crew1"
+      labelPosition="after"
+      primary={false}
+      secondary={false} />
+  </Cell>
+  <Cell
+    col={4}>
+    <RaisedButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/admin/crews/2" />
+      }
+      disabled={false}
+      fullWidth={false}
+      label="Crew 2"
+      labelPosition="after"
+      primary={false}
+      secondary={false} />
+  </Cell>
+</Grid>
+`;

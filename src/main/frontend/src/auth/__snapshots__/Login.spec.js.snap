@@ -1,0 +1,47 @@
+exports[`test Renders properly 1`] = `
+<form>
+  <Cell
+    col={6}
+    offset={3}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardTitle
+        title="Login" />
+      <CardText>
+        <div>
+          Not got an account yet? 
+          <Link
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/register">
+            Register
+          </Link>
+        </div>
+        <Field
+          component={[Function]}
+          floatingLabelText="Username"
+          fullWidth={true}
+          name="username" />
+        <Field
+          component={[Function]}
+          floatingLabelText="Password"
+          fullWidth={true}
+          name="password"
+          type="password" />
+      </CardText>
+      <CardActions>
+        <RaisedButton
+          disabled={false}
+          fullWidth={false}
+          label="Log in"
+          labelPosition="after"
+          primary={true}
+          secondary={false}
+          type="submit" />
+      </CardActions>
+    </Card>
+  </Cell>
+</form>
+`;

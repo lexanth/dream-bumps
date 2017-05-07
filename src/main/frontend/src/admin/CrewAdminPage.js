@@ -24,4 +24,6 @@ CrewAdminPage.propTypes = {
   children: PropTypes.node
 }
 
+export {CrewAdminPage};
+
 export default connect(null, { fetchCrews })(CrewAdminPage);

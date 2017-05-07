@@ -202,4 +202,6 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
+export {SortableHeaderColumn, RankingGenderTabContent};
+
 export default connect(mapStateToProps)(RankingGenderTabContent);

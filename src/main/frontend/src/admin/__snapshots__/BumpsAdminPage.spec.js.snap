@@ -1,0 +1,5 @@
+exports[`test Renders properly 1`] = `
+<div>
+  Loading...
+</div>
+`;

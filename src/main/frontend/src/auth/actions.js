@@ -41,7 +41,7 @@ const beginLogout = () => ({ type: types.LOGOUT_REQUEST });
 
 const logoutSuccess = () => ({ type: types.LOGOUT_SUCCESS, message: 'Logged out' });
 
-const logoutError = error => ({ type: types.LOGOUT_ERROR, errorMessage: error || 'Failed to log out' });
+// const logoutError = error => ({ type: types.LOGOUT_ERROR, errorMessage: error || 'Failed to log out' });
 
 // Current user details action Creators
 const requestCurrentUser = () => ({

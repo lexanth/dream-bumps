@@ -73,7 +73,7 @@ const SortableCrewList = SortableContainer(({crews, disabled, showBumps}) => (
 // ))
 
 class BumpsAdminPage extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCrews(this.props.params.sex);
   }
 
@@ -174,7 +174,7 @@ class BumpsAdminPage extends Component {
 BumpsAdminPage.propTypes = {
   sex: PropTypes.string,
   day: PropTypes.number,
-  crews: PropTypes.array,
+  crews: PropTypes.object,
   uploadBumps: PropTypes.func,
   fetchCrews: PropTypes.func,
   params: PropTypes.object
@@ -184,5 +184,7 @@ const mapStateToProps = (state, {params}) => ({
   crews: getCrewsByDivision(state)(params.sex),
   day: getCurrentDay(state)
 });
+
+export {BumpsAdminPage};
 
 export default connect(mapStateToProps, {fetchCrews, uploadBumps})(BumpsAdminPage);

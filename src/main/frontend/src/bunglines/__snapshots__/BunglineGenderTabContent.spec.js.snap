@@ -1,0 +1,26 @@
+exports[`test Renders properly when authenticated 1`] = `
+<Grid>
+  <Cell
+    col={4}>
+    <Connect(CurrentUserCrew)
+      sex="male" />
+  </Cell>
+  <Cell
+    col={8}
+    offset={0}>
+    <Connect(CrewList)
+      sex="male" />
+  </Cell>
+</Grid>
+`;
+
+exports[`test Renders properly when not authenticated 1`] = `
+<Grid>
+  <Cell
+    col={8}
+    offset={2}>
+    <Connect(CrewList)
+      sex="female" />
+  </Cell>
+</Grid>
+`;

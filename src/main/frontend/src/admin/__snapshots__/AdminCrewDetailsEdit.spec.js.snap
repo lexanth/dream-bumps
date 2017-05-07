@@ -1,0 +1,49 @@
+exports[`test Renders properly 1`] = `
+<Card
+  expandable={false}
+  expanded={null}
+  initiallyExpanded={false}>
+  <CardTitle
+    title="Edit Crew - 15" />
+  <CardText>
+    <form
+      onSubmit={[Function]}>
+      <Field
+        component={[Function]}
+        floatingLabelText="Name"
+        fullWidth={true}
+        name="name" />
+      <Field
+        component={[Function]}
+        floatingLabelText="Sex"
+        fullWidth={true}
+        name="sex">
+        <MenuItem
+          checked={false}
+          desktop={false}
+          disabled={false}
+          focusState="none"
+          insetChildren={false}
+          primaryText="Male"
+          value="male" />
+        <MenuItem
+          checked={false}
+          desktop={false}
+          disabled={false}
+          focusState="none"
+          insetChildren={false}
+          primaryText="Female"
+          value="female" />
+      </Field>
+      <RaisedButton
+        disabled={false}
+        fullWidth={false}
+        label="Save"
+        labelPosition="after"
+        primary={true}
+        secondary={false}
+        type="submit" />
+    </form>
+  </CardText>
+</Card>
+`;

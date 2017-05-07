@@ -26,4 +26,6 @@ UserAdminPage.propTypes = {
   children: PropTypes.node
 }
 
+export {UserAdminPage};
+
 export default connect(null, { fetchUsers })(UserAdminPage);

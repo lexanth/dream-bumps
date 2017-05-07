@@ -1,0 +1,27 @@
+exports[`test Renders properly 1`] = `
+<Grid>
+  <Cell
+    col={6}>
+    <Connect(UserCrew)
+      canBuySell={false}
+      header="Current Lineup"
+      sex="female"
+      showCashAndValue={false}
+      userId={2} />
+  </Cell>
+  <Cell
+    col={6}>
+    <Connect(UserCurrentScore)
+      sex="female"
+      userId={2} />
+    <Connect(UserScoreHistory)
+      sex="female"
+      style={
+        Object {
+          "marginTop": "16px",
+        }
+      }
+      userId={2} />
+  </Cell>
+</Grid>
+`;

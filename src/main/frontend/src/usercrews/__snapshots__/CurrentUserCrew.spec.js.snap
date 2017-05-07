@@ -1,0 +1,8 @@
+exports[`test Renders properly 1`] = `
+<Connect(UserCrew)
+  canBuySell={true}
+  header="My Crew"
+  sex="female"
+  showCashAndValue={true}
+  userId={3} />
+`;

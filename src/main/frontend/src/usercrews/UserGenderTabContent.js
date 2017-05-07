@@ -40,4 +40,6 @@ UserGenderTabContent.propTypes = {
   sex: PropTypes.string
 }
 
+export {UserGenderTabContent};
+
 export default UserGenderTabContent;

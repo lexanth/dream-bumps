@@ -1,0 +1,115 @@
+exports[`test Renders properly 1`] = `
+<TableRow
+  displayBorder={true}
+  hoverable={false}
+  hovered={false}
+  selectable={true}
+  selected={false}
+  striped={false}>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "width": "45px",
+      }
+    }>
+    3
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}>
+    <FlatButton
+      containerElement={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/rankings/5" />
+      }
+      disabled={false}
+      label="ThisIsAUserName "
+      labelPosition="after"
+      labelStyle={
+        Object {
+          "fontSize": "13px",
+          "textTransform": "",
+        }
+      }
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "marginLeft": "-16px",
+          "paddingLeft": 0,
+          "textAlign": "",
+        }
+      } />
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false} />
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingRight": 0,
+        "width": "88px",
+      }
+    }>
+    3
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingRight": 0,
+        "width": "88px",
+      }
+    }>
+    11.01
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingRight": 0,
+        "width": "88px",
+      }
+    }>
+    1036.50
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingRight": 0,
+        "width": "88px",
+      }
+    }>
+    12.67
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingRight": 0,
+        "width": "88px",
+      }
+    }>
+    34.84
+  </TableRowColumn>
+  <TableRowColumn
+    hoverable={false}
+    style={
+      Object {
+        "paddingRight": 0,
+        "width": "88px",
+      }
+    }>
+    1047.51
+  </TableRowColumn>
+</TableRow>
+`;

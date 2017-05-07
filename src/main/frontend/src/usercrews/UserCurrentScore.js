@@ -67,4 +67,6 @@ const mapStateToProps = (state, ownProps) => ({
   ranking: getUserCrewRanking(state)(ownProps.userId, ownProps.sex)
 });
 
+export {UserCurrentScore};
+
 export default connect(mapStateToProps, {fetchUserCrewRanking})(UserCurrentScore);

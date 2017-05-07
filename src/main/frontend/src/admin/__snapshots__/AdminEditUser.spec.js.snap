@@ -1,0 +1,92 @@
+exports[`test Renders properly 1`] = `
+<Cell
+  col="6"
+  offset={3}>
+  <Card
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={false}>
+    <CardTitle
+      title="Edit User - 21" />
+    <CardText>
+      <form
+        onSubmit={[Function]}>
+        <Field
+          component={[Function]}
+          floatingLabelText="Login"
+          fullWidth={true}
+          name="login" />
+        <Field
+          component={[Function]}
+          floatingLabelText="First Name"
+          fullWidth={true}
+          name="firstName" />
+        <Field
+          component={[Function]}
+          floatingLabelText="Last Name"
+          fullWidth={true}
+          name="lastName" />
+        <Field
+          component={[Function]}
+          floatingLabelText="E-Mail"
+          fullWidth={true}
+          name="email" />
+        <Field
+          component={[Function]}
+          multi={true}
+          name="authorities"
+          options={
+            Array [
+              Object {
+                "label": "ROLE_USER",
+                "value": "ROLE_USER",
+              },
+              Object {
+                "label": "ROLE_ADMIN",
+                "value": "ROLE_ADMIN",
+              },
+            ]
+          } />
+        <Field
+          component={[Function]}
+          floatingLabelText="College"
+          fullWidth={true}
+          name="college">
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText=""
+            value={null} />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="New College"
+            value="newc" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Balliol"
+            value="balliol" />
+        </Field>
+        <RaisedButton
+          disabled={false}
+          fullWidth={false}
+          label="Save"
+          labelPosition="after"
+          primary={true}
+          secondary={false}
+          type="submit" />
+      </form>
+    </CardText>
+  </Card>
+</Cell>
+`;

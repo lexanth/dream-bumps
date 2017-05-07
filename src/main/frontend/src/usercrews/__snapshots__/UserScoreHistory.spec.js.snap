@@ -1,0 +1,63 @@
+exports[`test Renders properly 1`] = `
+<Card
+  expandable={false}
+  expanded={null}
+  initiallyExpanded={false}
+  style={
+    Object {
+      "marginTop": "16px",
+    }
+  }>
+  <CardTitle
+    title="Score History" />
+  <CardText>
+    <Line
+      data={
+        Object {
+          "datasets": Array [
+            Object {
+              "data": Array [
+                Object {
+                  "x": "2017-05-02T21:51:15.123Z",
+                  "y": 1127.92,
+                },
+                Object {
+                  "x": "2017-05-02T21:53:15.123Z",
+                  "y": 1128.12,
+                },
+                Object {
+                  "x": "2017-05-04T12:51:15.123Z",
+                  "y": 1122.68,
+                },
+              ],
+              "fill": false,
+              "steppedLine": true,
+            },
+          ],
+        }
+      }
+      options={
+        Object {
+          "legend": Object {
+            "display": false,
+          },
+          "scales": Object {
+            "xAxes": Array [
+              Object {
+                "type": "time",
+              },
+            ],
+            "yAxes": Array [
+              Object {
+                "ticks": Object {
+                  "suggestedMax": 1138.12,
+                  "suggestedMin": 1112.68,
+                },
+              },
+            ],
+          },
+        }
+      } />
+  </CardText>
+</Card>
+`;

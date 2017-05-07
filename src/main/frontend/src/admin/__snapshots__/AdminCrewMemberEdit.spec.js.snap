@@ -1,0 +1,43 @@
+exports[`test Renders properly 1`] = `
+<Card
+  expandable={false}
+  expanded={null}
+  initiallyExpanded={false}>
+  <CardTitle
+    title="Crew Members - 19" />
+  <CardText>
+    <form
+      onSubmit={[Function]}>
+      <FieldArray
+        component={[Function]}
+        name="members"
+        props={
+          Object {
+            "current": Array [
+              Object {
+                "name": "Member1",
+                "seat": 1,
+              },
+              Object {
+                "name": "Member 2",
+                "seat": 2,
+              },
+              Object {
+                "name": "Member 3",
+                "seat": 3,
+              },
+            ],
+          }
+        } />
+      <RaisedButton
+        disabled={false}
+        fullWidth={false}
+        label="Save"
+        labelPosition="after"
+        primary={true}
+        secondary={false}
+        type="submit" />
+    </form>
+  </CardText>
+</Card>
+`;

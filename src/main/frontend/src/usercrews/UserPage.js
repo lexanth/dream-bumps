@@ -25,4 +25,6 @@ UserPage.propTypes = {
   })
 }
 
+export {UserPage};
+
 export default connect()(UserPage);

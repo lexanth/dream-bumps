@@ -1,0 +1,31 @@
+exports[`test Renders properly 1`] = `
+<Card
+  expandable={false}
+  expanded={null}
+  initiallyExpanded={false}>
+  <CardTitle
+    title="Crew Members" />
+  <CardText>
+    <div>
+      <dl
+        className="dl-horizontal">
+        <dt>
+          Bow
+        </dt>
+        <dd>
+          John
+        </dd>
+      </dl>
+      <dl
+        className="dl-horizontal">
+        <dt>
+          2
+        </dt>
+        <dd>
+          Bob
+        </dd>
+      </dl>
+    </div>
+  </CardText>
+</Card>
+`;

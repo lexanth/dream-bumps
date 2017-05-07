@@ -14,7 +14,6 @@ describe('Auth reducer', () => {
     expect(reducer(undefined, {})).toEqual({
       loading: false,
       authenticated: false,
-      token: null,
       currentUser: {}
     });
   });

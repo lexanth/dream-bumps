@@ -1,0 +1,135 @@
+exports[`test Renders properly - header, current key 1`] = `
+<TableHeaderColumn
+  onMouseUp={[Function]}
+  style={
+    Object {
+      "fontWeight": "bold",
+      "paddingRight": 0,
+      "width": "88px",
+    }
+  }>
+  Bumps
+  <NavigationArrowDownward
+    color="rgb(158, 158, 158)" />
+</TableHeaderColumn>
+`;
+
+exports[`test Renders properly - header, not current key 1`] = `
+<TableHeaderColumn
+  onMouseUp={[Function]}
+  style={
+    Object {
+      "paddingRight": 0,
+      "width": "88px",
+    }
+  }>
+  Bumps
+</TableHeaderColumn>
+`;
+
+exports[`test Renders properly - tab content 1`] = `
+<Grid>
+  <Cell
+    col={12}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardText>
+        <Table
+          allRowsSelected={false}
+          fixedFooter={true}
+          fixedHeader={true}
+          height="inherit"
+          multiSelectable={false}
+          selectable={false}>
+          <TableHeader
+            adjustForCheckbox={false}
+            displaySelectAll={false}
+            enableSelectAll={true}
+            selectAllSelected={false}>
+            <TableRow
+              displayBorder={true}
+              hoverable={false}
+              hovered={false}
+              selectable={true}
+              selected={false}
+              striped={false}>
+              <TableHeaderColumn
+                style={
+                  Object {
+                    "paddingLeft": 0,
+                    "paddingRight": 0,
+                    "width": "45px",
+                  }
+                }>
+                #
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                Name
+              </TableHeaderColumn>
+              <TableHeaderColumn>
+                College
+              </TableHeaderColumn>
+              <SortableHeaderColumn
+                currentSortKey="SCORE"
+                label="Bumps"
+                onSort={[Function]}
+                sortDescending={true}
+                sortKey="BUMPS" />
+              <SortableHeaderColumn
+                currentSortKey="SCORE"
+                label="Cash"
+                onSort={[Function]}
+                sortDescending={true}
+                sortKey="CASH" />
+              <SortableHeaderColumn
+                currentSortKey="SCORE"
+                label="Crew Value"
+                onSort={[Function]}
+                sortDescending={true}
+                sortKey="VALUE" />
+              <SortableHeaderColumn
+                currentSortKey="SCORE"
+                label="Dividends"
+                onSort={[Function]}
+                sortDescending={true}
+                sortKey="DIVIDEND" />
+              <SortableHeaderColumn
+                currentSortKey="SCORE"
+                label="Trading Profit"
+                onSort={[Function]}
+                sortDescending={true}
+                sortKey="TRADING" />
+              <SortableHeaderColumn
+                currentSortKey="SCORE"
+                label="Score"
+                onSort={[Function]}
+                sortDescending={true}
+                sortKey="SCORE" />
+            </TableRow>
+          </TableHeader>
+          <TableBody
+            allRowsSelected={false}
+            deselectOnClickaway={true}
+            displayRowCheckbox={false}
+            multiSelectable={false}
+            preScanRows={true}
+            selectable={true}
+            style={Object {}}>
+            <Connect(RankingRow)
+              number={1}
+              ranking={Object {}} />
+            <Connect(RankingRow)
+              number={2}
+              ranking={Object {}} />
+            <Connect(RankingRow)
+              number={3}
+              ranking={Object {}} />
+          </TableBody>
+        </Table>
+      </CardText>
+    </Card>
+  </Cell>
+</Grid>
+`;

@@ -5,7 +5,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import BunglineGenderTabContent from './BunglineGenderTabContent';
 import { cancelBuyMember } from '../usercrews/actions';
 
-const BunglinesPage = ({ cancelBuyMember }) => (
+export const BunglinesPage = ({ cancelBuyMember }) => (
   <Tabs onChange={cancelBuyMember}>
     <Tab label="Men">
       <BunglineGenderTabContent sex="male" />

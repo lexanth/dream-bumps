@@ -1,0 +1,106 @@
+exports[`test Renders properly - not buy/sell 1`] = `
+<Card
+  expandable={false}
+  expanded={null}
+  initiallyExpanded={false}>
+  <CardTitle
+    title="Other Header" />
+  <CardText>
+    <Table
+      allRowsSelected={false}
+      fixedFooter={true}
+      fixedHeader={true}
+      height="inherit"
+      multiSelectable={false}
+      selectable={false}>
+      <TableBody
+        allRowsSelected={false}
+        deselectOnClickaway={true}
+        displayRowCheckbox={false}
+        multiSelectable={false}
+        preScanRows={true}
+        selectable={true}
+        style={Object {}}>
+        <Connect(UserCrewMemberRow)
+          canBuySell={false}
+          member={
+            Object {
+              "id": 3,
+            }
+          }
+          onClickBuy={[Function]} />
+        <Connect(UserCrewMemberRow)
+          canBuySell={false}
+          member={
+            Object {
+              "id": 7,
+            }
+          }
+          onClickBuy={[Function]} />
+      </TableBody>
+    </Table>
+  </CardText>
+</Card>
+`;
+
+exports[`test Renders properly 1`] = `
+<Card
+  expandable={false}
+  expanded={null}
+  initiallyExpanded={false}>
+  <CardTitle
+    title="UserCrew" />
+  <CardText>
+    <Table
+      allRowsSelected={false}
+      fixedFooter={true}
+      fixedHeader={true}
+      height="inherit"
+      multiSelectable={false}
+      selectable={false}>
+      <TableBody
+        allRowsSelected={false}
+        deselectOnClickaway={true}
+        displayRowCheckbox={false}
+        multiSelectable={false}
+        preScanRows={true}
+        selectable={true}
+        style={Object {}}>
+        <Connect(UserCrewMemberRow)
+          canBuySell={true}
+          member={
+            Object {
+              "id": 3,
+            }
+          }
+          onClickBuy={[Function]} />
+        <Connect(UserCrewMemberRow)
+          canBuySell={true}
+          member={
+            Object {
+              "id": 7,
+            }
+          }
+          onClickBuy={[Function]} />
+      </TableBody>
+    </Table>
+  </CardText>
+  <CardText>
+    <dl
+      className="dl-horizontal">
+      <dt>
+        Cash
+      </dt>
+      <dd>
+        123.40
+      </dd>
+      <dt>
+        Crew Value
+      </dt>
+      <dd>
+        1067.12
+      </dd>
+    </dl>
+  </CardText>
+</Card>
+`;

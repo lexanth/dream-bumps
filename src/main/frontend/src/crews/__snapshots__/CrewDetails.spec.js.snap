@@ -1,0 +1,57 @@
+exports[`test Renders properly 1`] = `
+<Card
+  expandable={false}
+  expanded={null}
+  initiallyExpanded={false}>
+  <CardTitle />
+  <CardText>
+    <div>
+      <dl
+        className="dl-horizontal">
+        <dt>
+          Start Price
+        </dt>
+        <dd>
+          76.34
+        </dd>
+      </dl>
+      <dl
+        className="dl-horizontal">
+        <dt>
+          Current Price
+        </dt>
+        <dd>
+          100 (+30%)
+        </dd>
+      </dl>
+      <dl
+        className="dl-horizontal">
+        <dt>
+          Start Position
+        </dt>
+        <dd>
+          8
+        </dd>
+      </dl>
+      <dl
+        className="dl-horizontal">
+        <dt>
+          Current Position
+        </dt>
+        <dd>
+          5 (+3)
+        </dd>
+      </dl>
+      <dl
+        className="dl-horizontal">
+        <dt>
+          Held
+        </dt>
+        <dd>
+          _
+        </dd>
+      </dl>
+    </div>
+  </CardText>
+</Card>
+`;

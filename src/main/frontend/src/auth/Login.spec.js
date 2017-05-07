@@ -1,12 +1,13 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { shallow } from 'enzyme';
 import { Login } from './Login';
+import toJson from 'enzyme-to-json';
 
 test('Renders properly', () => {
-  const component = renderer.create(
+  const component = shallow(
     <Login />
   );
-  let tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  expect(component).toBeDefined();
+  expect(toJson(component)).toMatchSnapshot();
 
 });

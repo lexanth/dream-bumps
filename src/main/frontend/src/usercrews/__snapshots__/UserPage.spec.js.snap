@@ -1,0 +1,18 @@
+exports[`test Renders properly 1`] = `
+<Tabs
+  initialSelectedIndex={0}
+  onChange={[Function]}>
+  <Tab
+    label="Men">
+    <UserGenderTabContent
+      sex="male"
+      userId={5} />
+  </Tab>
+  <Tab
+    label="Women">
+    <UserGenderTabContent
+      sex="female"
+      userId={5} />
+  </Tab>
+</Tabs>
+`;

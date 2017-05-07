@@ -75,4 +75,6 @@ const mapStateToProps = (state, ownProps) => {
   return {user: {}};
 }
 
+export {RankingRow};
+
 export default connect(mapStateToProps)(RankingRow);

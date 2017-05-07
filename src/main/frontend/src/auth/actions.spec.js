@@ -1,6 +1,15 @@
-
+import {logOut} from './actions';
 
 import * as types from '../actionTypes';
+
+it('Should log out correctly', () => {
+  const dispatch = jest.fn();
+
+  logOut()(dispatch);
+  expect(dispatch).toHaveBeenCalledTimes(2);
+  expect(dispatch.mock.calls[0][0]).toEqual({ type: types.LOGOUT_REQUEST });
+  expect(dispatch.mock.calls[1][0]).toEqual({ type: types.LOGOUT_SUCCESS, message: 'Logged out' });
+})
 // describe('User Login', () => {
 //     it('dispatches MANUAL_LOGIN_USER and LOGIN_SUCCESS_USER when Manual Login returns status of 200 and routes user to /', (done) => {
 //       const expectedActions = [

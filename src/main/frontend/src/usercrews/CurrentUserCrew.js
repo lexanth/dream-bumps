@@ -27,6 +27,8 @@ const mapStateToProps = (state) => ({
   userId: getCurrentUserId(state)
 });
 
+export {CurrentUserCrew};
+
 export default connect(mapStateToProps)(CurrentUserCrew);
 
 //

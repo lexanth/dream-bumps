@@ -92,4 +92,6 @@ const mapStateToProps = (state, ownProps) => {
   return mapping;
 };
 
+export {DivisionTable};
+
 export default connect(mapStateToProps, {doBuyRower})(DivisionTable);

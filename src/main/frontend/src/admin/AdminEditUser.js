@@ -101,5 +101,6 @@ AdminEditUser.propTypes = {
 const mapStateToProps = (state, {params}) => ({
   initialValues: getUser(state)(params.userId)
 });
+export {AdminEditUser};
 
 export default connect(mapStateToProps, {onSubmit: updateUser})(reduxForm({form: 'edit-user', enableReinitialize: true})(AdminEditUser));

@@ -24,4 +24,5 @@ const mapStateToProps = (state, ownProps) => ({
   crews: getCrewsForSex(state)(ownProps.sex)
 });
 
+export {CrewAdminList};
 export default connect(mapStateToProps)(CrewAdminList);

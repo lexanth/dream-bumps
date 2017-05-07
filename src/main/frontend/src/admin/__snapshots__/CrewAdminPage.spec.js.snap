@@ -1,0 +1,6 @@
+exports[`test Renders properly 1`] = `
+<div>
+  <div
+    className="random div" />
+</div>
+`;

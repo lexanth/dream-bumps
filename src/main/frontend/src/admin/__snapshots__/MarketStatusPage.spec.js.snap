@@ -1,0 +1,147 @@
+exports[`test Renders properly 1`] = `
+<Grid>
+  <Cell
+    col={6}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardText>
+        <h3>
+          The market is currently 
+        </h3>
+        <h1>
+          Open
+        </h1>
+        <RaisedButton
+          disabled={false}
+          fullWidth={false}
+          label="Close Market"
+          labelPosition="after"
+          onClick={[Function]}
+          primary={true}
+          secondary={false} />
+      </CardText>
+    </Card>
+  </Cell>
+  <Cell
+    col={6}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardText>
+        <h3>
+          The market is currently showing
+        </h3>
+        <h1>
+          Start Order for Day 4
+        </h1>
+        <RaisedButton
+          disabled={false}
+          fullWidth={false}
+          label="Next Day"
+          labelPosition="after"
+          onClick={[Function]}
+          primary={true}
+          secondary={false} />
+        <p>
+          This cannot be reversed easily. This will also crystallise the dividends for crews. Make sure you have entered all bumps before this.
+        </p>
+      </CardText>
+    </Card>
+  </Cell>
+  <Cell
+    col={6}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardText>
+        <p>
+          Market status last updated: 
+          <Timestamp
+            format="ago"
+            includeDay={false}
+            offset={0}
+            time="2017-05-04T12:51:15.123Z" />
+        </p>
+      </CardText>
+    </Card>
+  </Cell>
+</Grid>
+`;
+
+exports[`test Renders properly 2`] = `
+<Grid>
+  <Cell
+    col={6}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardText>
+        <h3>
+          The market is currently 
+        </h3>
+        <h1>
+          Closed
+        </h1>
+        <RaisedButton
+          disabled={false}
+          fullWidth={false}
+          label="Open Market"
+          labelPosition="after"
+          onClick={[Function]}
+          primary={true}
+          secondary={false} />
+      </CardText>
+    </Card>
+  </Cell>
+  <Cell
+    col={6}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardText>
+        <h3>
+          The market is currently showing
+        </h3>
+        <h1>
+          Final Finish Order
+        </h1>
+        <RaisedButton
+          disabled={true}
+          fullWidth={false}
+          label="Next Day"
+          labelPosition="after"
+          onClick={[Function]}
+          primary={true}
+          secondary={false} />
+        <p>
+          This cannot be reversed easily. This will also crystallise the dividends for crews. Make sure you have entered all bumps before this.
+        </p>
+      </CardText>
+    </Card>
+  </Cell>
+  <Cell
+    col={6}>
+    <Card
+      expandable={false}
+      expanded={null}
+      initiallyExpanded={false}>
+      <CardText>
+        <p>
+          Market status last updated: 
+          <Timestamp
+            format="ago"
+            includeDay={false}
+            offset={0}
+            time="2017-05-05T17:51:15.123Z" />
+        </p>
+      </CardText>
+    </Card>
+  </Cell>
+</Grid>
+`;

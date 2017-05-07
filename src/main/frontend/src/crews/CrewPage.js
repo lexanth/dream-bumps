@@ -30,5 +30,6 @@ CrewPage.propTypes = {
     crewId: PropTypes.string
   })
 };
+export {CrewPage};
 
 export default CrewPage;

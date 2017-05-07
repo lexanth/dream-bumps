@@ -54,4 +54,6 @@ const mapStateToProps = (state, ownProps) => ({
   marketOpen: isMarketOpen(state)
 });
 
+export {CrewList};
+
 export default connect(mapStateToProps, { fetchCrews })(CrewList);

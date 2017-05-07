@@ -71,4 +71,6 @@ const mapStateToProps: Object = (state: Object) => ({
   status: getCurrentStatus(state)
 });
 
+export {MarketStatusPage};
+
 export default connect(mapStateToProps, { updateMarketStatus })(MarketStatusPage);
