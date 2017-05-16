@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {Field, FieldArray, reduxForm, formValueSelector } from 'redux-form';
@@ -26,8 +27,13 @@ const renderMembers = ({ fields, current }) => (
 )
 
 renderMembers.propTypes = {
-  fields: PropTypes.array,
-  current: PropTypes.array
+  fields: PropTypes.arrayOf(PropTypes.string),
+  current: PropTypes.arrayOf(
+    PropTypes.shape({
+      seat: PropTypes.number,
+      name: PropTypes.string
+    })
+  )
 }
 
 class AdminCrewMemberEdit extends Component {
@@ -41,7 +47,11 @@ class AdminCrewMemberEdit extends Component {
         <CardTitle title={`Crew Members - ${this.props.crewId}`}/>
         <CardText>
           <form onSubmit={this.props.handleSubmit}>
-            <FieldArray name="members" component={renderMembers} props={{current: this.props.currentMembers}} />
+            <FieldArray
+              name="members"
+              component={renderMembers}
+              props={{current: this.props.currentMembers}}
+            />
             <RaisedButton primary type="submit" label="Save"/>
           </form>
         </CardText>
@@ -53,18 +63,36 @@ class AdminCrewMemberEdit extends Component {
 AdminCrewMemberEdit.propTypes = {
   crewId: PropTypes.string,
   handleSubmit: PropTypes.func,
-  currentMembers: PropTypes.array,
-  initialValues: PropTypes.object,
+  currentMembers: PropTypes.arrayOf(
+    PropTypes.shape({
+      seat: PropTypes.number,
+      name: PropTypes.string,
+      id: PropTypes.number
+    })
+  ),
+  initialValues: PropTypes.shape({
+    members: PropTypes.arrayOf(PropTypes.shape({
+      seat: PropTypes.number,
+      name: PropTypes.string,
+      id: PropTypes.number
+    }))
+  }),
   fetchCrewMembers: PropTypes.func
 };
 
 const selector = formValueSelector('edit-crew-members');
 
-export const mapStateToProps = (state, {crewId}) => ({
-  initialValues: {members: getCrewMembers(state)(crewId)},
+export const mapStateToProps = (state: Object, {crewId}:{crewId: string}) => ({
+  initialValues: {members: getCrewMembers(state)(parseInt(crewId, 10))},
   currentMembers: selector(state, 'members')
 });
 
 export {AdminCrewMemberEdit};
 
-export default connect(mapStateToProps, {onSubmit: updateCrewMembers, fetchCrewMembers})(reduxForm({form: 'edit-crew-members', enableReinitialize: true})(AdminCrewMemberEdit));
+export default connect(
+  mapStateToProps,
+  {onSubmit: updateCrewMembers, fetchCrewMembers}
+)(
+  reduxForm(
+    {form: 'edit-crew-members', enableReinitialize: true}
+  )(AdminCrewMemberEdit));

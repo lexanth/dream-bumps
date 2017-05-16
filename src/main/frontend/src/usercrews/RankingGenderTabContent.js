@@ -174,7 +174,10 @@ class RankingGenderTabContent extends Component {
 
 RankingGenderTabContent.propTypes = {
   sex: PropTypes.string,
-  rankings: PropTypes.array
+  rankings: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    bumps: PropTypes.number
+  }))
 }
 
 export const mapStateToProps = (state, ownProps) => {

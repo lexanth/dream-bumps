@@ -1,5 +1,5 @@
+// @flow
 import React, {PropTypes, Component} from 'react';
-// import { connect } from 'react-redux';
 import {Grid, Cell} from 'material-grid/dist';
 
 import UserCrew from './UserCrew';

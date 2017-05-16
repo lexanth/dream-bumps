@@ -62,7 +62,11 @@ class MarketStatusPage extends React.Component {
 }
 
 MarketStatusPage.propTypes = {
-  status: PropTypes.object,
+  status: PropTypes.shape({
+    day: PropTypes.number,
+    open: PropTypes.bool,
+    dateTime: PropTypes.string
+  }),
   updateMarketStatus: PropTypes.func,
   day: PropTypes.number
 };

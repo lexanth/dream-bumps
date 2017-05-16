@@ -77,7 +77,7 @@ class BumpsAdminPage extends Component {
     this.props.fetchCrews(this.props.params.sex);
   }
 
-  setCrews(props) {
+  setCrews(props:Object) {
     const crewListWithDivisions = [];
     Object.keys(props.crews).forEach(division => {
       crewListWithDivisions.push({name: `Division ${parseInt(division, 10)+1}`, header: true});
@@ -90,7 +90,7 @@ class BumpsAdminPage extends Component {
     this.setState({crewListWithDivisions, startCrewListWithDivisions: crewListWithDivisions.map(crew => Object.assign({}, crew))});
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps:Object) {
     if (nextProps.crews) {
       this.setCrews(nextProps);
     }
@@ -104,7 +104,7 @@ class BumpsAdminPage extends Component {
     this.props.uploadBumps(this.state.crewListWithDivisions.filter(crew => !crew.header), this.props.day + 1);
   }
 
-  onSortEnd(params) {
+  onSortEnd(params: Object) {
     const {oldIndex, newIndex} = params;
     // TODO: Find all crews between these indexes and update their positions
     // console.log(params);
@@ -174,10 +174,14 @@ class BumpsAdminPage extends Component {
 BumpsAdminPage.propTypes = {
   sex: PropTypes.string,
   day: PropTypes.number,
-  crews: PropTypes.object,
+  crews: PropTypes.shape({
+    0: PropTypes.arrayOf(PropTypes.shape({bumps: PropTypes.number, position: PropTypes.number}))
+  }),
   uploadBumps: PropTypes.func,
   fetchCrews: PropTypes.func,
-  params: PropTypes.object
+  params: PropTypes.shape({
+    sex: PropTypes.string
+  })
 }
 
 export const mapStateToProps = (state, {params}) => ({

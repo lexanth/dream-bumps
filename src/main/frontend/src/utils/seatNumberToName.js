@@ -1,4 +1,5 @@
-const seatNumberToName = (seat) => {
+// @flow
+const seatNumberToName = (seat:number):string => {
   switch (seat) {
     case 1:
       return 'Bow';
@@ -7,7 +8,7 @@ const seatNumberToName = (seat) => {
     case 9:
       return 'Cox';
     default:
-      return seat;
+      return seat.toString(10);
   }
 };
 

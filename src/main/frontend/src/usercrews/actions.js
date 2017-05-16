@@ -1,3 +1,4 @@
+// @flow
 import requestWithAuth from '../auth/authorisedAxios';
 import * as types from '../actionTypes';
 
@@ -19,7 +20,7 @@ const fetchUserCrewMembersError = errorMessage => ({
   errorMessage
 });
 
-export const fetchUserCrewMembers = (userId, sex) => dispatch => {
+export const fetchUserCrewMembers = (userId: number, sex: string) => (dispatch:Function) => {
   dispatch(fetchUserCrewMembersStart(userId, sex));
   return requestWithAuth.get(`/api/users/${userId}/members?sex=${sex}`)
     .then(response => {
@@ -46,7 +47,7 @@ const fetchUserCrewRankingError = errorMessage => ({
   errorMessage
 });
 
-export const fetchUserCrewRanking = (userId, sex) => dispatch => {
+export const fetchUserCrewRanking = (userId:number, sex:string) => (dispatch:Function) => {
   dispatch(fetchUserCrewRankingStart(userId, sex));
   return requestWithAuth.get(`/api/users/${userId}/ranking?sex=${sex}`)
     .then(response => {
@@ -72,7 +73,7 @@ const fetchUserCrewRankingsError = errorMessage => ({
   errorMessage
 });
 
-export const fetchUserCrewRankings = (sex) => dispatch => {
+export const fetchUserCrewRankings = (sex:string) => (dispatch:Function) => {
   dispatch(fetchUserCrewRankingsStart(sex));
   return requestWithAuth.get(`/api/rankings?sex=${sex}`)
     .then(response => {
@@ -83,7 +84,7 @@ export const fetchUserCrewRankings = (sex) => dispatch => {
     });
 };
 
-export const setBuyMember = (memberId, sex) => ({
+export const setBuyMember = (memberId:number, sex:string) => ({
   type: types.SET_BUY_MEMBER,
   memberId,
   sex
@@ -93,23 +94,23 @@ export const cancelBuyMember = () => ({
   type: types.CANCEL_BUY_MEMBER
 });
 
-export const buyRowerStart = (crewId, userCrewMemberId) => ({
+export const buyRowerStart = (crewId:number, userCrewMemberId:number) => ({
   type: types.BUY_ROWER_REQUEST,
   crewId,
   userCrewMemberId
 });
 
-export const buyRowerSuccess = (userCrewMember) => ({
+export const buyRowerSuccess = (userCrewMember:Object) => ({
   type: types.BUY_ROWER_SUCCESS,
   userCrewMember
 });
 
-export const buyRowerError = errorMessage => ({
+export const buyRowerError = (errorMessage:string) => ({
   type: types.BUY_ROWER_ERROR,
   errorMessage
 });
 
-export const doBuyRower = (crewId, userCrewMemberId) => dispatch => {
+export const doBuyRower = (crewId:number, userCrewMemberId:number) => (dispatch:Function) => {
   dispatch(buyRowerStart(crewId, userCrewMemberId));
   return requestWithAuth.post('/api/buy', {crewId, userCrewMemberId})
     .then(response => {
@@ -122,23 +123,23 @@ export const doBuyRower = (crewId, userCrewMemberId) => dispatch => {
     });
 };
 
-const sellRowerStart = (crewId, userCrewMemberId) => ({
+const sellRowerStart = (crewId:number, userCrewMemberId:number) => ({
   type: types.SELL_ROWER_REQUEST,
   crewId,
   userCrewMemberId
 });
 
-const sellRowerSuccess = (userCrewMember) => ({
+const sellRowerSuccess = (userCrewMember:number) => ({
   type: types.SELL_ROWER_SUCCESS,
   userCrewMember
 });
 
-const sellRowerError = errorMessage => ({
+const sellRowerError = (errorMessage:number) => ({
   type: types.SELL_ROWER_ERROR,
   errorMessage
 });
 
-export const doSellRower = (crewId, userCrewMemberId) => dispatch => {
+export const doSellRower = (crewId:number, userCrewMemberId:number) => (dispatch:Function) => {
   dispatch(sellRowerStart(crewId, userCrewMemberId));
   return requestWithAuth.post('/api/sell', {crewId, userCrewMemberId})
     .then(response => {
@@ -151,23 +152,23 @@ export const doSellRower = (crewId, userCrewMemberId) => dispatch => {
     });
 };
 
-const fetchUserCrewPriceHistoryStart = (userId, sex) => ({
+const fetchUserCrewPriceHistoryStart = (userId:number, sex:string) => ({
   type: types.FETCH_USER_CREW_PRICE_HISTORY_REQUEST,
   userId,
   sex
 });
 
-const fetchUserCrewPriceHistorySuccess = (userCrewPriceHistories) => ({
+const fetchUserCrewPriceHistorySuccess = (userCrewPriceHistories:Array<Object>) => ({
   type: types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS,
   userCrewPriceHistories
 });
 
-const fetchUserCrewPriceHistoryError = errorMessage => ({
+const fetchUserCrewPriceHistoryError = (errorMessage:string) => ({
   type: types.FETCH_USER_CREW_PRICE_HISTORY_ERROR,
   errorMessage
 });
 
-export const fetchUserCrewPriceHistory = (userId, sex) => dispatch => {
+export const fetchUserCrewPriceHistory = (userId:number, sex:string) => (dispatch:Function) => {
   dispatch(fetchUserCrewPriceHistoryStart(userId, sex));
   return requestWithAuth.get(`/api/users/${userId}/price-history?sex=${sex}`)
     .then(response => {

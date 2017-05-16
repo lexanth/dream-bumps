@@ -42,12 +42,15 @@ CrewList.propTypes = {
   fetchCrews: PropTypes.func,
   sex: PropTypes.string,
   numberOfDivisions: PropTypes.number,
-  crews: PropTypes.object,
+  crews: PropTypes.shape({
+    [0]: PropTypes.arrayOf(PropTypes.shape(
+      {id: PropTypes.number, position: PropTypes.number, name: PropTypes.string}))
+  }),
   day: PropTypes.number,
   marketOpen: PropTypes.bool
 };
 
-export const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state: Object, ownProps: Object) => ({
   crews: getCrewsByDivision(state)(ownProps.sex),
   numberOfDivisions: getNumberOfDivisions(state)(ownProps.sex),
   day: getCurrentDay(state),

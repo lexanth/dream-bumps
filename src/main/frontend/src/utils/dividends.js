@@ -1,3 +1,4 @@
+// @flow
 import {round} from './maths';
 const getStartPrice = position => 300 - 66 * Math.log(position);
 const getBaseRowOverDividend = position => 0.3 * getStartPrice(position);
@@ -16,7 +17,7 @@ const _calculateRowOverDividend = (position, day) => {
   return getBaseRowOverDividend(position);
 }
 
-export const calculateRowOverDividendForPosition = (position, day) => round(_calculateRowOverDividend(position, day), 2).toFixed(2);
+export const calculateRowOverDividendForPosition = (position: number, day: number): string => round(_calculateRowOverDividend(position, day), 2).toFixed(2);
 
 const _calculateBumpDividend = (position, numberOfCrews, crewsPerDivision, day) => {
   if (position === 2 && day >= 3) {
@@ -28,4 +29,4 @@ const _calculateBumpDividend = (position, numberOfCrews, crewsPerDivision, day) 
   return 3 * getBaseRowOverDividend(position);
 }
 
-export const calculateBumpDividend = (position, numberOfCrews, crewsPerDivision, day) => round(_calculateBumpDividend(position, numberOfCrews, crewsPerDivision, day), 2).toFixed(2);
+export const calculateBumpDividend = (position: number, numberOfCrews: number, crewsPerDivision: number, day:number):string => round(_calculateBumpDividend(position, numberOfCrews, crewsPerDivision, day), 2).toFixed(2);

@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
@@ -20,7 +21,7 @@ class UserScoreHistory extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps:{userId:number}) {
     if (nextProps.userId && nextProps.userId !== this.props.userId) {
       this.props.fetchUserCrewPriceHistory(nextProps.userId, nextProps.sex);
     }
@@ -56,14 +57,18 @@ class UserScoreHistory extends Component {
 }
 
 UserScoreHistory.propTypes = {
-  scoreHistory: PropTypes.array,
+  scoreHistory: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.number,
+    cash: PropTypes.number,
+    dateTime: PropTypes.string
+  })),
   userId: PropTypes.number,
   fetchUserCrewPriceHistory: PropTypes.func,
   sex: PropTypes.string,
   style: PropTypes.object
 };
 
-export const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state:Object, ownProps:{userId:number,sex:string}) => ({
   scoreHistory: getUserScoreHistory(state)(ownProps.userId, ownProps.sex) || []
 });
 

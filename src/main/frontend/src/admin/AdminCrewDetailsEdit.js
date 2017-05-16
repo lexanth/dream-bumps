@@ -44,14 +44,25 @@ class AdminCrewDetailsEdit extends Component {
 
 AdminCrewDetailsEdit.propTypes = {
   crewId: PropTypes.string,
-  initialValues: PropTypes.object,
+  initialValues: PropTypes.shape({
+    name: PropTypes.string,
+    sex: PropTypes.string
+  }),
   handleSubmit: PropTypes.func
 }
 
-export const mapStateToProps = (state: Object, {crewId}) => ({
-  initialValues: getCrew(state)(crewId)
-});
+export const mapStateToProps = (state: Object, {crewId}: {crewId: string} ) =>(
+  {
+    initialValues: getCrew(state)(parseInt(crewId,10))
+  }
+);
 
 export {AdminCrewDetailsEdit};
 
-export default connect(mapStateToProps, {onSubmit: updateCrew})(reduxForm({form: 'edit-crew-details', enableReinitialize: true})(AdminCrewDetailsEdit));
+export default connect(
+  mapStateToProps,
+  {onSubmit: updateCrew}
+)(
+  reduxForm(
+    {form: 'edit-crew-details', enableReinitialize: true}
+  )(AdminCrewDetailsEdit));

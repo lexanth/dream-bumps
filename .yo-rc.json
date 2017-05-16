@@ -23,6 +23,7 @@
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "skipClient": true,
-    "clientPackageManager": "yarn"
+    "clientPackageManager": "yarn",
+    "herokuAppName": "dream-bumps"
   }
 }

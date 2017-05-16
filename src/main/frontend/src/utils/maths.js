@@ -1,1 +1,2 @@
-export const round = (value, decimals = 0) => Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+// @flow
+export const round = (value: number, decimals:number = 0):number => Number(Math.round(value.toString(10)+'e'+decimals.toString(10))+'e-'+decimals);

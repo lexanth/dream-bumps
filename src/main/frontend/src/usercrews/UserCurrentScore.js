@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
@@ -63,7 +64,7 @@ UserCurrentScore.propTypes = {
   sex: PropTypes.string
 };
 
-export const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state:Object, ownProps:{userId:number,sex:string}) => ({
   ranking: getUserCrewRanking(state)(ownProps.userId, ownProps.sex)
 });
 

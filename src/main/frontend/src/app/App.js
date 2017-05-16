@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -8,7 +9,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 // import { Meta } from '../components/Meta';
 import Navigation from './Navigation';
-// import MySnackbar from '../messages/MySnackbar';
+import MySnackbar from './MySnackbar';
 import { fetchCurrentUser } from '../auth/actions';
 import { fetchConfig } from '../config/actions';
 import { fetchStatus } from '../status/actions';
@@ -55,7 +56,7 @@ class App extends Component {
           <Navigation />
           <div>
             {this.props.children}
-            {/* <MySnackbar /> */}
+            <MySnackbar />
           </div>
         </div>
       </MuiThemeProvider>
@@ -64,14 +65,14 @@ class App extends Component {
 }
 
 App.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.node,
   fetchCurrentUser: PropTypes.func,
   loading: PropTypes.bool,
   fetchConfig: PropTypes.func,
   fetchStatus: PropTypes.func
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: Object) => ({
   loading: isLoading(state)
 });
 

@@ -1,3 +1,4 @@
+// @flow
 import requestWithAuth from '../auth/authorisedAxios';
 import * as types from '../actionTypes';
 
@@ -15,7 +16,7 @@ const fetchConfigError = errorMessage => ({
   errorMessage
 });
 
-export const fetchConfig = () => dispatch => {
+export const fetchConfig = () => (dispatch: Function) => {
   dispatch(fetchConfigStart());
   return requestWithAuth.get('/api/config')
     .then(response => {

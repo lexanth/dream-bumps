@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { IndexLink, Link } from 'react-router';
 import { connect } from 'react-redux';
@@ -9,7 +10,7 @@ import Divider from 'material-ui/Divider';
 
 import {isAdmin} from '../rootReducer';
 
-export const Navigation = ({ authenticated, isAdmin }) => (
+export const Navigation = ({ authenticated, isAdmin }: {authenticated: boolean, isAdmin: boolean}) => (
       <Toolbar>
         <ToolbarGroup>
           <FlatButton
@@ -52,7 +53,7 @@ Navigation.propTypes = {
   isAdmin: PropTypes.bool
 };
 
-export const mapStateToProps = state => ({
+export const mapStateToProps = (state: Object) => ({
   authenticated: state.auth.authenticated,
   isAdmin: isAdmin(state)()
 });

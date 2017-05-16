@@ -1,3 +1,4 @@
+// @flow
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
@@ -7,11 +8,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {Cell} from 'material-grid/dist';
 import Select from 'react-select';
 import MenuItem from 'material-ui/MenuItem';
-
-// Be sure to include styles at some point, probably during your bootstrapping
 import 'react-select/dist/react-select.css';
 
-// import ReduxFormSuperSelectField from '../utils/ReduxFormSuperSelectField';
 import { getUser } from '../rootReducer';
 import { updateUser } from './actions';
 import colleges from '../utils/colleges';
@@ -32,11 +30,17 @@ const MyReactSelect = (props) => (
 );
 
 MyReactSelect.propTypes = {
-  input: PropTypes.object,
+  input: PropTypes.shape({
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func
+  }),
   options: PropTypes.object
 }
 
-const AdminEditUser = ({user, handleSubmit, params}) => (
+const AdminEditUser = (
+  {handleSubmit, params}: {handleSubmit: Function, params: Object}
+) => (
   <Cell col="6" offset={3} >
   <Card>
     <CardTitle title={`Edit User - ${params.userId}`} />
@@ -79,7 +83,11 @@ const AdminEditUser = ({user, handleSubmit, params}) => (
             component={SelectField}
           >
             {colleges.map(college =>
-              <MenuItem key={college.value} value={college.value} primaryText={college.label} />
+              <MenuItem
+                key={college.value}
+                value={college.value}
+                primaryText={college.label}
+              />
             )}
           </Field>
         <RaisedButton primary type="submit" label="Save" />
@@ -90,17 +98,31 @@ const AdminEditUser = ({user, handleSubmit, params}) => (
 );
 
 AdminEditUser.propTypes = {
-  user: PropTypes.object,
   handleSubmit: PropTypes.func,
-  params: PropTypes.object,
-  initialValues: PropTypes.object
+  params: PropTypes.shape({
+    userId: PropTypes.string
+  }),
+  initialValues: PropTypes.shape({
+    login: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    authorities: PropTypes.arrayOf(PropTypes.string),
+    college: PropTypes.string
+  })
 }
 
 // todo - activated and authorities
 
-export const mapStateToProps = (state, {params}) => ({
+export const mapStateToProps = (state: Object, {params}:{params:Object}) => ({
   initialValues: getUser(state)(params.userId)
 });
 export {AdminEditUser};
 
-export default connect(mapStateToProps, {onSubmit: updateUser})(reduxForm({form: 'edit-user', enableReinitialize: true})(AdminEditUser));
+export default connect(
+  mapStateToProps,
+  {onSubmit: updateUser}
+)(
+  reduxForm(
+    {form: 'edit-user', enableReinitialize: true}
+  )(AdminEditUser));

@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 
 import * as types from '../actionTypes';
@@ -103,9 +104,9 @@ export default combineReducers({
   priceHistory
 });
 
-export const _getCrewMembers = state => crewId => (state.members.byCrewId[crewId] ? state.members.byCrewId[crewId].map(id => state.members.byId[id]) : []).sort((a,b) => a.seat > b.seat);
-export const _getCrew = state => crewId => (state.crews.byId[crewId]);
-export const _getCrewPriceHistory = state => crewId =>
+export const _getCrewMembers = (state: Object) => (crewId: number) => (state.members.byCrewId[crewId] ? state.members.byCrewId[crewId].map(id => state.members.byId[id]) : []).sort((a,b) => a.seat - b.seat);
+export const _getCrew = (state: Object) => (crewId:number) => (state.crews.byId[crewId]);
+export const _getCrewPriceHistory = (state: Object) => (crewId: number) =>
   (state.priceHistory.byCrewId[crewId] ?
     state.priceHistory.byCrewId[crewId]
       .map(id => state.priceHistory.byId[id])
@@ -117,22 +118,22 @@ export const _getCrewPriceHistory = state => crewId =>
   :
     []);
 
-export const _getCrewName = state => crewId => {
+export const _getCrewName = (state: Object) => (crewId: number) => {
   if (crewId === null) return '';
   const crew = _getCrew(state)(crewId);
   return crew ? crew.name : '';
 };
 
-export const _getCrewMemberName = state => (crewId, seat) => {
+export const _getCrewMemberName = (state: Object) => (crewId:number, seat:number) => {
   const members = _getCrewMembers(state)(crewId);
   const member = members.find(member => member.seat === seat)
   return member ? member.name : '';
 };
 
-export const _getCrewPrice = state => crewId => {
+export const _getCrewPrice = (state: Object) => (crewId:number) => {
   if (crewId === null) return '';
   const crew = _getCrew(state)(crewId);
   return crew ? crew.price : '';
 };
 
-export const _getCrewsForSex = state => sex => (state.crews.bySex[sex] || []).map(id => state.crews.byId[id]).sort((a,b) => a.position - b.position);
+export const _getCrewsForSex = (state: Object) => (sex: string) => (state.crews.bySex[sex] || []).map(id => state.crews.byId[id]).sort((a,b) => a.position - b.position);

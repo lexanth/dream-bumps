@@ -1,3 +1,4 @@
+// @flow
 import axios from 'axios';
 import { tokenName } from '../constants/config';
 

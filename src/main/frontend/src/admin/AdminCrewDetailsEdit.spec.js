@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminCrewDetailsEdit, mapStateToProps } from './AdminCrewDetailsEdit';
@@ -21,12 +22,12 @@ test('mapStateToProps', () => {
     crews: {
       crews: {
         byId: {
-          1: {id: 1, sex: 'male', name: 'Crew 1'},
-          2: {id: 2, sex: 'male', name: 'Crew 2'},
-          3: {id: 3, sex: 'female', name: 'Crew 3'},
-          4: {id: 4, sex: 'male', name: 'Crew 4'},
-          5: {id: 5, sex: 'female', name: 'Crew 5'},
-          6: {id: 6, sex: 'female', name: 'Crew 6'},
+          [1]: {id: 1, sex: 'male', name: 'Crew 1'},
+          [2]: {id: 2, sex: 'male', name: 'Crew 2'},
+          [3]: {id: 3, sex: 'female', name: 'Crew 3'},
+          [4]: {id: 4, sex: 'male', name: 'Crew 4'},
+          [5]: {id: 5, sex: 'female', name: 'Crew 5'},
+          [6]: {id: 6, sex: 'female', name: 'Crew 6'},
         },
         bySex: {
           male: [1,2,4],

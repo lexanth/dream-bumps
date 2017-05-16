@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
@@ -49,12 +50,15 @@ class CrewPriceHistory extends Component {
 }
 
 CrewPriceHistory.propTypes = {
-  crewPriceHistory: PropTypes.array,
+  crewPriceHistory: PropTypes.arrayOf(PropTypes.shape({
+    price: PropTypes.number,
+    dateTime: PropTypes.string
+  })),
   crewId: PropTypes.string,
   fetchCrewPriceHistory: PropTypes.func
 };
 
-export const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state: Object, ownProps: Object) => ({
   crewPriceHistory: getCrewPriceHistory(state)(ownProps.crewId)
 });
 

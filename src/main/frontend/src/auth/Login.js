@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
@@ -10,7 +11,7 @@ import {Card, CardTitle, CardText, CardActions} from 'material-ui/Card';
 
 import {login} from './actions';
 
-export const Login = ({handleSubmit}) => (
+export const Login = ({handleSubmit}:{handleSubmit:Function}) => (
   <form onSubmit={handleSubmit}>
     <Cell col={6} offset={3}>
       <Card>

@@ -11,7 +11,7 @@ exports[`test Renders properly 1`] = `
         title="Register" />
       <CardText>
         <div>
-          Already have an account?
+          Already have an account? 
           <Link
             onlyActiveOnIndex={false}
             style={Object {}}
@@ -26,14 +26,9 @@ exports[`test Renders properly 1`] = `
           name="login" />
         <Field
           component={[Function]}
-          floatingLabelText="First Name"
+          floatingLabelText="E-Mail"
           fullWidth={true}
-          name="firstName" />
-        <Field
-          component={[Function]}
-          floatingLabelText="Last Name"
-          fullWidth={true}
-          name="lastName" />
+          name="email" />
         <Field
           component={[Function]}
           floatingLabelText="Password"

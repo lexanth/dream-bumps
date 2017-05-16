@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 
 import * as types from '../actionTypes';
@@ -28,6 +29,6 @@ export default combineReducers({
   loading
 });
 
-export const _getNumberOfCrews = state => sex => (sex === 'male' ? state.config.mensCrews : state.config.womensCrews);
+export const _getNumberOfCrews = (state: Object) => (sex:string) => (sex === 'male' ? state.config.mensCrews : state.config.womensCrews);
 
-export const _getNumberOfDivisions = state => sex => (Math.floor(_getNumberOfCrews(state)(sex) / state.config.crewsPerDivision));
+export const _getNumberOfDivisions = (state: Object) => (sex:string) => (Math.floor(_getNumberOfCrews(state)(sex) / state.config.crewsPerDivision));

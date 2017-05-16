@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 
 import * as types from '../actionTypes';
@@ -46,7 +47,7 @@ const rankingsById = (state = {}, action) => {
   }
 };
 
-const rankingsBySex = (state = {}, action, ranking) => {
+const rankingsBySex = (state = {}, action = {}, ranking = {}) => {
   switch (action.type) {
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
       return {...state, [action.ranking.sex]: action.ranking.id};
@@ -142,7 +143,7 @@ export default combineReducers({
   history
 });
 
-export const _getUserCrewMembers = state => (userId, sex) => {
+export const _getUserCrewMembers = (state:{members:{byUserId:Object,byId:Object}}) => (userId: number, sex: string) => {
   const membersForUser = state.members.byUserId[userId] || [];
   return membersForUser
     .map(id => state.members.byId[id])

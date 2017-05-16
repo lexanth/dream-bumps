@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
@@ -20,7 +21,7 @@ class Logout extends Component {
 
 Logout.propTypes = {
   onLogOut: PropTypes.func.isRequired,
-  router: PropTypes.object.isRequired
+  router: PropTypes.shape({replace: PropTypes.func}).isRequired
 };
 
 export default withRouter(connect(null, { onLogOut: logOut })(Logout));

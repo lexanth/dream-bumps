@@ -23,7 +23,7 @@ module.exports = {
 
   parser: 'babel-eslint',
 
-  plugins: ['import', 'flowtype', 'jsx-a11y', 'react'],
+  plugins: ['import', 'flowtype', 'jsx-a11y', 'react', 'prettier'],
 
   env: {
     browser: true,
@@ -229,6 +229,7 @@ module.exports = {
     'react/require-render-return': 'warn',
     'react/style-prop-object': 'warn',
     'react/prop-types': 'warn',
+    'react/forbid-prop-types': ['error', { forbid: ['any', 'array', 'object'] }],
 
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
     'jsx-a11y/aria-role': 'warn',
@@ -240,5 +241,6 @@ module.exports = {
     'flowtype/define-flow-type': 'warn',
     'flowtype/require-valid-file-annotation': 'warn',
     'flowtype/use-flow-type': 'warn',
+    'prettier/prettier':'error'
   },
 };

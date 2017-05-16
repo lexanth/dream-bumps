@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
@@ -5,7 +6,6 @@ import {Card, CardTitle, CardText} from 'material-ui/Card';
 import { fetchCrew } from './actions';
 import { getCrew } from '../rootReducer';
 
-// import dlHorizontal from '../styles/dl.css';
 const percentChange = (now, original) => {
   const change = Math.trunc(100 * ( now - original ) / original,2);
   if (change < 0) {
@@ -69,10 +69,17 @@ class CrewDetails extends React.Component {
 CrewDetails.propTypes = {
   crewId: PropTypes.string,
   fetchCrew: PropTypes.func,
-  crew: PropTypes.object
+  crew: PropTypes.shape({
+    name: PropTypes.string,
+    startPrice: PropTypes.number,
+    price: PropTypes.number,
+    startPosition: PropTypes.number,
+    position: PropTypes.number,
+    holding: PropTypes.number
+  })
 };
 
-export const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state:Object, ownProps:Object) => ({
   crew: getCrew(state)(ownProps.crewId)
 });
 

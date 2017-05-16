@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 import jwtDecode from 'jwt-decode';
 
@@ -62,20 +63,20 @@ const userReducer = combineReducers({
 
 export default userReducer;
 
-export const getCurrentUserLogin = (state) => {
+export const getCurrentUserLogin = (state: Object) => {
   if (state.user.currentUser !== undefined) {
     return state.currentUser.login;
   }
   return '';
 };
 
-export const _getCurrentUserId = (state) => {
+export const _getCurrentUserId = (state: Object) => {
   if (state.currentUser !== undefined) {
     return state.currentUser.id;
   }
   return 0;
 };
 
-export const _getCurrentUser = state => state.currentUser;
+export const _getCurrentUser = (state: Object) => state.currentUser;
 
-export const _isAdmin = state => () => (state.currentUser && state.currentUser.authorities && state.currentUser.authorities.indexOf('ROLE_ADMIN') > -1);
+export const _isAdmin = (state: Object) => () => (state.currentUser && state.currentUser.authorities && state.currentUser.authorities.indexOf('ROLE_ADMIN') > -1);

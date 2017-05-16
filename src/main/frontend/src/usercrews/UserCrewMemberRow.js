@@ -16,13 +16,13 @@ class UserCrewMemberRow extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps:{member:{crewId:number}}) {
     if (nextProps && nextProps.member && (!this.props.member || nextProps.member.crewId !== this.props.member.crewId)) {
       this.loadCrew(nextProps);
     }
   }
 
-  loadCrew(props) {
+  loadCrew(props:{member:{crewId:number}}) {
     if (this.props.member.crewId) {
       this.props.fetchCrewMembers(this.props.member.crewId);
       this.props.fetchCrew(this.props.member.crewId);
@@ -86,8 +86,14 @@ class UserCrewMemberRow extends Component {
 }
 
 UserCrewMemberRow.propTypes = {
-  member: PropTypes.object,
-  crew: PropTypes.object,
+  member: PropTypes.shape({
+    id: PropTypes.number,
+    crewId: PropTypes.number,
+    seat: PropTypes.number
+  }),
+  crew: PropTypes.shape({
+    id: PropTypes.number
+  }),
   crewMemberName: PropTypes.string,
   onClickBuy: PropTypes.func,
   buyMemberId: PropTypes.number,
@@ -99,7 +105,7 @@ UserCrewMemberRow.propTypes = {
   fetchCrew: PropTypes.func
 };
 
-export const mapStateToProps = (state, {member}) => ({
+export const mapStateToProps = (state:Object, {member}:{member:Object}) => ({
   crew: getCrew(state)(member.crewId),
   crewMemberName: getCrewMemberName(state)(member.crewId, member.seat) || '',
   buyMemberId: getBuyMemberId(state),

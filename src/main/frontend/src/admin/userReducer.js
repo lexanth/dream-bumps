@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 
 import * as types from '../actionTypes';
@@ -27,5 +28,5 @@ const byId = (state = {}, action) => {
 
 export default combineReducers({byId, all});
 
-export const _getAllUsers = state => state.all.map(id => state.byId[id]);
-export const _getUser = state => userId => state.byId[userId];
+export const _getAllUsers = (state: Object) => state.all.map(id => state.byId[id]);
+export const _getUser = (state: Object) => (userId: number) => state.byId[userId];

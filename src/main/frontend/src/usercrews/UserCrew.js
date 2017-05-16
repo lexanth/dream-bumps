@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {Card, CardTitle, CardText} from 'material-ui/Card';
@@ -17,13 +18,13 @@ class UserCrew extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: {userId: number}) {
     if (nextProps.userId && this.props.userId !== nextProps.userId) {
       this.loadCrew(nextProps);
     }
   }
 
-  loadCrew(props) {
+  loadCrew(props:{userId:number}) {
     this.props.fetchUserCrewMembers(props.userId, this.props.sex);
     this.props.fetchUserCrewRanking(props.userId, this.props.sex);
   }
@@ -68,17 +69,22 @@ class UserCrew extends Component {
 UserCrew.propTypes = {
   sex: PropTypes.string,
   userId: PropTypes.number,
-  crewMembers: PropTypes.array,
+  crewMembers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number
+  })),
   fetchUserCrewMembers: PropTypes.func,
   fetchUserCrewRanking: PropTypes.func,
   onClickBuy: PropTypes.func,
-  crewRanking: PropTypes.object,
+  crewRanking: PropTypes.shape({
+    cash: PropTypes.number,
+    value: PropTypes.number
+  }),
   canBuySell: PropTypes.bool,
   header: PropTypes.string,
   showCashAndValue: PropTypes.bool
 };
 
-export const mapStateToProps = (state, ownProps) => ({
+export const mapStateToProps = (state:Object, ownProps:{userId:number, sex:string}) => ({
   crewMembers : getUserCrewMembers(state)(ownProps.userId, ownProps.sex),
   crewRanking : getUserCrewRanking(state)(ownProps.userId, ownProps.sex) || {}
 });

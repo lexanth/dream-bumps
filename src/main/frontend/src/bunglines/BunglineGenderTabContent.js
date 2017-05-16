@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react';
 import {Grid, Cell} from 'material-grid/dist';
 import { connect } from 'react-redux';
@@ -5,7 +6,7 @@ import { connect } from 'react-redux';
 import CrewList from './CrewList';
 import CurrentUserCrew from '../usercrews/CurrentUserCrew';
 
-export const BunglineGenderTabContent = ({ sex, authenticated }) => (
+export const BunglineGenderTabContent = ({ sex, authenticated }:{sex:string, authenticated:boolean}) => (
   <Grid>
     { authenticated &&
       <Cell col={4}>
@@ -23,7 +24,7 @@ BunglineGenderTabContent.propTypes = {
   authenticated: PropTypes.bool
 };
 
-export const mapStateToProps = state => ({
+export const mapStateToProps = (state: Object) => ({
   authenticated: state.auth.authenticated
 });
 

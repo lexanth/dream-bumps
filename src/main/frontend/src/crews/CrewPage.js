@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react';
 import {Grid, Cell} from 'material-grid/dist';
 
@@ -5,7 +6,7 @@ import CrewMemberList from './CrewMemberList';
 import CrewDetails from './CrewDetails';
 import CrewPriceHistory from './CrewPriceHistory';
 
-const CrewPage = ({ params }) => (
+const CrewPage = ({ params }: {params: Object}) => (
   <Grid>
     <Cell col={6}>
       <CrewDetails

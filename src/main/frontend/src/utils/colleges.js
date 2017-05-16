@@ -1,3 +1,4 @@
+// @flow
 export default [
   {value: null, label: ''},
   {value: 'newc', label: 'New College'},

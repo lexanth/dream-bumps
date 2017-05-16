@@ -1,3 +1,4 @@
+// @flow
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {
@@ -16,7 +17,7 @@ import EditorModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 
 import {getAllUsers} from '../rootReducer';
 
-const UserList = ({users}) => (
+const UserList = ({users}:{users:Array<Object>}) => (
 
   <Card>
     <CardTitle title="Users"/>
@@ -53,10 +54,19 @@ const UserList = ({users}) => (
 );
 
 UserList.propTypes = {
-  users: PropTypes.array
+  users: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    login: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    authorities: PropTypes.arrayOf(PropTypes.string),
+    college: PropTypes.string,
+    activated: PropTypes.bool
+  }))
 }
 
-export const mapStateToProps = state => ({users: getAllUsers(state)});
+export const mapStateToProps = (state: Object) => ({users: getAllUsers(state)});
 
 export {UserList};
 

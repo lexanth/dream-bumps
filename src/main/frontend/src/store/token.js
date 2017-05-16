@@ -1,7 +1,8 @@
+// @flow
 import * as types from '../actionTypes';
 import { tokenName } from '../constants/config';
 
-const saveToken = store => next => action => {
+const saveToken = (store:Object) => (next: Function) => (action:{type:string,token:string}) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
       localStorage.setItem(tokenName, action.token);

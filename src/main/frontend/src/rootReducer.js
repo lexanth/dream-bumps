@@ -9,6 +9,8 @@ import config, { _getNumberOfDivisions, _getNumberOfCrews } from './config/reduc
 import usercrews, { _getUserCrewMembers, _getUserCrewRanking, _getBuyMemberId, _getBuySex, _getUserCrewRankings, _getUserScoreHistory } from './usercrews/reducer';
 import users, {_getAllUsers, _getUser } from './admin/userReducer';
 import status, {_isMarketOpen, _getCurrentDay, _getCurrentStatus} from './status/reducer';
+import app from './app/reducer';
+import * as types from './actionTypes';
 
 const rootReducer = combineReducers({
   auth,
@@ -18,7 +20,8 @@ const rootReducer = combineReducers({
   config,
   usercrews,
   users,
-  status
+  status,
+  app
 });
 
 export default rootReducer;
@@ -47,7 +50,7 @@ export const getCrewsPerDivision = (state: Object) => () => state.config.config.
 
 export const getCrewsByDivision = (state: Object) => (sex: string) => {
   const crewsForSex = getCrewsForSex(state)(sex).sort((a,b) => a.position - b.position);
-  const result = {0:[]};
+  const result = {[0]:[]};
   let currentDivision = 0;
   const crewsPerDivision = state.config.config.crewsPerDivision;
   for (let i = 0; i < crewsForSex.length; i++) {

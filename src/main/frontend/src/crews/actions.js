@@ -1,3 +1,4 @@
+// @flow
 import requestWithAuth from '../auth/authorisedAxios';
 import * as types from '../actionTypes';
 
@@ -17,7 +18,7 @@ const fetchCrewError = errorMessage => ({
 });
 
 
-export const fetchCrew = crewId => dispatch => {
+export const fetchCrew = (crewId: number) => (dispatch: Function) => {
   dispatch(fetchCrewStart(crewId));
   return requestWithAuth.get(`/api/crews/${crewId}`)
     .then(response => {
@@ -44,7 +45,7 @@ const fetchCrewsError = errorMessage => ({
 });
 
 
-export const fetchCrews = sex => dispatch => {
+export const fetchCrews = (sex: string) => (dispatch: Function) => {
   dispatch(fetchCrewsStart(sex));
   return requestWithAuth.get(`/api/crews?sex=${sex}`)
     .then(response => {
@@ -71,7 +72,7 @@ const fetchCrewMembersError = errorMessage => ({
 });
 
 
-export const fetchCrewMembers = crewId => dispatch => {
+export const fetchCrewMembers = (crewId: number) => (dispatch: Function) => {
   dispatch(fetchCrewMembersStart(crewId));
   return requestWithAuth.get(`/api/crews/${crewId}/members`)
     .then(response => {
@@ -97,7 +98,7 @@ const fetchCrewPriceHistoryError = errorMessage => ({
   errorMessage
 });
 
-export const fetchCrewPriceHistory = crewId => dispatch => {
+export const fetchCrewPriceHistory = (crewId: number) => (dispatch: Function) => {
   dispatch(fetchCrewPriceHistoryStart(crewId));
   return requestWithAuth.get(`/api/crews/${crewId}/price-history`)
     .then(response => {
@@ -108,7 +109,7 @@ export const fetchCrewPriceHistory = crewId => dispatch => {
     });
 };
 
-export const updateCrew = crew => dispatch => {
+export const updateCrew = (crew: Object) => (dispatch: Function) => {
   console.log(crew);
 }
 
@@ -128,7 +129,7 @@ const updateCrewMembersError = errorMessage => ({
 });
 
 
-export const updateCrewMembers = crew => dispatch => {
+export const updateCrewMembers = (crew:Object) => (dispatch: Function) => {
   dispatch(updateCrewMembersStart(crew.members));
   return requestWithAuth.put(`/api/crews/${crew.id}/members`, crew.members)
     .then(response => {

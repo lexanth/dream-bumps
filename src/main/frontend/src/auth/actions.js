@@ -1,3 +1,4 @@
+// @flow
 import request from 'axios';
 import { push } from 'react-router-redux';
 import requestWithAuth from './authorisedAxios';
@@ -58,7 +59,7 @@ const errorCurrentUser = (error) => ({
   errorMessage: error.message || 'Failed to fetch current user'
 });
 
-export const login = (loginDetails) => (dispatch) => {
+export const login = (loginDetails: Object) => (dispatch: Function) => {
   dispatch(beginLogin(loginDetails));
   return request.post('/api/authenticate', loginDetails)
     .then(response => {
@@ -73,9 +74,10 @@ export const login = (loginDetails) => (dispatch) => {
     });
 };
 
-export const signUp = (loginDetails) => (dispatch) => {
-  dispatch(beginSignUp(loginDetails));
-  return request.post('/api/register', loginDetails)
+export const signUp = (loginDetails: Object) => (dispatch: Function) => {
+  const fixedLoginDetails = {...loginDetails, firstName: loginDetails.login, lastName: ''};
+  dispatch(beginSignUp(fixedLoginDetails));
+  return request.post('/api/register', fixedLoginDetails)
     .then(response => {
         if (response.status === 201) {
           dispatch(signUpSuccess(response.data.message));
@@ -90,7 +92,7 @@ export const signUp = (loginDetails) => (dispatch) => {
       });
 };
 
-export const logOut = () => dispatch => {
+export const logOut = () => (dispatch: Function) => {
   dispatch(beginLogout());
 
   // localStorage.removeItem(tokenName);
@@ -99,7 +101,7 @@ export const logOut = () => dispatch => {
   // somewhere presumably we could get a log out error?
 };
 
-export const fetchCurrentUser = () => (dispatch) => {
+export const fetchCurrentUser = () => (dispatch: Function) => {
   // const token = getToken();
   // if (token === undefined || token === null) {
   //   return dispatch(errorCurrentUser('Not logged in'));

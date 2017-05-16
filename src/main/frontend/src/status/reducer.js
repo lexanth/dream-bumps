@@ -1,3 +1,4 @@
+// @flow
 import { combineReducers } from 'redux';
 
 import * as types from '../actionTypes';
@@ -32,6 +33,6 @@ export default combineReducers({
   loading
 });
 
-export const _getCurrentDay = state => state.status.day;
-export const _isMarketOpen = state => state.status.open;
-export const _getCurrentStatus = state => state.status;
+export const _getCurrentDay = (state:{status:{day:number}}) => state.status.day;
+export const _isMarketOpen = (state:{status:{open:boolean}}) => state.status.open;
+export const _getCurrentStatus = (state:{status:{day:number,open:boolean,dateTime:string}}) => state.status;

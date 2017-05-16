@@ -1,3 +1,4 @@
+// @flow
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
@@ -67,7 +68,8 @@ class DivisionTable extends Component { // eslint-disable-line react/prefer-stat
 DivisionTable.propTypes = {
   sex: PropTypes.string,
   division: PropTypes.string,
-  crews: PropTypes.array,
+  crews: PropTypes.arrayOf(PropTypes.shape(
+    {id: PropTypes.number, position: PropTypes.number, name: PropTypes.string})),
   buySex: PropTypes.string,
   crewRanking: PropTypes.shape({
     cash: PropTypes.number
@@ -79,12 +81,16 @@ DivisionTable.propTypes = {
   day: PropTypes.number
 };
 
-export const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state:Object, ownProps:Object) => {
   const mapping = {
     // crews: getCrewsForDivision(state)(ownProps.sex, ownProps.division),
     currentUserId: getCurrentUserId(state),
     buySex: getBuySex(state),
-    buyMemberId: getBuyMemberId(state)
+    buyMemberId: getBuyMemberId(state),
+    // Give flow a hand - objects should be sealed when declared
+    crewRanking: {},
+    crewsPerDivision: 0,
+    numberOfCrews: 0
   };
   mapping.crewRanking = getUserCrewRanking(state)(mapping.currentUserId, ownProps.sex) || {};
   mapping.crewsPerDivision = getCrewsPerDivision(state)();

@@ -1,7 +1,10 @@
+// @flow
 import React from 'react';
 import {Card, CardTitle, CardText, CardMedia} from 'material-ui/Card';
 import {Grid, Cell} from 'material-grid/dist';
 // import {Link} from 'react-router';
+
+import bumpImg from '../../static/bump.jpg';
 
 const HomePage = () => {
   return (
@@ -18,7 +21,7 @@ const HomePage = () => {
               />
             }
           >
-            <img src="static/bump.jpg" alt=""/>
+            <img src={bumpImg} alt=""/>
           </CardMedia>
 
         </Card>
@@ -50,7 +53,7 @@ const HomePage = () => {
         <Card style={{marginTop: '16px'}}>
           <CardTitle title="Credits" />
           <CardText>
-            Images: <a href="heartheboatsing.com">HearTheBoatSing</a>
+            Images: Oliver Clarke
           </CardText>
         </Card>
       </Cell>
