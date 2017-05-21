@@ -144,13 +144,20 @@ public class UserResource {
      * @return the ResponseEntity with status 200 (OK) and with body all users
      * @throws URISyntaxException if the pagination headers couldn't be generated
      */
+//    @GetMapping("/users")
+//    @Timed
+//    public ResponseEntity<List<UserDTO>> getAllUsers(@ApiParam Pageable pageable)
+//        throws URISyntaxException {
+//        final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
+//        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+//        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+//    }
+
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<UserDTO>> getAllUsers(@ApiParam Pageable pageable)
-        throws URISyntaxException {
-        final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    public List<UserDTO> getAllUsers() {
+      log.debug("REST request to get all Users");
+      return userService.getAllUsers();
     }
 
     /**
@@ -174,12 +181,12 @@ public class UserResource {
      * @param login the login of the user to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
-    @Timed
-    @Secured(AuthoritiesConstants.ADMIN)
-    public ResponseEntity<Void> deleteUser(@PathVariable String login) {
-        log.debug("REST request to delete User: {}", login);
-        userService.deleteUser(login);
-        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "A user is deleted with identifier " + login, login)).build();
-    }
+//    @DeleteMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
+//    @Timed
+//    @Secured(AuthoritiesConstants.ADMIN)
+//    public ResponseEntity<Void> deleteUser(@PathVariable String login) {
+//        log.debug("REST request to delete User: {}", login);
+//        userService.deleteUser(login);
+//        return ResponseEntity.ok().headers(HeaderUtil.createAlert( "A user is deleted with identifier " + login, login)).build();
+//    }
 }

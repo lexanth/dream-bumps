@@ -41,6 +41,308 @@ exports[`test Renders properly 1`] = `
           fullWidth={true}
           name="confirmPassword"
           type="password" />
+        <Field
+          component={[Function]}
+          floatingLabelText="College"
+          fullWidth={true}
+          name="college">
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText=""
+            value={null} />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Balliol"
+            value="ball" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Brasenose"
+            value="bras" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Christ Church"
+            value="chri" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Corpus Christi"
+            value="corp" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Exeter"
+            value="exet" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Green Templeton"
+            value="grte" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Hertford"
+            value="hert" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Jesus"
+            value="jesu" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Keble"
+            value="kebl" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Lady Margaret Hall"
+            value="lady" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Linacre"
+            value="lina" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Lincoln"
+            value="linc" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Magdalen"
+            value="magd" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Mansfield"
+            value="mans" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Merton"
+            value="mert" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="New College"
+            value="newc" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Oriel"
+            value="orie" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Osler House"
+            value="gree" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Pembroke"
+            value="pemb" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Queen\'s"
+            value="quee" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Regent\'s Park"
+            value="rege" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Somerville"
+            value="some" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Anne\'s"
+            value="sann" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Antony\'s"
+            value="sant" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Benet\'s"
+            value="sben" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Catherine\'s"
+            value="scat" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Edmund Hall"
+            value="sedm" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Hilda\'s"
+            value="shil" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Hugh\'s"
+            value="shug" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St John\'s"
+            value="sjoh" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="St Peter\'s"
+            value="spet" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Trinity"
+            value="trin" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="University"
+            value="univ" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Wadham"
+            value="wadh" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Wolfson"
+            value="wolf" />
+          <MenuItem
+            checked={false}
+            desktop={false}
+            disabled={false}
+            focusState="none"
+            insetChildren={false}
+            primaryText="Worcester"
+            value="worc" />
+        </Field>
       </CardText>
       <CardActions>
         <RaisedButton

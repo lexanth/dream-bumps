@@ -39,7 +39,7 @@ const updateMarketStatusSuccess = status => ({
 
 const updateMarketStatusError = errorMessage => ({
   type: types.UPDATE_STATUS_ERROR,
-  errorMessage
+  errorMessage: errorMessage || 'Error updating market status'
 });
 
 export const updateMarketStatus = (status: {day: number, open: boolean}) => (dispatch: Function) => {

@@ -2,11 +2,18 @@ exports[`test Renders properly 1`] = `
 <Grid>
   <Cell
     col={6}>
+    <Connect(UserDetail)
+      userId={2} />
     <Connect(UserCrew)
       canBuySell={false}
       header="Current Lineup"
       sex="female"
       showCashAndValue={false}
+      style={
+        Object {
+          "marginTop": "16px",
+        }
+      }
       userId={2} />
   </Cell>
   <Cell

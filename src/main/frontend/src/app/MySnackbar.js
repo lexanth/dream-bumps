@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Snackbar from 'material-ui/Snackbar';
-import { dismissMessage } from '../actionTypes';
+import { dismissMessage } from './actions';
 
 const MySnackbar = ({ message, onDismissMessage }) => (
   <Snackbar

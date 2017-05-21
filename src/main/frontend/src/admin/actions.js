@@ -39,7 +39,7 @@ const updateUserSuccess = (user: Object) => ({
 
 const updateUserError = (errorMessage: string) => ({
   type: types.UPDATE_USER_ERROR,
-  errorMessage
+  errorMessage: errorMessage || 'Error updating user'
 });
 
 export const updateUser = (user: Object) => (dispatch: Function) => {
@@ -65,7 +65,7 @@ const uploadBumpsSuccess = (bumps: Array<Object>) => ({
 
 const uploadBumpsError = (errorMessage: string) => ({
   type: types.UPLOAD_BUMPS_ERROR,
-  errorMessage
+  errorMessage: errorMessage || 'Bump upload error'
 });
 
 export const uploadBumps = (crews: Array<Object>, day: number) => (dispatch: Function) => {

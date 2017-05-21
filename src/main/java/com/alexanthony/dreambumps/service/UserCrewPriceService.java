@@ -1,9 +1,8 @@
 package com.alexanthony.dreambumps.service;
 
-import com.alexanthony.dreambumps.domain.User;
-import com.alexanthony.dreambumps.domain.UserCrewPositionHistory;
-import com.alexanthony.dreambumps.domain.UserCrewPrice;
+import com.alexanthony.dreambumps.domain.*;
 import com.alexanthony.dreambumps.domain.enumeration.Sex;
+import com.alexanthony.dreambumps.repository.UserCrewMemberRepository;
 import com.alexanthony.dreambumps.repository.UserCrewPositionHistoryRepository;
 import com.alexanthony.dreambumps.repository.UserCrewPriceRepository;
 import com.alexanthony.dreambumps.service.dto.UserCrewPriceDTO;
@@ -31,15 +30,18 @@ public class UserCrewPriceService {
   private final UserCrewPriceRepository userCrewPriceRepository;
   private final UserCrewPriceHistoryService userCrewPriceHistoryService;
   private final UserCrewPositionHistoryRepository userCrewPositionHistoryRepository;
+  private final UserCrewMemberRepository userCrewMemberRepository;
 
   private final UserCrewPriceMapper userCrewPriceMapper;
 
   public UserCrewPriceService(UserCrewPriceRepository userCrewPriceRepository,
-      UserCrewPriceHistoryService userCrewPriceHistoryService, UserCrewPriceMapper userCrewPriceMapper, UserCrewPositionHistoryRepository userCrewPositionHistoryRepository) {
+      UserCrewPriceHistoryService userCrewPriceHistoryService, UserCrewPriceMapper userCrewPriceMapper, UserCrewPositionHistoryRepository userCrewPositionHistoryRepository,
+         UserCrewMemberRepository userCrewMemberRepository  ) {
     this.userCrewPriceRepository = userCrewPriceRepository;
     this.userCrewPriceHistoryService = userCrewPriceHistoryService;
     this.userCrewPriceMapper = userCrewPriceMapper;
     this.userCrewPositionHistoryRepository = userCrewPositionHistoryRepository;
+    this.userCrewMemberRepository = userCrewMemberRepository;
   }
 
   /**
@@ -94,7 +96,6 @@ public class UserCrewPriceService {
   }
 
   public List<UserCrewPriceDTO> findAllForSex(Sex sex) {
-    // TODO Auto-generated method stub
     return userCrewPriceRepository.findBySex(sex).stream()
       .map(userCrewPriceMapper::userCrewPriceToUserCrewPriceDTO)
       .map(this::populateBumpsAndDividends)
@@ -135,5 +136,25 @@ public class UserCrewPriceService {
   public UserCrewPrice findForUserAndSex(Long userId, Sex sex) {
     UserCrewPrice userCrewPrice = userCrewPriceRepository.findFirstByUserIdAndSex(userId, sex);
     return userCrewPrice;
+  }
+
+  public void updateValuesForCrew(Crew crewToBuy) {
+    List<UserCrewPrice> crewsToUpdate = userCrewPriceRepository.findByOwnsCrewWithIdAndSex(crewToBuy.getId(), crewToBuy.getSex());
+    for (UserCrewPrice userCrewPrice : crewsToUpdate) {
+      updatePrice(userCrewPrice);
+      save(userCrewPrice);
+    }
+
+  }
+
+  private void updatePrice(UserCrewPrice userCrewPrice) {
+    List<UserCrewMember> members = userCrewMemberRepository.findByUserIdAndSex(userCrewPrice.getUser().getId(), userCrewPrice.getSex());
+    BigDecimal newValue = BigDecimal.ZERO;
+    for (UserCrewMember member : members) {
+      if (member.getCrew() != null) {
+        newValue = newValue.add(member.getCrew().getPrice());
+      }
+    }
+    userCrewPrice.setValue(newValue);
   }
 }

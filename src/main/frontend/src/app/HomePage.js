@@ -31,8 +31,11 @@ const HomePage = () => {
           <CardTitle title="About" />
           <CardText>
             You think your crew is fast. Or slow.<br/>
+            <br />
             You don't keep your eyes in the boat in training. Always checking out the opposition.<br/>
+            <br />
             You spend your evenings reading the latest gossip on the latest RowChat incarnation.<br/>
+            <br />
             <br />
             <br />
             Put your (fake) money where your mouth is.
@@ -42,9 +45,9 @@ const HomePage = () => {
           <CardTitle title="Get in touch" />
           <CardText>
             <p>
-              This has been built in a slight rush to be ready for Eights. And in limited spare time. So I'm very confident that there are bugs floating around all over the place.<br/>
+              This has been built in a slight rush to be ready for Eights. And in limited spare time. So I'm very confident that there are loads of bugs floating around all over the place.<br/>
               <br />
-              If you spot something, please give me a shout at .... Or get in touch with any questions, or if you'd like to help fix the bugs too!<br/>
+              If you spot something, please give me a shout at dreambumps (at) gmail.com. Or get in touch with any questions, or if you'd like to help fix the bugs too!<br/>
               <br />
               In the mean time, refreshing the page can sometimes fix things.
             </p>
@@ -53,7 +56,11 @@ const HomePage = () => {
         <Card style={{marginTop: '16px'}}>
           <CardTitle title="Credits" />
           <CardText>
-            Images: Oliver Clarke
+            Oliver Clarke - Images
+            <br /><br />
+            OURCs - Organising Eights
+            <br /><br />
+            DONALD_BUMP - Testing
           </CardText>
         </Card>
       </Cell>
@@ -76,7 +83,7 @@ const HomePage = () => {
             <b>Where are the rowing on crews?</b>
             <p>The rowing on divisions get finalised later. We'll endeavour to update the crews as soon as possible.</p>
             <b>My name is spelt wrong! My crew list is wrong! The start list is wrong!</b>
-            <p>Get in touch so we can update it.</p>
+            <p>Get in touch so we can update it. dreambumps (at) gmail.com.</p>
             <b>How do the prices work?</b>
             <p>Initial prices were set in descending order based on start order. As soon as the market opens, prices move with demand.</p>
             <b>How do dividends work?</b>
@@ -89,6 +96,8 @@ const HomePage = () => {
             <p>Sorry, I haven't got round to doing that yet! I've hacked this together in my spare time, so happy for someone else to give me a hand if they want to add anything.</p>
             <b>I'm at Cambridge, can I play?</b>
             <p>You can play the Oxford game straight away! But if you want to have Lents/Mays, get in touch and I can help you get set up.</p>
+            <b>Where is the data from?</b>
+            <p>All data is freely available at www.ourcs.org.uk. But if you'd like your name removed, let me know.</p>
           </CardText>
         </Card>
       </Cell>

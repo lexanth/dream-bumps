@@ -259,6 +259,13 @@ public class CrewPositionHistoryService {
         String divNumber = divNameComponents[divNameComponents.length-1];
         int divNum = parseNumeral(divNumber);
 
+        if (sex == Sex.male && divNum >= 6) {
+          continue;
+        }
+        if (sex == Sex.female && divNum >= 5) {
+          continue;
+        }
+
         for (int i = 1; i < rows.size(); i++) {
           String crewName = rows.get(i).getElementsByTag("a").text();
           int overallPosition = (divNum - 1)* Constants.CREWS_PER_DIVISION+i;

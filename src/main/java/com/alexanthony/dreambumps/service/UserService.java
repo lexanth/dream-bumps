@@ -2,6 +2,7 @@ package com.alexanthony.dreambumps.service;
 
 import com.alexanthony.dreambumps.domain.Authority;
 import com.alexanthony.dreambumps.domain.User;
+import com.alexanthony.dreambumps.domain.enumeration.College;
 import com.alexanthony.dreambumps.repository.AuthorityRepository;
 import com.alexanthony.dreambumps.config.Constants;
 import com.alexanthony.dreambumps.repository.UserRepository;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.ZonedDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service class for managing users.
@@ -88,7 +90,7 @@ public class UserService {
   }
 
   public User createUser(String login, String password, String firstName, String lastName, String email,
-      String imageUrl, String langKey) {
+      String imageUrl, String langKey, College college) {
 
     User newUser = new User();
     Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
@@ -102,6 +104,7 @@ public class UserService {
     newUser.setEmail(email);
     newUser.setImageUrl(imageUrl);
     newUser.setLangKey(langKey);
+    newUser.setCollege(college);
     // new user is not active
     newUser.setActivated(true);
     // new user gets registration key
@@ -123,6 +126,7 @@ public class UserService {
     user.setLastName(userDTO.getLastName());
     user.setEmail(userDTO.getEmail());
     user.setImageUrl(userDTO.getImageUrl());
+    user.setCollege(userDTO.getCollege());
     if (userDTO.getLangKey() == null) {
       user.setLangKey("en"); // default language
     } else {
@@ -169,6 +173,7 @@ public class UserService {
       user.setFirstName(userDTO.getFirstName());
       user.setLastName(userDTO.getLastName());
       user.setEmail(userDTO.getEmail());
+      user.setCollege(userDTO.getCollege());
       user.setImageUrl(userDTO.getImageUrl());
       user.setActivated(userDTO.isActivated());
       user.setLangKey(userDTO.getLangKey());
@@ -199,6 +204,17 @@ public class UserService {
   @Transactional(readOnly = true)
   public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
     return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
+  }
+
+  @Transactional(readOnly = true)
+  public List<UserDTO> getAllUsers() {
+    return userRepository.findAll().stream().map(UserDTO::new).map(this::clearEmailAndAuthorities).collect(Collectors.toList());
+  }
+
+  private UserDTO clearEmailAndAuthorities(UserDTO userDTO) {
+    userDTO.setEmail(null);
+    userDTO.setAuthorities(null);
+    return userDTO;
   }
 
   @Transactional(readOnly = true)

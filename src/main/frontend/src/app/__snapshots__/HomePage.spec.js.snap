@@ -39,9 +39,12 @@ exports[`test Renders properly 1`] = `
       <CardText>
         You think your crew is fast. Or slow.
         <br />
+        <br />
         You don\'t keep your eyes in the boat in training. Always checking out the opposition.
         <br />
+        <br />
         You spend your evenings reading the latest gossip on the latest RowChat incarnation.
+        <br />
         <br />
         <br />
         <br />
@@ -61,10 +64,10 @@ exports[`test Renders properly 1`] = `
         title="Get in touch" />
       <CardText>
         <p>
-          This has been built in a slight rush to be ready for Eights. And in limited spare time. So I\'m very confident that there are bugs floating around all over the place.
+          This has been built in a slight rush to be ready for Eights. And in limited spare time. So I\'m very confident that there are loads of bugs floating around all over the place.
           <br />
           <br />
-          If you spot something, please give me a shout at .... Or get in touch with any questions, or if you\'d like to help fix the bugs too!
+          If you spot something, please give me a shout at dreambumps (at) gmail.com. Or get in touch with any questions, or if you\'d like to help fix the bugs too!
           <br />
           <br />
           In the mean time, refreshing the page can sometimes fix things.
@@ -83,7 +86,13 @@ exports[`test Renders properly 1`] = `
       <CardTitle
         title="Credits" />
       <CardText>
-        Images: Oliver Clarke
+        Oliver Clarke - Images
+        <br />
+        <br />
+        OURCs - Organising Eights
+        <br />
+        <br />
+        DONALD_BUMP - Testing
       </CardText>
     </Card>
   </Cell>
@@ -130,7 +139,7 @@ exports[`test Renders properly 1`] = `
           My name is spelt wrong! My crew list is wrong! The start list is wrong!
         </b>
         <p>
-          Get in touch so we can update it.
+          Get in touch so we can update it. dreambumps (at) gmail.com.
         </p>
         <b>
           How do the prices work?
@@ -155,6 +164,12 @@ exports[`test Renders properly 1`] = `
         </b>
         <p>
           You can play the Oxford game straight away! But if you want to have Lents/Mays, get in touch and I can help you get set up.
+        </p>
+        <b>
+          Where is the data from?
+        </b>
+        <p>
+          All data is freely available at www.ourcs.org.uk. But if you\'d like your name removed, let me know.
         </p>
       </CardText>
     </Card>

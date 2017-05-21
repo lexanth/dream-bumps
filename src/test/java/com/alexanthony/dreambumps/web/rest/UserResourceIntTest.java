@@ -2,6 +2,7 @@ package com.alexanthony.dreambumps.web.rest;
 
 import com.alexanthony.dreambumps.DreamBumpsApp;
 import com.alexanthony.dreambumps.domain.User;
+import com.alexanthony.dreambumps.domain.enumeration.College;
 import com.alexanthony.dreambumps.repository.UserRepository;
 import com.alexanthony.dreambumps.service.UserService;
 import com.alexanthony.dreambumps.service.MailService;
@@ -89,7 +90,7 @@ public class UserResourceIntTest {
 
     @Test
     public void testGetExistingUserWithAnEmailLogin() throws Exception {
-        User user = userService.createUser("john.doe@localhost.com", "johndoe", "John", "Doe", "john.doe@localhost.com", "http://placehold.it/50x50", "en-US");
+        User user = userService.createUser("john.doe@localhost.com", "johndoe", "John", "Doe", "john.doe@localhost.com", "http://placehold.it/50x50", "en-US", College.ball);
 
         restUserMockMvc.perform(get("/api/users/john.doe@localhost.com")
             .accept(MediaType.APPLICATION_JSON))
@@ -102,7 +103,7 @@ public class UserResourceIntTest {
 
     @Test
     public void testDeleteExistingUserWithAnEmailLogin() throws Exception {
-        User user = userService.createUser("john.doe@localhost.com", "johndoe", "John", "Doe", "john.doe@localhost.com", "http://placehold.it/50x50", "en-US");
+        User user = userService.createUser("john.doe@localhost.com", "johndoe", "John", "Doe", "john.doe@localhost.com", "http://placehold.it/50x50", "en-US", College.ball);
 
         restUserMockMvc.perform(delete("/api/users/john.doe@localhost.com")
             .accept(MediaType.APPLICATION_JSON))

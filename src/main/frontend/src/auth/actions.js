@@ -32,9 +32,9 @@ const signUpError = (message) => ({
 
 const beginSignUp = () => ({ type: types.SIGNUP_REQUEST });
 
-const signUpSuccess = message => ({
+const signUpSuccess = token => ({
   type: types.SIGNUP_SUCCESS,
-  message: message || 'Registered successfully'
+  token
 });
 
 // Log Out Action Creators
@@ -80,7 +80,7 @@ export const signUp = (loginDetails: Object) => (dispatch: Function) => {
   return request.post('/api/register', fixedLoginDetails)
     .then(response => {
         if (response.status === 201) {
-          dispatch(signUpSuccess(response.data.message));
+          dispatch(signUpSuccess(response.data.id_token));
           // TODO - redirect
           dispatch(push('/'));
         } else {

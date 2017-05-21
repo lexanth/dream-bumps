@@ -1,11 +1,15 @@
 // @flow
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import {Card, CardTitle, CardText} from 'material-ui/Card';
+import { Card, CardTitle, CardText } from 'material-ui/Card';
 import { Table, TableBody } from 'material-ui/Table';
 
 import { getUserCrewMembers, getUserCrewRanking } from '../rootReducer';
-import { fetchUserCrewMembers, fetchUserCrewRanking, setBuyMember } from './actions';
+import {
+  fetchUserCrewMembers,
+  fetchUserCrewRanking,
+  setBuyMember
+} from './actions';
 import UserCrewMemberRow from './UserCrewMemberRow';
 
 /**
@@ -18,36 +22,33 @@ class UserCrew extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps: {userId: number}) {
+  componentWillReceiveProps(nextProps: { userId: number }) {
     if (nextProps.userId && this.props.userId !== nextProps.userId) {
       this.loadCrew(nextProps);
     }
   }
 
-  loadCrew(props:{userId:number}) {
+  loadCrew(props: { userId: number }) {
     this.props.fetchUserCrewMembers(props.userId, this.props.sex);
     this.props.fetchUserCrewRanking(props.userId, this.props.sex);
   }
 
   render() {
     return (
-      <Card>
+      <Card style={this.props.style}>
         <CardTitle title={this.props.header} />
         <CardText>
-          <Table
-            selectable={false}
-          >
-            <TableBody
-              displayRowCheckbox={false}
-            >
+          <Table selectable={false}>
+            <TableBody displayRowCheckbox={false}>
               {this.props.crewMembers.map(member => (
                 <UserCrewMemberRow
                   key={member.id}
                   member={member}
                   canBuySell={this.props.canBuySell}
-                  onClickBuy={e => this.props.onClickBuy(member.id, this.props.sex)}
-                />))
-              }
+                  onClickBuy={e =>
+                    this.props.onClickBuy(member.id, this.props.sex)}
+                />
+              ))}
             </TableBody>
           </Table>
         </CardText>
@@ -55,12 +56,19 @@ class UserCrew extends Component {
           <CardText>
             <dl className="dl-horizontal">
               <dt>Cash</dt>
-              <dd>{this.props.crewRanking.cash ? this.props.crewRanking.cash.toFixed(2) : ''}</dd>
+              <dd>
+                {this.props.crewRanking.cash
+                  ? this.props.crewRanking.cash.toFixed(2)
+                  : ''}
+              </dd>
               <dt>Crew Value</dt>
-              <dd>{this.props.crewRanking.value ? this.props.crewRanking.value.toFixed(2): ''}</dd>
+              <dd>
+                {this.props.crewRanking.value
+                  ? this.props.crewRanking.value.toFixed(2)
+                  : ''}
+              </dd>
             </dl>
-          </CardText>
-        }
+          </CardText>}
       </Card>
     );
   }
@@ -69,9 +77,11 @@ class UserCrew extends Component {
 UserCrew.propTypes = {
   sex: PropTypes.string,
   userId: PropTypes.number,
-  crewMembers: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number
-  })),
+  crewMembers: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number
+    })
+  ),
   fetchUserCrewMembers: PropTypes.func,
   fetchUserCrewRanking: PropTypes.func,
   onClickBuy: PropTypes.func,
@@ -84,11 +94,18 @@ UserCrew.propTypes = {
   showCashAndValue: PropTypes.bool
 };
 
-export const mapStateToProps = (state:Object, ownProps:{userId:number, sex:string}) => ({
-  crewMembers : getUserCrewMembers(state)(ownProps.userId, ownProps.sex),
-  crewRanking : getUserCrewRanking(state)(ownProps.userId, ownProps.sex) || {}
+export const mapStateToProps = (
+  state: Object,
+  ownProps: { userId: number, sex: string }
+) => ({
+  crewMembers: getUserCrewMembers(state)(ownProps.userId, ownProps.sex),
+  crewRanking: getUserCrewRanking(state)(ownProps.userId, ownProps.sex) || {}
 });
 
-export {UserCrew};
+export { UserCrew };
 
-export default connect(mapStateToProps, { fetchUserCrewMembers, fetchUserCrewRanking, onClickBuy: setBuyMember })(UserCrew);
+export default connect(mapStateToProps, {
+  fetchUserCrewMembers,
+  fetchUserCrewRanking,
+  onClickBuy: setBuyMember
+})(UserCrew);

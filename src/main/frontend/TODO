@@ -1,11 +1,7 @@
 * Flow everything
-* Tests
-* Make sure can't buy/sell while market is closed
+* Tests in backend
 * All those "// Throw an error" bits of validation in Java...
-* Loading/error notifications in UI
-* Fill college list
 * User edit screen (self service)
 * When setting crew value after buy/sell, actually sum the crew value, don't just work it out (rounding)
-* Move to reselect - hopefully sort the performance issues out
-* Saving college doesn't work
+* Move to reselect - hopefully sort the performance issues out. and load all the crews/crew members in one hit
 * lock down the endpoints for the scrapers

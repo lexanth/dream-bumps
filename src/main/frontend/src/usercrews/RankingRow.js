@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
 
 import { getUser } from '../rootReducer';
+import { getCollegeName } from '../utils/colleges';
 
 class RankingRow extends Component {
   render() {
@@ -35,7 +36,7 @@ class RankingRow extends Component {
           </TableRowColumn>
         }
         {this.props.user ?
-          <TableRowColumn>{this.props.user.college}</TableRowColumn>
+          <TableRowColumn>{getCollegeName(this.props.user.college)}</TableRowColumn>
         :
           <TableRowColumn />
         }

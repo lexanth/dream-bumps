@@ -1,5 +1,5 @@
 // @flow
-const seatNumberToName = (seat:number):string => {
+const seatNumberToName = (seat: number): string => {
   switch (seat) {
     case 1:
       return 'Bow';

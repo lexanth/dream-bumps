@@ -51,7 +51,7 @@ public class UserDTO {
     private ZonedDateTime lastModifiedDate;
 
     private Set<String> authorities;
-    
+
     private College college;
 
     public UserDTO() {
@@ -84,6 +84,7 @@ public class UserDTO {
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = lastModifiedDate;
         this.authorities = authorities;
+        this.college = college;
     }
 
     public Long getId() {
@@ -114,7 +115,15 @@ public class UserDTO {
         return email;
     }
 
-    public String getImageUrl() {
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public void setAuthorities(Set<String> authorities) {
+    this.authorities = authorities;
+  }
+
+  public String getImageUrl() {
         return imageUrl;
     }
 
@@ -173,6 +182,7 @@ public class UserDTO {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", college=" + college +
             "}";
     }
 }

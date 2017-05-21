@@ -97,31 +97,33 @@ public class BuySellService {
 
     UserCrewPrice userCrewPrice = userCrewPriceService.findForUserAndSex(currentUser.getId(),
         userCrewMember.getSex());
-    
+
     if (userCrewPrice.getCash().compareTo(crewToBuy.getPrice()) == -1) {
       // not enough money, error
       return null;
     }
-    
+
     userCrewPrice.setCash(userCrewPrice.getCash().subtract(crewToBuy.getPrice()));
-    
+
     BigDecimal newPrice = crewToBuy.getPrice().multiply(priceChangeMultiplierBuy).add(priceChangeAbsolute).setScale(2, BigDecimal.ROUND_HALF_UP);
-    
+
     userCrewPrice.setValue(userCrewPrice.getValue().add(newPrice));
-    
+
     userCrewPriceService.save(userCrewPrice);
-    
+
     userCrewMember.setCrew(crewToBuy);
     userCrewMemberService.save(userCrewMember);
-    
+
     crewToBuy.setPrice(newPrice);
     crewService.save(crewToBuy);
-    
+
 
     UserCrewMemberDTO result = userCrewMemberMapper.userCrewMemberToUserCrewMemberDTO(userCrewMember);
-    
+
     // TODO change everybody else slightly
-    
+
+    userCrewPriceService.updateValuesForCrew(crewToBuy);
+
     return result;
   }
 
@@ -162,20 +164,22 @@ public class BuySellService {
     UserCrewPrice userCrewPrice = userCrewPriceService.findForUserAndSex(currentUser.getId(),
         userCrewMember.getSex());
     userCrewPrice.setValue(userCrewPrice.getValue().subtract(crewToSell.getPrice()));
-    
+
     BigDecimal newPrice = crewToSell.getPrice().multiply(priceChangeMultiplierSell).subtract(priceChangeAbsolute).setScale(2, BigDecimal.ROUND_HALF_UP);
 
     userCrewPrice.setCash(userCrewPrice.getCash().add(newPrice));
-    
+
     userCrewPriceService.save(userCrewPrice);
-    
+
     userCrewMember.setCrew(null);
     userCrewMemberService.save(userCrewMember);
-    
+
     crewToSell.setPrice(newPrice);
     crewService.save(crewToSell);
-    
+
  // TODO change everybody else slightly
+
+    userCrewPriceService.updateValuesForCrew(crewToSell);
 
     UserCrewMemberDTO result = userCrewMemberMapper.userCrewMemberToUserCrewMemberDTO(userCrewMember);
     return result;

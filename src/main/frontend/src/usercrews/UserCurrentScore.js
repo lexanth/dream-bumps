@@ -30,15 +30,15 @@ class UserCurrentScore extends Component {
               </TableRow>
               <TableRow>
                 <TableRowColumn>Cash</TableRowColumn>
-                <TableRowColumn>{ranking.cash}</TableRowColumn>
+                <TableRowColumn>{ranking.cash ? ranking.cash.toFixed(2) : ''}</TableRowColumn>
               </TableRow>
               <TableRow>
                 <TableRowColumn>Crew Value</TableRowColumn>
-                <TableRowColumn>{ranking.value}</TableRowColumn>
+                <TableRowColumn>{ranking.value ? ranking.value.toFixed(2) : ''}</TableRowColumn>
               </TableRow>
               <TableRow>
                 <TableRowColumn>Dividends</TableRowColumn>
-                <TableRowColumn>{ranking.dividends}</TableRowColumn>
+                <TableRowColumn>{ranking.dividends ? ranking.dividends.toFixed(2) : ''}</TableRowColumn>
               </TableRow>
               <TableRow>
                 <TableRowColumn>Score</TableRowColumn>

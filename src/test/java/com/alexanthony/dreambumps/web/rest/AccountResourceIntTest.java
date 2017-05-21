@@ -6,6 +6,7 @@ import com.alexanthony.dreambumps.domain.User;
 import com.alexanthony.dreambumps.repository.AuthorityRepository;
 import com.alexanthony.dreambumps.repository.UserRepository;
 import com.alexanthony.dreambumps.security.AuthoritiesConstants;
+import com.alexanthony.dreambumps.security.jwt.TokenProvider;
 import com.alexanthony.dreambumps.service.MailService;
 import com.alexanthony.dreambumps.service.UserService;
 import com.alexanthony.dreambumps.service.dto.UserDTO;
@@ -18,6 +19,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -51,6 +53,12 @@ public class AccountResourceIntTest {
     @Autowired
     private UserService userService;
 
+  @Autowired
+  private TokenProvider tokenProvider;
+
+  @Autowired
+  private AuthenticationManager authenticationManager;
+
     @Mock
     private UserService mockUserService;
 
@@ -67,10 +75,10 @@ public class AccountResourceIntTest {
         doNothing().when(mockMailService).sendActivationEmail(anyObject());
 
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userService, mockMailService, tokenProvider, authenticationManager);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, mockUserService, mockMailService, tokenProvider, authenticationManager);
 
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource).build();
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(accountUserMockResource).build();

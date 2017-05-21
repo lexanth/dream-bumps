@@ -125,7 +125,7 @@ const updateCrewMembersSuccess = crewMembers => ({
 
 const updateCrewMembersError = errorMessage => ({
   type: types.UPDATE_CREW_MEMBERS_ERROR,
-  errorMessage
+  errorMessage: errorMessage || 'Error updating crew members'
 });
 
 

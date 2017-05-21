@@ -28,7 +28,7 @@ public final class Constants {
   public static final BigDecimal BUMP_MULTIPLIER = new BigDecimal("3");
   public static final BigDecimal HEADSHIP_MULTIPLIER = new BigDecimal("3");
 
-  public static final String REGATTA_NAME = "Torpids 2017";
+  public static final String REGATTA_NAME = "Eights 2017";
 
 
     private Constants() {

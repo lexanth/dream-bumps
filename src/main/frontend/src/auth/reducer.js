@@ -10,9 +10,9 @@ const authenticated = (
 ) => {
   switch (action.type) {
     case types.LOGIN_SUCCESS:
-    case types.SIGNUP_SUCCESS:
     case types.LOGOUT_ERROR:
     case types.FETCH_CURRENT_USER_SUCCESS:
+    case types.SIGNUP_SUCCESS:
       return true;
     case types.LOGIN_ERROR:
     case types.SIGNUP_ERROR:
@@ -30,6 +30,7 @@ const currentUser = (state = {}, action) => {
       return action.user;
     case types.LOGOUT_SUCCESS:
       return {};
+    case types.SIGNUP_SUCCESS:
     case types.LOGIN_SUCCESS:
       // console.log(jwtDecode(action.token));
       const token = jwtDecode(action.token);

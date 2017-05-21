@@ -4,7 +4,7 @@ exports[`test Renders properly 1`] = `
   expanded={null}
   initiallyExpanded={false}>
   <CardTitle
-    title="Current Score" />
+    title="User Details" />
   <CardText>
     <Table
       allRowsSelected={false}
@@ -30,27 +30,11 @@ exports[`test Renders properly 1`] = `
           striped={false}>
           <TableRowColumn
             hoverable={false}>
-            Bumps
+            Username
           </TableRowColumn>
           <TableRowColumn
             hoverable={false}>
-            3
-          </TableRowColumn>
-        </TableRow>
-        <TableRow
-          displayBorder={true}
-          hoverable={false}
-          hovered={false}
-          selectable={true}
-          selected={false}
-          striped={false}>
-          <TableRowColumn
-            hoverable={false}>
-            Cash
-          </TableRowColumn>
-          <TableRowColumn
-            hoverable={false}>
-            123.40
+            UserName
           </TableRowColumn>
         </TableRow>
         <TableRow
@@ -62,43 +46,11 @@ exports[`test Renders properly 1`] = `
           striped={false}>
           <TableRowColumn
             hoverable={false}>
-            Crew Value
+            College
           </TableRowColumn>
           <TableRowColumn
             hoverable={false}>
-            1823.43
-          </TableRowColumn>
-        </TableRow>
-        <TableRow
-          displayBorder={true}
-          hoverable={false}
-          hovered={false}
-          selectable={true}
-          selected={false}
-          striped={false}>
-          <TableRowColumn
-            hoverable={false}>
-            Dividends
-          </TableRowColumn>
-          <TableRowColumn
-            hoverable={false}>
-            234.23
-          </TableRowColumn>
-        </TableRow>
-        <TableRow
-          displayBorder={true}
-          hoverable={false}
-          hovered={false}
-          selectable={true}
-          selected={false}
-          striped={false}>
-          <TableRowColumn
-            hoverable={false}>
-            Score
-          </TableRowColumn>
-          <TableRowColumn
-            hoverable={false}>
-            1946.83
+            New College
           </TableRowColumn>
         </TableRow>
       </TableBody>

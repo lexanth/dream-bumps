@@ -115,16 +115,23 @@ const byUserAndSex = (state = {}, action) => {
     case types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS:
       action.userCrewPriceHistories.forEach(history => newState[history.user.id] = historyByUser(newState[history.user.id], history));
       return newState;
+    case types.FETCH_USER_CREW_RANKING_SUCCESS:
+      newState[action.ranking.userId] = historyByUser(newState[action.ranking.userId], {sex: action.ranking.sex, id: -action.ranking.userId})
+      return newState;
     default:
       return state;
   }
 }
+
 
 const historyById = (state = {}, action) => {
   let newState = {...state};
   switch (action.type) {
     case types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS:
       action.userCrewPriceHistories.forEach(history => newState[history.id] = history);
+      return newState;
+    case types.FETCH_USER_CREW_RANKING_SUCCESS:
+      newState[-action.ranking.userId] = {sex: action.ranking.sex, cash: action.ranking.cash, value: action.ranking.value, dateTime: new Date().toISOString()};
       return newState;
     default:
       return state;

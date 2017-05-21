@@ -1,5 +1,7 @@
 package com.alexanthony.dreambumps.web.rest;
 
+import com.alexanthony.dreambumps.security.jwt.JWTConfigurer;
+import com.alexanthony.dreambumps.security.jwt.TokenProvider;
 import com.codahale.metrics.annotation.Timed;
 
 import com.alexanthony.dreambumps.domain.User;
@@ -19,9 +21,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -40,9 +47,14 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService,
-            MailService mailService) {
+  private final TokenProvider tokenProvider;
 
+  private final AuthenticationManager authenticationManager;
+
+    public AccountResource(UserRepository userRepository, UserService userService,
+            MailService mailService, TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
+      this.tokenProvider = tokenProvider;
+      this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
@@ -57,25 +69,41 @@ public class AccountResource {
     @PostMapping(path = "/register",
                     produces={MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE})
     @Timed
-    public ResponseEntity registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public ResponseEntity registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM, HttpServletResponse response) {
 
         HttpHeaders textPlainHeaders = new HttpHeaders();
         textPlainHeaders.setContentType(MediaType.TEXT_PLAIN);
 
-        return userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase())
-            .map(user -> new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
-            .orElseGet(() -> userRepository.findOneByEmail(managedUserVM.getEmail())
-                .map(user -> new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
-                .orElseGet(() -> {
-                    User user = userService
-                        .createUser(managedUserVM.getLogin(), managedUserVM.getPassword(),
-                            managedUserVM.getFirstName(), managedUserVM.getLastName(),
-                            managedUserVM.getEmail().toLowerCase(), managedUserVM.getImageUrl(), managedUserVM.getLangKey());
+      HttpHeaders jsonHeaders = new HttpHeaders();
+      jsonHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-                    // mailService.sendActivationEmail(user);
-                    return new ResponseEntity<>(HttpStatus.CREATED);
-                })
-        );
+      Optional userForLogin = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
+      if (userForLogin.isPresent()) {
+        return new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST);
+      }
+
+      Optional userForEmail = userRepository.findOneByEmail(managedUserVM.getEmail().toLowerCase());
+      if (userForEmail.isPresent()) {
+        return new ResponseEntity<>("e-mail address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST);
+      }
+
+      User user = userService
+        .createUser(managedUserVM.getLogin().toLowerCase(), managedUserVM.getPassword(),
+          managedUserVM.getFirstName(), managedUserVM.getLastName(),
+          managedUserVM.getEmail().toLowerCase(), managedUserVM.getImageUrl(), managedUserVM.getLangKey(), managedUserVM.getCollege());
+
+      UsernamePasswordAuthenticationToken authenticationToken =
+        new UsernamePasswordAuthenticationToken(managedUserVM.getLogin().toLowerCase(), managedUserVM.getPassword());
+
+      Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+
+      String jwt = tokenProvider.createToken(authentication, true, userService.getUserWithAuthorities().getId());
+      response.addHeader(JWTConfigurer.AUTHORIZATION_HEADER, "Bearer " + jwt);
+
+      JWTToken token = new JWTToken(jwt);
+
+      return new ResponseEntity<JWTToken>(token, jsonHeaders, HttpStatus.CREATED);
     }
 
     /**
