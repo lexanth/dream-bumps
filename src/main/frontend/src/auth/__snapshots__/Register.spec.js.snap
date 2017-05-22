@@ -1,8 +1,10 @@
 exports[`test Renders properly 1`] = `
 <form>
   <Cell
-    col={6}
-    offset={3}>
+    desktop={6}
+    desktopOffset={3}
+    tablet={6}
+    tabletOffset={1}>
     <Card
       expandable={false}
       expanded={null}

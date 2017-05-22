@@ -7,9 +7,10 @@ exports[`test Renders properly when authenticated 1`] = `
       sex="male" />
   </Cell>
   <Cell
-    col={8}
-    offset={0}
-    tablet={12}>
+    desktop={8}
+    desktopOffset={0}
+    tablet={12}
+    tabletOffset={0}>
     <Connect(CrewList)
       sex="male" />
   </Cell>
@@ -19,9 +20,10 @@ exports[`test Renders properly when authenticated 1`] = `
 exports[`test Renders properly when not authenticated 1`] = `
 <Grid>
   <Cell
-    col={8}
-    offset={2}
-    tablet={12}>
+    desktop={8}
+    desktopOffset={2}
+    tablet={12}
+    tabletOffset={0}>
     <Connect(CrewList)
       sex="female" />
   </Cell>

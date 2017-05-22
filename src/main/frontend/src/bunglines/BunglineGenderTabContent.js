@@ -18,7 +18,12 @@ export const BunglineGenderTabContent = ({
       <Cell col={4} tablet={12}>
         <CurrentUserCrew sex={sex} />
       </Cell>}
-    <Cell tablet={12} col={8} offset={authenticated ? 0 : 2}>
+    <Cell
+      tablet={12}
+      desktop={8}
+      desktopOffset={authenticated ? 0 : 2}
+      tabletOffset={0}
+    >
       <CrewList sex={sex} />
     </Cell>
   </Grid>

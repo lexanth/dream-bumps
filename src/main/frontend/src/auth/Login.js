@@ -1,30 +1,41 @@
 // @flow
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router';
 // import {Col} from 'react-flexbox-grid';
 import { Cell } from 'material-grid/dist';
-import {Field, reduxForm} from 'redux-form';
-import {TextField} from 'redux-form-material-ui';
+import { Field, reduxForm } from 'redux-form';
+import { TextField } from 'redux-form-material-ui';
 import RaisedButton from 'material-ui/RaisedButton';
-import {Card, CardTitle, CardText, CardActions} from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card';
 
-import {login} from './actions';
+import { login } from './actions';
 
-export const Login = ({handleSubmit}:{handleSubmit:Function}) => (
+export const Login = ({ handleSubmit }: { handleSubmit: Function }) => (
   <form onSubmit={handleSubmit}>
-    <Cell col={6} offset={3}>
+    <Cell desktop={6} desktopOffset={3} tablet={6} tabletOffset={1}>
       <Card>
-        <CardTitle title="Login"/>
+        <CardTitle title="Login" />
         <CardText>
           <div>
             Not got an account yet? <Link to="/register">Register</Link>
           </div>
-          <Field name="username" component={TextField} floatingLabelText="Username" fullWidth/>
-          <Field name="password" component={TextField} floatingLabelText="Password" type="password" fullWidth/>
+          <Field
+            name="username"
+            component={TextField}
+            floatingLabelText="Username"
+            fullWidth
+          />
+          <Field
+            name="password"
+            component={TextField}
+            floatingLabelText="Password"
+            type="password"
+            fullWidth
+          />
         </CardText>
         <CardActions>
-          <RaisedButton primary label="Log in" type="submit"/>
+          <RaisedButton primary label="Log in" type="submit" />
         </CardActions>
       </Card>
     </Cell>
@@ -37,12 +48,10 @@ Login.propTypes = {
 
 const LoginForm = reduxForm({
   form: 'login',
-  fields: [
-    'username', 'password', 'rememberMe'
-  ],
+  fields: ['username', 'password', 'rememberMe'],
   initialValues: {
     rememberMe: true
   }
 })(Login);
 
-export default connect(null, {onSubmit: login})(LoginForm);
+export default connect(null, { onSubmit: login })(LoginForm);

@@ -26,7 +26,7 @@ const HomePage = () => {
 
         </Card>
       </Cell>
-      <Cell col={6} tablet={12}>
+      <Cell desktop={6} tablet={8}>
         <Card>
           <CardTitle title="About" />
           <CardText>
@@ -68,7 +68,7 @@ const HomePage = () => {
           </CardText>
         </Card>
       </Cell>
-      <Cell col={6} tablet={12}>
+      <Cell desktop={6} tablet={12}>
         <Card>
           <CardTitle title="FAQs" />
           <CardText>
