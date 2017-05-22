@@ -5,24 +5,31 @@ import * as types from '../actionTypes';
 import copyAndAddIfNotPresent from '../utils/copyAndAddIfNotPresent';
 
 const membersById = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_USER_CREW_MEMBERS_SUCCESS:
-      action.members.forEach(member => {newState[member.id] = member;});
+      action.members.forEach(member => {
+        newState[member.id] = member;
+      });
       return newState;
     case types.BUY_ROWER_SUCCESS:
     case types.SELL_ROWER_SUCCESS:
-      return {...state, [action.userCrewMember.id]: action.userCrewMember};
+      return { ...state, [action.userCrewMember.id]: action.userCrewMember };
     default:
       return state;
   }
 };
 
 const membersByUserId = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_USER_CREW_MEMBERS_SUCCESS:
-      action.members.forEach(member => {newState[member.userId] = copyAndAddIfNotPresent(newState[member.userId], member.id);});
+      action.members.forEach(member => {
+        newState[member.userId] = copyAndAddIfNotPresent(
+          newState[member.userId],
+          member.id
+        );
+      });
       return newState;
     default:
       return state;
@@ -35,12 +42,12 @@ const members = combineReducers({
 });
 
 const rankingsById = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
-      return {...state, [action.ranking.id]: action.ranking};
+      return { ...state, [action.ranking.id]: action.ranking };
     case types.FETCH_USER_CREW_RANKINGS_SUCCESS:
-      action.rankings.forEach(ranking => newState[ranking.id] = ranking);
+      action.rankings.forEach(ranking => (newState[ranking.id] = ranking));
       return newState;
     default:
       return state;
@@ -50,21 +57,34 @@ const rankingsById = (state = {}, action) => {
 const rankingsBySex = (state = {}, action = {}, ranking = {}) => {
   switch (action.type) {
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
-      return {...state, [action.ranking.sex]: action.ranking.id};
+      return { ...state, [action.ranking.sex]: action.ranking.id };
     case types.FETCH_USER_CREW_RANKINGS_SUCCESS:
-      return {...state, [ranking.sex]: ranking.id}
+      return { ...state, [ranking.sex]: ranking.id };
     default:
       return state;
   }
-}
+};
 
 const rankingsByUserId = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
-      return {...state, [action.ranking.userId]: rankingsBySex(state[action.ranking.userId], action)};
+      return {
+        ...state,
+        [action.ranking.userId]: rankingsBySex(
+          state[action.ranking.userId],
+          action
+        )
+      };
     case types.FETCH_USER_CREW_RANKINGS_SUCCESS:
-      action.rankings.forEach(ranking => newState[ranking.userId] = rankingsBySex(state[ranking.userId], action, ranking));
+      action.rankings.forEach(
+        ranking =>
+          (newState[ranking.userId] = rankingsBySex(
+            state[ranking.userId],
+            action,
+            ranking
+          ))
+      );
       return newState;
     default:
       return state;
@@ -74,7 +94,7 @@ const rankingsByUserId = (state = {}, action) => {
 const rankings = combineReducers({
   byId: rankingsById,
   byUserId: rankingsByUserId
-})
+});
 
 const buyMember = (state = null, action) => {
   switch (action.type) {
@@ -86,7 +106,7 @@ const buyMember = (state = null, action) => {
     default:
       return state;
   }
-}
+};
 
 const buySex = (state = null, action) => {
   switch (action.type) {
@@ -98,45 +118,69 @@ const buySex = (state = null, action) => {
     default:
       return state;
   }
-}
+};
 
 const purchase = combineReducers({
   buyMember,
   buySex
-})
+});
 
 const historyByUser = (state = {}, history) => {
-  return {...state, [history.sex]: copyAndAddIfNotPresent(state[history.sex], history.id)};
-}
+  return {
+    ...state,
+    [history.sex]: copyAndAddIfNotPresent(state[history.sex], history.id)
+  };
+};
 
 const byUserAndSex = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS:
-      action.userCrewPriceHistories.forEach(history => newState[history.user.id] = historyByUser(newState[history.user.id], history));
+      action.userCrewPriceHistories.forEach(
+        history =>
+          (newState[history.user.id] = historyByUser(
+            newState[history.user.id],
+            history
+          ))
+      );
       return newState;
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
-      newState[action.ranking.userId] = historyByUser(newState[action.ranking.userId], {sex: action.ranking.sex, id: -action.ranking.userId})
+      newState[action.ranking.userId] = historyByUser(
+        newState[action.ranking.userId],
+        {
+          sex: action.ranking.sex,
+          id: -action.ranking.userId *
+            (action.ranking.sex === 'male' ? 10000 : 1)
+        }
+      );
       return newState;
     default:
       return state;
   }
-}
-
+};
 
 const historyById = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_USER_CREW_PRICE_HISTORY_SUCCESS:
-      action.userCrewPriceHistories.forEach(history => newState[history.id] = history);
+      action.userCrewPriceHistories.forEach(
+        history => (newState[history.id] = history)
+      );
       return newState;
     case types.FETCH_USER_CREW_RANKING_SUCCESS:
-      newState[-action.ranking.userId] = {sex: action.ranking.sex, cash: action.ranking.cash, value: action.ranking.value, dateTime: new Date().toISOString()};
+      newState[
+        -action.ranking.userId * (action.ranking.sex === 'male' ? 10000 : 1)
+      ] = {
+        sex: action.ranking.sex,
+        cash: action.ranking.cash,
+        value: action.ranking.value,
+        dateTime: new Date().toISOString()
+      };
       return newState;
     default:
       return state;
   }
-}
+};
 
 const history = combineReducers({
   byUserAndSex,
@@ -150,18 +194,20 @@ export default combineReducers({
   history
 });
 
-export const _getUserCrewMembers = (state:{members:{byUserId:Object,byId:Object}}) => (userId: number, sex: string) => {
+export const _getUserCrewMembers = (state: {
+  members: { byUserId: Object, byId: Object }
+}) => (userId: number, sex: string) => {
   const membersForUser = state.members.byUserId[userId] || [];
   return membersForUser
     .map(id => state.members.byId[id])
     .filter(member => member.sex === sex)
-    .sort((a,b) => (a.seat - b.seat));
+    .sort((a, b) => a.seat - b.seat);
 };
 
 export const _getUserCrewRanking = state => (userId, sex) => {
   if (!userId || !state.rankings.byUserId[userId]) return {};
   return state.rankings.byId[state.rankings.byUserId[userId][sex]];
-}
+};
 export const _getBuyMemberId = state => state.purchase.buyMember;
 export const _getBuySex = state => state.purchase.buySex;
 export const _getUserCrewRankings = state => sex => {
@@ -170,16 +216,16 @@ export const _getUserCrewRankings = state => sex => {
     rankings.push(state.rankings.byUserId[userId][sex]);
   });
   return rankings.map(id => state.rankings.byId[id]);
-}
+};
 
 export const _getUserScoreHistory = state => (userId, sex) => {
   if (!userId || !state.history.byUserAndSex[userId]) return [];
   const historyIds = state.history.byUserAndSex[userId][sex] || [];
   return historyIds
-          .map(id => state.history.byId[id])
-          .map(history => {
-            history.date = Date.parse(history.dateTime);
-            return history;
-          })
-          .sort((p1, p2) => (p1.date - p2.date));
-}
+    .map(id => state.history.byId[id])
+    .map(history => {
+      history.date = Date.parse(history.dateTime);
+      return history;
+    })
+    .sort((p1, p2) => p1.date - p2.date);
+};

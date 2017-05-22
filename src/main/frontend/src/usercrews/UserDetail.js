@@ -25,12 +25,16 @@ class UserDetail extends Component {
             <TableBody displayRowCheckbox={false}>
               <TableRow>
                 <TableRowColumn>Username</TableRowColumn>
-                <TableRowColumn>{this.props.user.firstName}</TableRowColumn>
+                <TableRowColumn>
+                  {this.props.user ? this.props.user.firstName : ''}
+                </TableRowColumn>
               </TableRow>
               <TableRow>
                 <TableRowColumn>College</TableRowColumn>
                 <TableRowColumn>
-                  {getCollegeName(this.props.user.college)}
+                  {getCollegeName(
+                    this.props.user ? this.props.user.college : null
+                  )}
                 </TableRowColumn>
               </TableRow>
             </TableBody>
