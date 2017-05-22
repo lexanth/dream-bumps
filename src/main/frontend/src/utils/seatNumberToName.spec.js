@@ -38,17 +38,16 @@ test('All seats', () => {
 
   it('gives the right name for stroke', () => {
     const seatName = seatNumberToName(8);
-    expect(seatName).toEqual('Stroke');
+    expect(seatName).toEqual('Str');
   });
 
   it('gives the right name for cox', () => {
     const seatName = seatNumberToName(9);
     expect(seatName).toEqual('Cox');
-  })
+  });
 
   // it('gives the right name for others', () => {
   //   const seatName = seatNumberToName(1);
   //   expect(seatName).toEqual('Bow');
   // })
-
-})
+});

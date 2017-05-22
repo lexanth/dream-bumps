@@ -37,7 +37,13 @@ class UserCrew extends Component {
     return (
       <Card style={this.props.style}>
         <CardTitle title={this.props.header} />
-        <CardText>
+        <CardText
+          style={
+            this.props.canBuySell
+              ? { paddingLeft: '8px', paddingRight: '8px' }
+              : { paddingLeft: '16px', paddingRight: '16px' }
+          }
+        >
           <Table selectable={false}>
             <TableBody displayRowCheckbox={false}>
               {this.props.crewMembers.map(member => (

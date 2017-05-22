@@ -1,27 +1,21 @@
 // @flow
-import React, {PropTypes} from 'react';
-import {Grid, Cell} from 'material-grid/dist';
+import React, { PropTypes } from 'react';
+import { Grid, Cell } from 'material-grid/dist';
 
 import CrewMemberList from './CrewMemberList';
 import CrewDetails from './CrewDetails';
 import CrewPriceHistory from './CrewPriceHistory';
 
-const CrewPage = ({ params }: {params: Object}) => (
+const CrewPage = ({ params }: { params: Object }) => (
   <Grid>
-    <Cell col={6}>
-      <CrewDetails
-        crewId={params.crewId}
-      />
+    <Cell col={6} tablet={12}>
+      <CrewDetails crewId={params.crewId} />
     </Cell>
-    <Cell col={6}>
-      <CrewMemberList
-        crewId={params.crewId}
-      />
+    <Cell col={6} tablet={12}>
+      <CrewMemberList crewId={params.crewId} />
     </Cell>
-    <Cell col={12}>
-      <CrewPriceHistory
-        crewId={params.crewId}
-      />
+    <Cell col={12} tablet={12}>
+      <CrewPriceHistory crewId={params.crewId} />
     </Cell>
   </Grid>
 );
@@ -31,6 +25,6 @@ CrewPage.propTypes = {
     crewId: PropTypes.string
   })
 };
-export {CrewPage};
+export { CrewPage };
 
 export default CrewPage;

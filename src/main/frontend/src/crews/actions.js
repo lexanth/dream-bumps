@@ -17,16 +17,16 @@ const fetchCrewError = errorMessage => ({
   errorMessage
 });
 
-
 export const fetchCrew = (crewId: number) => (dispatch: Function) => {
   dispatch(fetchCrewStart(crewId));
-  return requestWithAuth.get(`/api/crews/${crewId}`)
-    .then(response => {
+  return requestWithAuth.get(`/api/crews/${crewId}`).then(
+    response => {
       dispatch(fetchCrewSuccess(response.data));
     },
     error => {
       dispatch(fetchCrewError(error));
-    });
+    }
+  );
 };
 
 const fetchCrewsStart = sex => ({
@@ -44,16 +44,16 @@ const fetchCrewsError = errorMessage => ({
   errorMessage
 });
 
-
 export const fetchCrews = (sex: string) => (dispatch: Function) => {
   dispatch(fetchCrewsStart(sex));
-  return requestWithAuth.get(`/api/crews?sex=${sex}`)
-    .then(response => {
+  return requestWithAuth.get(`/api/crews?sex=${sex}`).then(
+    response => {
       dispatch(fetchCrewsSuccess(response.data));
     },
     error => {
       dispatch(fetchCrewsError(error));
-    });
+    }
+  );
 };
 
 const fetchCrewMembersStart = id => ({
@@ -71,16 +71,16 @@ const fetchCrewMembersError = errorMessage => ({
   errorMessage
 });
 
-
 export const fetchCrewMembers = (crewId: number) => (dispatch: Function) => {
   dispatch(fetchCrewMembersStart(crewId));
-  return requestWithAuth.get(`/api/crews/${crewId}/members`)
-    .then(response => {
+  return requestWithAuth.get(`/api/crews/${crewId}/members`).then(
+    response => {
       dispatch(fetchCrewMembersSuccess(response.data));
     },
     error => {
       dispatch(fetchCrewMembersError(error));
-    });
+    }
+  );
 };
 
 const fetchCrewPriceHistoryStart = id => ({
@@ -98,20 +98,23 @@ const fetchCrewPriceHistoryError = errorMessage => ({
   errorMessage
 });
 
-export const fetchCrewPriceHistory = (crewId: number) => (dispatch: Function) => {
+export const fetchCrewPriceHistory = (crewId: number) => (
+  dispatch: Function
+) => {
   dispatch(fetchCrewPriceHistoryStart(crewId));
-  return requestWithAuth.get(`/api/crews/${crewId}/price-history`)
-    .then(response => {
+  return requestWithAuth.get(`/api/crews/${crewId}/price-history`).then(
+    response => {
       dispatch(fetchCrewPriceHistorySuccess(response.data));
     },
     error => {
       dispatch(fetchCrewPriceHistoryError(error));
-    });
+    }
+  );
 };
 
 export const updateCrew = (crew: Object) => (dispatch: Function) => {
   console.log(crew);
-}
+};
 
 const updateCrewMembersStart = members => ({
   type: types.UPDATE_CREW_MEMBERS_REQUEST,
@@ -128,14 +131,42 @@ const updateCrewMembersError = errorMessage => ({
   errorMessage: errorMessage || 'Error updating crew members'
 });
 
-
-export const updateCrewMembers = (crew:Object) => (dispatch: Function) => {
+export const updateCrewMembers = (crew: Object) => (dispatch: Function) => {
   dispatch(updateCrewMembersStart(crew.members));
-  return requestWithAuth.put(`/api/crews/${crew.id}/members`, crew.members)
-    .then(response => {
-      dispatch(updateCrewMembersSuccess(response.data));
+  return requestWithAuth
+    .put(`/api/crews/${crew.id}/members`, crew.members)
+    .then(
+      response => {
+        dispatch(updateCrewMembersSuccess(response.data));
+      },
+      error => {
+        dispatch(updateCrewMembersError(error));
+      }
+    );
+};
+
+const fetchAllMembersStart = () => ({
+  type: types.FETCH_ALL_CREW_MEMBERS_REQUEST
+});
+
+const fetchAllMembersSuccess = crewMembers => ({
+  type: types.FETCH_ALL_CREW_MEMBERS_SUCCESS,
+  crewMembers
+});
+
+const fetchAllMembersError = errorMessage => ({
+  type: types.FETCH_ALL_CREW_MEMBERS_ERROR,
+  errorMessage
+});
+
+export const fetchAllMembers = () => (dispatch: Function) => {
+  dispatch(fetchAllMembersStart());
+  return requestWithAuth.get('/api/crews/members').then(
+    response => {
+      dispatch(fetchAllMembersSuccess(response.data));
     },
     error => {
-      dispatch(updateCrewMembersError(error));
-    });
+      dispatch(fetchAllMembersError(error));
+    }
+  );
 };

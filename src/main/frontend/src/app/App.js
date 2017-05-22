@@ -4,18 +4,14 @@ import { connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import { Grid } from 'react-flexbox-grid';
-// import { Grid } from 'material-grid/dist';
 
-// import { Meta } from '../components/Meta';
 import Navigation from './Navigation';
 import MySnackbar from './MySnackbar';
 import { fetchCurrentUser } from '../auth/actions';
 import { fetchConfig } from '../config/actions';
 import { fetchStatus } from '../status/actions';
 import { isLoading } from '../rootReducer';
-
-// require('../../style/style.css');
+import { fetchCrews, fetchAllMembers } from '../crews/actions';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -31,7 +27,7 @@ const muiTheme = getMuiTheme({
     backgroundColor: OXFORD_BLUE,
     color: '#fff'
   }
-})
+});
 
 /*
  * React-router's <Router> component renders <Route>'s
@@ -47,7 +43,11 @@ class App extends Component {
     this.props.fetchCurrentUser();
     this.props.fetchConfig();
     this.props.fetchStatus();
+    this.props.fetchCrews('male');
+    this.props.fetchCrews('female');
+    this.props.fetchAllMembers();
   }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -69,11 +69,19 @@ App.propTypes = {
   fetchCurrentUser: PropTypes.func,
   loading: PropTypes.bool,
   fetchConfig: PropTypes.func,
-  fetchStatus: PropTypes.func
+  fetchStatus: PropTypes.func,
+  fetchCrews: PropTypes.func,
+  fetchAllMembers: PropTypes.func
 };
 
 const mapStateToProps = (state: Object) => ({
   loading: isLoading(state)
 });
 
-export default connect(mapStateToProps, { fetchCurrentUser, fetchConfig, fetchStatus })(App);
+export default connect(mapStateToProps, {
+  fetchCurrentUser,
+  fetchConfig,
+  fetchStatus,
+  fetchCrews,
+  fetchAllMembers
+})(App);

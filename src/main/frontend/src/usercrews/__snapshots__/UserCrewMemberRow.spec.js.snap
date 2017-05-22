@@ -12,7 +12,7 @@ exports[`test Renders properly 1`] = `
       Object {
         "paddingLeft": 0,
         "paddingRight": 0,
-        "width": "45px",
+        "width": "30px",
       }
     }>
     Cox
@@ -44,7 +44,7 @@ exports[`test Renders properly 1`] = `
         "paddingLeft": 0,
         "paddingRight": "5px",
         "textAlign": "right",
-        "width": "75px",
+        "width": "46px",
       }
     }>
     123.56
@@ -55,7 +55,7 @@ exports[`test Renders properly 1`] = `
       Object {
         "paddingLeft": 0,
         "paddingRight": 0,
-        "width": "75px",
+        "width": "68px",
       }
     }>
     <RaisedButton
@@ -65,7 +65,7 @@ exports[`test Renders properly 1`] = `
       labelPosition="after"
       labelStyle={
         Object {
-          "paddingLeft": "2px",
+          "paddingLeft": "0px",
           "paddingRight": 0,
         }
       }
@@ -74,7 +74,7 @@ exports[`test Renders properly 1`] = `
       secondary={false}
       style={
         Object {
-          "minWidth": "70px",
+          "minWidth": "68px",
         }
       } />
   </TableRowColumn>
@@ -95,7 +95,7 @@ exports[`test Renders properly 2`] = `
       Object {
         "paddingLeft": 0,
         "paddingRight": 0,
-        "width": "45px",
+        "width": "40px",
       }
     }>
     Cox
@@ -127,7 +127,7 @@ exports[`test Renders properly 2`] = `
         "paddingLeft": 0,
         "paddingRight": "5px",
         "textAlign": "right",
-        "width": "75px",
+        "width": "46px",
       }
     }>
     123.56
@@ -149,7 +149,7 @@ exports[`test Renders properly 3`] = `
       Object {
         "paddingLeft": 0,
         "paddingRight": 0,
-        "width": "45px",
+        "width": "30px",
       }
     }>
     Cox
@@ -181,7 +181,7 @@ exports[`test Renders properly 3`] = `
         "paddingLeft": 0,
         "paddingRight": "5px",
         "textAlign": "right",
-        "width": "75px",
+        "width": "46px",
       }
     }>
     123.56
@@ -192,7 +192,7 @@ exports[`test Renders properly 3`] = `
       Object {
         "paddingLeft": 0,
         "paddingRight": 0,
-        "width": "75px",
+        "width": "68px",
       }
     }>
     <RaisedButton
@@ -205,7 +205,7 @@ exports[`test Renders properly 3`] = `
       secondary={false}
       style={
         Object {
-          "minWidth": "70px",
+          "minWidth": "68px",
         }
       } />
   </TableRowColumn>

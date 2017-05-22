@@ -28,13 +28,13 @@ public class CrewMemberResource {
     private final Logger log = LoggerFactory.getLogger(CrewMemberResource.class);
 
     private static final String ENTITY_NAME = "crewMember";
-        
+
     private final CrewMemberService crewMemberService;
 
     public CrewMemberResource(CrewMemberService crewMemberService) {
         this.crewMemberService = crewMemberService;
     }
-    
+
     @GetMapping("/crews/{crewId}/members")
     @Timed
     public List<CrewMemberDTO> getCrewMembersForCrew(@PathVariable Long crewId) {
@@ -65,7 +65,7 @@ public class CrewMemberResource {
     /**
      * PUT  /crew-members : Updates an existing crewMember.
      *
-     * @param crewMemberDTO the crewMemberDTO to update
+     * @param crewMemberDTOs the crewMemberDTO to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated crewMemberDTO,
      * or with status 400 (Bad Request) if the crewMemberDTO is not valid,
      * or with status 500 (Internal Server Error) if the crewMemberDTO couldnt be updated
@@ -87,12 +87,12 @@ public class CrewMemberResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of crewMembers in body
      */
-//    @GetMapping("/crew-members")
-//    @Timed
-//    public List<CrewMemberDTO> getAllCrewMembers() {
-//        log.debug("REST request to get all CrewMembers");
-//        return crewMemberService.findAll();
-//    }
+    @GetMapping("/crews/members")
+    @Timed
+    public List<CrewMemberDTO> getAllCrewMembers() {
+        log.debug("REST request to get all CrewMembers");
+        return crewMemberService.findAll();
+    }
 
     /**
      * GET  /crew-members/:id : get the "id" crewMember.

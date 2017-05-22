@@ -1,7 +1,8 @@
 exports[`test Renders properly 1`] = `
 <Grid>
   <Cell
-    col={6}>
+    col={6}
+    tablet={12}>
     <Connect(UserDetail)
       userId={2} />
     <Connect(UserCrew)
@@ -17,7 +18,8 @@ exports[`test Renders properly 1`] = `
       userId={2} />
   </Cell>
   <Cell
-    col={6}>
+    col={6}
+    tablet={12}>
     <Connect(UserCurrentScore)
       sex="female"
       userId={2} />

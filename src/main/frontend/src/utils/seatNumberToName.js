@@ -4,7 +4,7 @@ const seatNumberToName = (seat: number): string => {
     case 1:
       return 'Bow';
     case 8:
-      return 'Stroke';
+      return 'Str';
     case 9:
       return 'Cox';
     default:

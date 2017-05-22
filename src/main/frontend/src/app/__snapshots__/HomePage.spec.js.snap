@@ -29,7 +29,8 @@ exports[`test Renders properly 1`] = `
     </Card>
   </Cell>
   <Cell
-    col={6}>
+    col={6}
+    tablet={12}>
     <Card
       expandable={false}
       expanded={null}
@@ -97,7 +98,8 @@ exports[`test Renders properly 1`] = `
     </Card>
   </Cell>
   <Cell
-    col={6}>
+    col={6}
+    tablet={12}>
     <Card
       expandable={false}
       expanded={null}

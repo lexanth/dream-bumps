@@ -5,11 +5,14 @@ import * as types from '../actionTypes';
 import copyAndAddIfNotPresent from '../utils/copyAndAddIfNotPresent';
 
 const membersById = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_CREW_MEMBERS_SUCCESS:
     case types.UPDATE_CREW_MEMBERS_SUCCESS:
-      action.crewMembers.forEach(member => {newState[member.id] = member;});
+    case types.FETCH_ALL_CREW_MEMBERS_SUCCESS:
+      action.crewMembers.forEach(member => {
+        newState[member.id] = member;
+      });
       return newState;
     default:
       return state;
@@ -17,11 +20,17 @@ const membersById = (state = {}, action) => {
 };
 
 const membersByCrewId = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_CREW_MEMBERS_SUCCESS:
     case types.UPDATE_CREW_MEMBERS_SUCCESS:
-      action.crewMembers.forEach(member => {newState[member.crewId] = copyAndAddIfNotPresent(newState[member.crewId], member.id);});
+    case types.FETCH_ALL_CREW_MEMBERS_SUCCESS:
+      action.crewMembers.forEach(member => {
+        newState[member.crewId] = copyAndAddIfNotPresent(
+          newState[member.crewId],
+          member.id
+        );
+      });
       return newState;
     default:
       return state;
@@ -34,12 +43,12 @@ const members = combineReducers({
 });
 
 const crewsById = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_CREW_SUCCESS:
-      return {...state, [action.crew.id]: action.crew};
+      return { ...state, [action.crew.id]: action.crew };
     case types.FETCH_CREWS_SUCCESS:
-      action.crews.forEach(crew => newState[crew.id] = crew);
+      action.crews.forEach(crew => (newState[crew.id] = crew));
       return newState;
     default:
       return state;
@@ -47,13 +56,21 @@ const crewsById = (state = {}, action) => {
 };
 
 const crewsBySex = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_CREW_SUCCESS:
-      newState[action.crew.sex] = copyAndAddIfNotPresent(newState[action.crew.sex], action.crew.id);
+      newState[action.crew.sex] = copyAndAddIfNotPresent(
+        newState[action.crew.sex],
+        action.crew.id
+      );
       return newState;
     case types.FETCH_CREWS_SUCCESS:
-      action.crews.forEach(crew => {newState[crew.sex] = copyAndAddIfNotPresent(newState[crew.sex], crew.id);});
+      action.crews.forEach(crew => {
+        newState[crew.sex] = copyAndAddIfNotPresent(
+          newState[crew.sex],
+          crew.id
+        );
+      });
       return newState;
     default:
       return state;
@@ -66,13 +83,18 @@ const crews = combineReducers({
 });
 
 const priceHistoryById = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_CREW_PRICE_HISTORY_SUCCESS:
-      action.priceHistories.forEach(history => {newState[history.id] = history;});
+      action.priceHistories.forEach(history => {
+        newState[history.id] = history;
+      });
       return newState;
     case types.FETCH_CREW_SUCCESS:
-      newState[-action.crew.id] = {price: action.crew.price, dateTime: new Date()};
+      newState[-action.crew.id] = {
+        price: action.crew.price,
+        dateTime: new Date()
+      };
       return newState;
     default:
       return state;
@@ -80,13 +102,21 @@ const priceHistoryById = (state = {}, action) => {
 };
 
 const priceHistoryByCrewId = (state = {}, action) => {
-  let newState = {...state};
+  let newState = { ...state };
   switch (action.type) {
     case types.FETCH_CREW_PRICE_HISTORY_SUCCESS:
-      action.priceHistories.forEach(history => {newState[parseInt(history.crew.id, 10)] = copyAndAddIfNotPresent(newState[parseInt(history.crew.id, 10)], history.id);});
+      action.priceHistories.forEach(history => {
+        newState[parseInt(history.crew.id, 10)] = copyAndAddIfNotPresent(
+          newState[parseInt(history.crew.id, 10)],
+          history.id
+        );
+      });
       return newState;
     case types.FETCH_CREW_SUCCESS:
-      newState[parseInt(action.crew.id, 10)] = copyAndAddIfNotPresent(newState[parseInt(action.crew.id, 10)], -action.crew.id);
+      newState[parseInt(action.crew.id, 10)] = copyAndAddIfNotPresent(
+        newState[parseInt(action.crew.id, 10)],
+        -action.crew.id
+      );
       return newState;
     default:
       return state;
@@ -104,19 +134,22 @@ export default combineReducers({
   priceHistory
 });
 
-export const _getCrewMembers = (state: Object) => (crewId: number) => (state.members.byCrewId[crewId] ? state.members.byCrewId[crewId].map(id => state.members.byId[id]) : []).sort((a,b) => a.seat - b.seat);
-export const _getCrew = (state: Object) => (crewId:number) => (state.crews.byId[crewId]);
+export const _getCrewMembers = (state: Object) => (crewId: number) =>
+  (state.members.byCrewId[crewId]
+    ? state.members.byCrewId[crewId].map(id => state.members.byId[id])
+    : []).sort((a, b) => a.seat - b.seat);
+export const _getCrew = (state: Object) => (crewId: number) =>
+  state.crews.byId[crewId];
 export const _getCrewPriceHistory = (state: Object) => (crewId: number) =>
-  (state.priceHistory.byCrewId[crewId] ?
-    state.priceHistory.byCrewId[crewId]
-      .map(id => state.priceHistory.byId[id])
-      .map(history => {
-        history.date = Date.parse(history.dateTime);
-        return history;
-      })
-      .sort((p1, p2) => (p1.date - p2.date))
-  :
-    []);
+  state.priceHistory.byCrewId[crewId]
+    ? state.priceHistory.byCrewId[crewId]
+        .map(id => state.priceHistory.byId[id])
+        .map(history => {
+          history.date = Date.parse(history.dateTime);
+          return history;
+        })
+        .sort((p1, p2) => p1.date - p2.date)
+    : [];
 
 export const _getCrewName = (state: Object) => (crewId: number) => {
   if (crewId === null) return '';
@@ -124,16 +157,22 @@ export const _getCrewName = (state: Object) => (crewId: number) => {
   return crew ? crew.name : '';
 };
 
-export const _getCrewMemberName = (state: Object) => (crewId:number, seat:number) => {
+export const _getCrewMemberName = (state: Object) => (
+  crewId: number,
+  seat: number
+) => {
   const members = _getCrewMembers(state)(crewId);
-  const member = members.find(member => member.seat === seat)
+  const member = members.find(member => member.seat === seat);
   return member ? member.name : '';
 };
 
-export const _getCrewPrice = (state: Object) => (crewId:number) => {
+export const _getCrewPrice = (state: Object) => (crewId: number) => {
   if (crewId === null) return '';
   const crew = _getCrew(state)(crewId);
   return crew ? crew.price : '';
 };
 
-export const _getCrewsForSex = (state: Object) => (sex: string) => (state.crews.bySex[sex] || []).map(id => state.crews.byId[id]).sort((a,b) => a.position - b.position);
+export const _getCrewsForSex = (state: Object) => (sex: string) =>
+  (state.crews.bySex[sex] || [])
+    .map(id => state.crews.byId[id])
+    .sort((a, b) => a.position - b.position);

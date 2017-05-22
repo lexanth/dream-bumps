@@ -1,17 +1,20 @@
 exports[`test Renders properly 1`] = `
 <Grid>
   <Cell
-    col={6}>
+    col={6}
+    tablet={12}>
     <Connect(CrewDetails)
       crewId="1" />
   </Cell>
   <Cell
-    col={6}>
+    col={6}
+    tablet={12}>
     <Connect(CrewMemberList)
       crewId="1" />
   </Cell>
   <Cell
-    col={12}>
+    col={12}
+    tablet={12}>
     <Connect(CrewPriceHistory)
       crewId="1" />
   </Cell>

@@ -5,7 +5,13 @@ exports[`test Renders properly - not buy/sell 1`] = `
   initiallyExpanded={false}>
   <CardTitle
     title="Other Header" />
-  <CardText>
+  <CardText
+    style={
+      Object {
+        "paddingLeft": "16px",
+        "paddingRight": "16px",
+      }
+    }>
     <Table
       allRowsSelected={false}
       fixedFooter={true}
@@ -50,7 +56,13 @@ exports[`test Renders properly 1`] = `
   initiallyExpanded={false}>
   <CardTitle
     title="UserCrew" />
-  <CardText>
+  <CardText
+    style={
+      Object {
+        "paddingLeft": "8px",
+        "paddingRight": "8px",
+      }
+    }>
     <Table
       allRowsSelected={false}
       fixedFooter={true}
