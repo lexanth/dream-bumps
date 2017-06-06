@@ -20,7 +20,7 @@ exports[`test Renders properly - header, not current key 1`] = `
   style={
     Object {
       "paddingRight": 0,
-      "width": "88px",
+      "width": "70px",
     }
   }>
   Bumps
@@ -60,17 +60,26 @@ exports[`test Renders properly - tab content 1`] = `
                   Object {
                     "paddingLeft": 0,
                     "paddingRight": 0,
-                    "width": "45px",
+                    "width": "28px",
                   }
                 }>
                 #
               </TableHeaderColumn>
-              <TableHeaderColumn>
+              <TableHeaderColumn
+                style={
+                  Object {
+                    "minWidth": "120px",
+                  }
+                }>
                 Name
               </TableHeaderColumn>
-              <TableHeaderColumn>
-                College
-              </TableHeaderColumn>
+              <MediaQuery
+                minWidth={1000}
+                values={Object {}}>
+                <TableHeaderColumn>
+                  College
+                </TableHeaderColumn>
+              </MediaQuery>
               <SortableHeaderColumn
                 currentSortKey="SCORE"
                 label="Bumps"

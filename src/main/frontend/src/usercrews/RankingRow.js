@@ -4,6 +4,7 @@ import { TableRow, TableRowColumn } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
+import MediaQuery from 'react-responsive';
 
 import { getUser } from '../rootReducer';
 import { getCollegeName } from '../utils/colleges';
@@ -16,7 +17,7 @@ const RankingRow = props => {
   return (
     <TableRow>
       <TableRowColumn
-        style={{ paddingLeft: 0, paddingRight: 0, width: '45px' }}
+        style={{ paddingLeft: 0, paddingRight: 0, width: '30px' }}
       >
         {props.number}
       </TableRowColumn>
@@ -26,7 +27,12 @@ const RankingRow = props => {
               containerElement={<Link to={`/rankings/${props.user.id}`} />}
               label={`${props.user.firstName} ${props.user.lastName}`}
               labelStyle={{ textTransform: '', fontSize: '13px' }}
-              style={{ paddingLeft: 0, textAlign: '', marginLeft: '-16px' }}
+              style={{
+                paddingLeft: 0,
+                textAlign: '',
+                marginLeft: '-16px',
+                minWidth: '120px'
+              }}
             />
           </TableRowColumn>
         : <TableRowColumn>
@@ -36,27 +42,34 @@ const RankingRow = props => {
               }
               label={`User ${props.ranking.userId}`}
               labelStyle={{ textTransform: '', fontSize: '13px' }}
-              style={{ paddingLeft: 0, textAlign: '', marginLeft: '-16px' }}
+              style={{
+                paddingLeft: 0,
+                textAlign: '',
+                marginLeft: '-16px',
+                minWidth: '120px'
+              }}
             />
           </TableRowColumn>}
       {props.user
-        ? <TableRowColumn>
-            {getCollegeName(props.user.college)}
-          </TableRowColumn>
-        : <TableRowColumn />}
-      <TableRowColumn style={{ paddingRight: 0, width: '88px' }}>
+        ? <MediaQuery minWidth={1000}>
+            <TableRowColumn>
+              {getCollegeName(props.user.college)}
+            </TableRowColumn>
+          </MediaQuery>
+        : <MediaQuery minWidth={1000}><TableRowColumn /></MediaQuery>}
+      <TableRowColumn style={{ paddingRight: 0, width: '70px' }}>
         {props.ranking.bumps}
       </TableRowColumn>
-      <TableRowColumn style={{ paddingRight: 0, width: '88px' }}>
+      <TableRowColumn style={{ paddingRight: 0, width: '70px' }}>
         {formatMoney(props.ranking.cash)}
       </TableRowColumn>
-      <TableRowColumn style={{ paddingRight: 0, width: '88px' }}>
+      <TableRowColumn style={{ paddingRight: 0, width: '70px' }}>
         {formatMoney(props.ranking.value)}
       </TableRowColumn>
-      <TableRowColumn style={{ paddingRight: 0, width: '88px' }}>
+      <TableRowColumn style={{ paddingRight: 0, width: '70px' }}>
         {formatMoney(props.ranking.dividends)}
       </TableRowColumn>
-      <TableRowColumn style={{ paddingRight: 0, width: '88px' }}>
+      <TableRowColumn style={{ paddingRight: 0, width: '70px' }}>
         {formatMoney(
           props.ranking.cash +
             props.ranking.value -
@@ -64,7 +77,7 @@ const RankingRow = props => {
             props.ranking.dividends
         )}
       </TableRowColumn>
-      <TableRowColumn style={{ paddingRight: 0, width: '88px' }}>
+      <TableRowColumn style={{ paddingRight: 0, width: '70px' }}>
         {formatMoney(props.ranking.cash + props.ranking.value)}
       </TableRowColumn>
     </TableRow>

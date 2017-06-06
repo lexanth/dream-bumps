@@ -12,7 +12,7 @@ exports[`test Renders properly 1`] = `
       Object {
         "paddingLeft": 0,
         "paddingRight": 0,
-        "width": "45px",
+        "width": "30px",
       }
     }>
     3
@@ -44,19 +44,24 @@ exports[`test Renders properly 1`] = `
       style={
         Object {
           "marginLeft": "-16px",
+          "minWidth": "120px",
           "paddingLeft": 0,
           "textAlign": "",
         }
       } />
   </TableRowColumn>
-  <TableRowColumn
-    hoverable={false} />
+  <MediaQuery
+    minWidth={1000}
+    values={Object {}}>
+    <TableRowColumn
+      hoverable={false} />
+  </MediaQuery>
   <TableRowColumn
     hoverable={false}
     style={
       Object {
         "paddingRight": 0,
-        "width": "88px",
+        "width": "70px",
       }
     }>
     3
@@ -66,7 +71,7 @@ exports[`test Renders properly 1`] = `
     style={
       Object {
         "paddingRight": 0,
-        "width": "88px",
+        "width": "70px",
       }
     }>
     11.01
@@ -76,7 +81,7 @@ exports[`test Renders properly 1`] = `
     style={
       Object {
         "paddingRight": 0,
-        "width": "88px",
+        "width": "70px",
       }
     }>
     1036.50
@@ -86,7 +91,7 @@ exports[`test Renders properly 1`] = `
     style={
       Object {
         "paddingRight": 0,
-        "width": "88px",
+        "width": "70px",
       }
     }>
     12.67
@@ -96,7 +101,7 @@ exports[`test Renders properly 1`] = `
     style={
       Object {
         "paddingRight": 0,
-        "width": "88px",
+        "width": "70px",
       }
     }>
     34.84
@@ -106,7 +111,7 @@ exports[`test Renders properly 1`] = `
     style={
       Object {
         "paddingRight": 0,
-        "width": "88px",
+        "width": "70px",
       }
     }>
     1047.51

@@ -85,6 +85,9 @@ public class CrewPositionHistoryResource {
 
   @GetMapping("/crews/parse-positions")
   public List<CrewPositionHistoryDTO> parseStartingPositions(@RequestParam("url") String url) throws IOException {
+    if (url == null || url.isEmpty()) {
+      return crewPositionHistoryService.uploadStatic();
+    }
     return crewPositionHistoryService.parseStartingPositionsFromAnu(url);
   }
 

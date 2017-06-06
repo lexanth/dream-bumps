@@ -96,6 +96,7 @@ public class UserCrewRacingHistoryService {
     public void payDividends(Integer day) {
       List<UserCrewPositionHistory> userBumps = userCrewPositionHistoryRepository.findByDay(day);
 
+      // TODO - do this better so we only save each UserCrewPrice once.
       for (UserCrewPositionHistory bump : userBumps) {
         UserCrewPrice userCrewPrice = userCrewPriceService.findForUserAndSex(bump.getUser().getId(), bump.getSex());
         userCrewPrice.setCash(userCrewPrice.getCash().add(bump.getDividend()));

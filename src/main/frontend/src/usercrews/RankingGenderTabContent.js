@@ -1,23 +1,43 @@
-import React, {PropTypes, Component} from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import {Grid, Cell} from 'material-grid/dist';
-import {Card, CardText} from 'material-ui/Card';
-import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
+import { Grid, Cell } from 'material-grid/dist';
+import { Card, CardText } from 'material-ui/Card';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow
+} from 'material-ui/Table';
 import UpArrow from 'material-ui/svg-icons/navigation/arrow-upward';
 import DownArrow from 'material-ui/svg-icons/navigation/arrow-downward';
+import MediaQuery from 'react-responsive';
 
 import { getUserCrewRankings } from '../rootReducer';
 import RankingRow from './RankingRow';
 
-const SortableHeaderColumn = ({sortKey, label, onSort, currentSortKey, sortDescending}) => (
+const SortableHeaderColumn = ({
+  sortKey,
+  label,
+  onSort,
+  currentSortKey,
+  sortDescending
+}) => (
   <TableHeaderColumn
     onMouseUp={onSort}
-    style={currentSortKey === sortKey ? {fontWeight: 'bold',paddingRight:0, width: '88px'} :  {paddingRight:0, width: '88px'}}
+    style={
+      currentSortKey === sortKey
+        ? { fontWeight: 'bold', paddingRight: 0, width: '88px' }
+        : { paddingRight: 0, width: '70px' }
+    }
   >
     {label}
-    {currentSortKey === sortKey && (sortDescending ? <DownArrow color="rgb(158, 158, 158)"/>:<UpArrow color="rgb(158, 158, 158)"/>)}
+    {currentSortKey === sortKey &&
+      (sortDescending
+        ? <DownArrow color="rgb(158, 158, 158)" />
+        : <UpArrow color="rgb(158, 158, 158)" />)}
   </TableHeaderColumn>
-)
+);
 
 SortableHeaderColumn.propTypes = {
   sortKey: PropTypes.string,
@@ -34,7 +54,7 @@ class RankingGenderTabContent extends Component {
   // }
   constructor(props) {
     super(props);
-    this.state = {sortBy: 'SCORE', sortDescending: true};
+    this.state = { sortBy: 'SCORE', sortDescending: true };
     // this.onSortByCash = this.onSortByCash.bind(this);
     // this.onSortByBumps = this.onSortByBumps.bind(this);
     // this.onSortByCrewValue = this.onSortByCrewValue.bind(this);
@@ -42,49 +62,85 @@ class RankingGenderTabContent extends Component {
   }
 
   onSortByBumps() {
-    this.setState({sortBy: 'BUMPS', sortDescending: !(this.state.sortBy === 'BUMPS' && this.state.sortDescending) });
+    this.setState({
+      sortBy: 'BUMPS',
+      sortDescending: !(this.state.sortBy === 'BUMPS' &&
+        this.state.sortDescending)
+    });
   }
 
   onSortByCash() {
-    this.setState({sortBy: 'CASH', sortDescending: !(this.state.sortBy === 'CASH' && this.state.sortDescending) });
+    this.setState({
+      sortBy: 'CASH',
+      sortDescending: !(this.state.sortBy === 'CASH' &&
+        this.state.sortDescending)
+    });
   }
 
   onSortByCrewValue() {
-    this.setState({sortBy: 'VALUE', sortDescending: !(this.state.sortBy === 'VALUE' && this.state.sortDescending) });
+    this.setState({
+      sortBy: 'VALUE',
+      sortDescending: !(this.state.sortBy === 'VALUE' &&
+        this.state.sortDescending)
+    });
   }
 
   onSortByScore() {
-    this.setState({sortBy: 'SCORE', sortDescending: !(this.state.sortBy === 'SCORE' && this.state.sortDescending)});
+    this.setState({
+      sortBy: 'SCORE',
+      sortDescending: !(this.state.sortBy === 'SCORE' &&
+        this.state.sortDescending)
+    });
   }
 
   onSortByDividends() {
-    this.setState({sortBy: 'DIVIDEND', sortDescending: !(this.state.sortBy === 'DIVIDEND' && this.state.sortDescending)});
+    this.setState({
+      sortBy: 'DIVIDEND',
+      sortDescending: !(this.state.sortBy === 'DIVIDEND' &&
+        this.state.sortDescending)
+    });
   }
 
   onSortByTradingProfit() {
-    this.setState({sortBy: 'TRADING', sortDescending: !(this.state.sortBy === 'TRADING' && this.state.sortDescending)})
+    this.setState({
+      sortBy: 'TRADING',
+      sortDescending: !(this.state.sortBy === 'TRADING' &&
+        this.state.sortDescending)
+    });
   }
 
   render() {
     let sortedRankings = this.props.rankings || [];
     switch (this.state.sortBy) {
       case 'BUMPS':
-        sortedRankings = sortedRankings.sort((r1, r2) => (r2.bumps - r1.bumps));
+        sortedRankings = sortedRankings.sort((r1, r2) => r2.bumps - r1.bumps);
         break;
       case 'CASH':
-        sortedRankings = sortedRankings.sort((r1, r2) => (r2.cash - r1.cash));
+        sortedRankings = sortedRankings.sort((r1, r2) => r2.cash - r1.cash);
         break;
       case 'VALUE':
-        sortedRankings = sortedRankings.sort((r1, r2) => (r2.value - r1.value));
+        sortedRankings = sortedRankings.sort((r1, r2) => r2.value - r1.value);
         break;
       case 'SCORE':
-        sortedRankings = sortedRankings.sort((r1, r2) => (r2.value + r2.cash - r1.value - r1.cash));
+        sortedRankings = sortedRankings.sort(
+          (r1, r2) => r2.value + r2.cash - r1.value - r1.cash
+        );
         break;
       case 'DIVIDEND':
-        sortedRankings = sortedRankings.sort((r1, r2) => (r2.dividends - r1.dividends));
+        sortedRankings = sortedRankings.sort(
+          (r1, r2) => r2.dividends - r1.dividends
+        );
         break;
       case 'TRADING':
-        sortedRankings = sortedRankings.sort((r1, r2) => (r2.value + r2.cash - r2.dividends - r1.value - r1.cash + r1.dividends));
+        sortedRankings = sortedRankings.sort(
+          (r1, r2) =>
+            r2.value +
+            r2.cash -
+            r2.dividends -
+            r1.value -
+            r1.cash +
+            r1.dividends
+        );
         break;
       default:
         break;
@@ -97,17 +153,20 @@ class RankingGenderTabContent extends Component {
         <Cell col={12}>
           <Card>
             <CardText>
-              <Table
-                selectable={false}
-              >
-                <TableHeader
-                  adjustForCheckbox={false}
-                  displaySelectAll={false}
-                >
+              <Table selectable={false}>
+                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
-                    <TableHeaderColumn style={{paddingLeft:0, paddingRight:0, width: '45px'}}>#</TableHeaderColumn>
-                    <TableHeaderColumn>Name</TableHeaderColumn>
-                    <TableHeaderColumn>College</TableHeaderColumn>
+                    <TableHeaderColumn
+                      style={{ paddingLeft: 0, paddingRight: 0, width: '28px' }}
+                    >
+                      #
+                    </TableHeaderColumn>
+                    <TableHeaderColumn style={{ minWidth: '120px' }}>
+                      Name
+                    </TableHeaderColumn>
+                    <MediaQuery minWidth={1000}>
+                      <TableHeaderColumn>College</TableHeaderColumn>
+                    </MediaQuery>
                     <SortableHeaderColumn
                       label="Bumps"
                       sortKey="BUMPS"
@@ -152,16 +211,14 @@ class RankingGenderTabContent extends Component {
                     />
                   </TableRow>
                 </TableHeader>
-                <TableBody
-                  displayRowCheckbox={false}
-                >
-                  {sortedRankings.map((ranking, index) =>
+                <TableBody displayRowCheckbox={false}>
+                  {sortedRankings.map((ranking, index) => (
                     <RankingRow
                       number={index + 1}
                       ranking={ranking}
                       key={index}
                     />
-                  )}
+                  ))}
                 </TableBody>
               </Table>
             </CardText>
@@ -170,15 +227,17 @@ class RankingGenderTabContent extends Component {
       </Grid>
     );
   }
-};
+}
 
 RankingGenderTabContent.propTypes = {
   sex: PropTypes.string,
-  rankings: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    bumps: PropTypes.number
-  }))
-}
+  rankings: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      bumps: PropTypes.number
+    })
+  )
+};
 
 export const mapStateToProps = (state, ownProps) => {
   if (ownProps.sex === 'combined') {
@@ -186,9 +245,13 @@ export const mapStateToProps = (state, ownProps) => {
     const femaleRankings = getUserCrewRankings(state)('female');
     return {
       rankings: maleRankings.map(maleRanking => {
-        const ranking = {...maleRanking, 'sex': 'combined'};
-        const userId = maleRanking && maleRanking.userId ? maleRanking.userId : -1;
-        const femaleRanking = femaleRankings.find(rank => userId === (rank ? rank.userId : -1) );
+        const ranking = { ...maleRanking, sex: 'combined' };
+        const userId = maleRanking && maleRanking.userId
+          ? maleRanking.userId
+          : -1;
+        const femaleRanking = femaleRankings.find(
+          rank => userId === (rank ? rank.userId : -1)
+        );
         if (femaleRanking) {
           ranking.value += femaleRanking.value;
           ranking.cash += femaleRanking.cash;
@@ -197,13 +260,13 @@ export const mapStateToProps = (state, ownProps) => {
         }
         return ranking;
       })
-    }
+    };
   }
   return {
     rankings: getUserCrewRankings(state)(ownProps.sex)
-  }
+  };
 };
 
-export {SortableHeaderColumn, RankingGenderTabContent};
+export { SortableHeaderColumn, RankingGenderTabContent };
 
 export default connect(mapStateToProps)(RankingGenderTabContent);

@@ -78,6 +78,7 @@ exports[`test Renders properly buy 1`] = `
           style={
             Object {
               "marginLeft": "-16px",
+              "minWidth": "80px",
               "paddingLeft": 0,
               "textAlign": "",
             }
@@ -167,6 +168,7 @@ exports[`test Renders properly buy 1`] = `
           style={
             Object {
               "marginLeft": "-16px",
+              "minWidth": "80px",
               "paddingLeft": 0,
               "textAlign": "",
             }
@@ -298,6 +300,7 @@ exports[`test Renders properly not buy 1`] = `
           style={
             Object {
               "marginLeft": "-16px",
+              "minWidth": "80px",
               "paddingLeft": 0,
               "textAlign": "",
             }
@@ -376,6 +379,7 @@ exports[`test Renders properly not buy 1`] = `
           style={
             Object {
               "marginLeft": "-16px",
+              "minWidth": "80px",
               "paddingLeft": 0,
               "textAlign": "",
             }

@@ -11,6 +11,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import { getCrewsByDivision, getCurrentDay } from '../rootReducer';
 import { uploadBumps } from './actions';
+
+// Hack - trying to get something to work quickly
+const headerIndexes = Array.apply(null, Array(6)).map(function(_, i) {
+  return (i + 1) * 14;
+});
+
 /**
  * BumpsAdminPage
  */
@@ -151,7 +157,24 @@ class BumpsAdminPage extends Component {
     // const lowerAffectedIndex = oldIndex < newIndex ? oldIndex : newIndex;
 
     // Positive movement is movement down (higher position, negative bumps)
-    const movement = newIndex - oldIndex;
+    let movement = newIndex - oldIndex;
+    let headerIndex = 0;
+    if (movement !== 0) {
+      for (let i = 0; i < headerIndexes.length; i++) {
+        if (
+          (newIndex < headerIndexes[i] && headerIndexes[i] < oldIndex) ||
+          (oldIndex < headerIndexes[i] && headerIndexes[i] < newIndex)
+        ) {
+          headerIndex = headerIndexes[i];
+          if (movement > 0) {
+            movement = movement - 1;
+          } else {
+            movement = movement + 1;
+          }
+          break;
+        }
+      }
+    }
 
     const affectedCrews = this.state.crewListWithDivisions.slice(
       movement > 0 ? oldIndex : newIndex,
@@ -176,13 +199,17 @@ class BumpsAdminPage extends Component {
     });
 
     // TODO - handle moves across divisions
+    let adjustedCrewList = arrayMove(
+      this.state.crewListWithDivisions,
+      oldIndex,
+      newIndex
+    );
+    if (headerIndex != 0) {
+      adjustedCrewList = arrayMove(adjustedCrewList, oldIndex, headerIndex);
+    }
 
     this.setState({
-      crewListWithDivisions: arrayMove(
-        this.state.crewListWithDivisions,
-        oldIndex,
-        newIndex
-      )
+      crewListWithDivisions: adjustedCrewList
     });
   }
 

@@ -173,6 +173,8 @@ public class CrewService {
     Elements tables = entriesPage.getElementsByTag("div");
     Elements collegePanels = entriesPage.getElementsByAttributeValueStarting("id", "club-");
 
+    List<Crew> crews = crewRepository.findAll();
+
     List<Crew> crewList = new ArrayList<>();
 
     for (Element collegePanel : collegePanels) {
@@ -188,6 +190,9 @@ public class CrewService {
       }
       Elements crewHeaders = collegePanel.getElementsByTag("h4");
       for (Element crewHeader : crewHeaders) {
+        if (hasExistingCrewForName(crewHeader.text(), crews)) {
+          continue;
+        }
         Crew crew = new Crew();
         crewList.add(crew);
         String crewName = crewHeader.text();
@@ -349,6 +354,25 @@ public class CrewService {
     }
     crewMemberService.saveMembers(membersToSave);
     return crewMapper.crewsToCrewDTOs(crewList);
+  }
+
+  private boolean hasExistingCrewForName(String text, List<Crew> crews) {
+    for (Crew crew: crews) {
+      if (crew.getName().equals(text)) {
+        return true;
+      }
+    }
+    // HAX - crews that got entered but aren't racing
+    if (text.equals("Worcester M3")
+      || text.equals("St Benet's M2")
+      || text.equals("Keble M5")
+      || text.equals("St Edmund Hall M3")
+      || text.equals("St Peter's M3")
+      || text.equals("Magdalen M4")
+      || text.equals("New College W3")) {
+      return true;
+    }
+    return false;
   }
 
   private void fillCrew(Crew crew) {

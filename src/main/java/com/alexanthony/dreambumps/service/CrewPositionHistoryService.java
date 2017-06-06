@@ -158,7 +158,7 @@ public class CrewPositionHistoryService {
     CrewPositionHistory lastPosition = crewPositionHistoryRepository.findFirstByCrewAndDay(crewPositionHistory.getCrew(), crewPositionHistory.getDay() - 1);
     Integer startPosition = lastPosition.getPosition();
     Integer endPosition = crewPositionHistory.getPosition();
-    Integer bumps = endPosition - startPosition;
+    Integer bumps = startPosition - endPosition;
     crewPositionHistory.setBumps(bumps);
 
     if (startPosition == 1 && endPosition == 1 && crewPositionHistory.getDay() >= 4) {
@@ -285,6 +285,89 @@ public class CrewPositionHistoryService {
     }
     positionHistories = crewPositionHistoryRepository.save(positionHistories);
     return crewPositionHistoryMapper.crewPositionHistorysToCrewPositionHistoryDTOs(positionHistories);
+  }
+
+  // HAX - get rowing on crews in
+  public List<CrewPositionHistoryDTO> uploadStatic() {
+
+    List<Crew> crews = crewRepository.findAll();
+    List<CrewPositionHistory> positionHistories = new ArrayList<>();
+    addCrew("Christ Church III", Sex.male, 6, 1, crews, positionHistories);
+    addCrew("St Anne's II", Sex.male, 6, 2, crews, positionHistories);
+    addCrew("Somerville II", Sex.male, 6, 3, crews, positionHistories);
+    addCrew("Wadham III", Sex.male, 6, 4, crews, positionHistories);
+    addCrew("Keble III", Sex.male, 6, 5, crews, positionHistories);
+    addCrew("Oriel III", Sex.male, 6, 6, crews, positionHistories);
+    addCrew("St Hugh's II", Sex.male, 6, 7, crews, positionHistories);
+    addCrew("New College III", Sex.male, 6, 8, crews, positionHistories);
+    addCrew("Balliol III", Sex.male, 6, 9, crews, positionHistories);
+    addCrew("Pembroke IV", Sex.male, 6, 10, crews, positionHistories);
+    addCrew("Linacre II", Sex.male, 6, 11, crews, positionHistories);
+    addCrew("St Antony's II", Sex.male, 6, 12, crews, positionHistories);
+    addCrew("Jesus IV", Sex.male, 6, 13, crews, positionHistories);
+
+    addCrew("Merton III", Sex.male, 7, 1, crews, positionHistories);
+    addCrew("St Hilda's II", Sex.male, 7, 2, crews, positionHistories);
+    addCrew("St Catherine's III", Sex.male, 7, 3, crews, positionHistories);
+    addCrew("Balliol IV", Sex.male, 7, 4, crews, positionHistories);
+    addCrew("Corpus Christi II", Sex.male, 7, 5, crews, positionHistories);
+    addCrew("Keble IV", Sex.male, 7, 6, crews, positionHistories);
+    addCrew("Lincoln III", Sex.male, 7, 7, crews, positionHistories);
+    addCrew("Corpus Christi III", Sex.male, 7, 8, crews, positionHistories);
+    addCrew("St Antony's III", Sex.male, 7, 9, crews, positionHistories);
+    addCrew("Magdalen III", Sex.male, 7, 10, crews, positionHistories);
+    addCrew("St Hilda's III", Sex.male, 7, 11, crews, positionHistories);
+    addCrew("Oriel IV", Sex.male, 7, 12, crews, positionHistories);
+    addCrew("Somerville III", Sex.male, 7, 13, crews, positionHistories);
+    addCrew("Queen's III", Sex.male, 7, 14, crews, positionHistories);
+
+    addCrew("St Hilda's II", Sex.female, 4, 12, crews, positionHistories);
+    addCrew("Brasenose II", Sex.female, 4, 13, crews, positionHistories);
+
+    addCrew("Jesus II", Sex.female, 5, 1, crews, positionHistories);
+    addCrew("St Hugh's II", Sex.female, 5, 2, crews, positionHistories);
+    addCrew("L.M.H. II", Sex.female, 5, 3, crews, positionHistories);
+    addCrew("Wolfson III", Sex.female, 5, 4, crews, positionHistories);
+    addCrew("Mansfield II", Sex.female, 5, 5, crews, positionHistories);
+    addCrew("Keble II", Sex.female, 5, 6, crews, positionHistories);
+    addCrew("Somerville II", Sex.female, 5, 7, crews, positionHistories);
+    addCrew("Pembroke III", Sex.female, 5, 8, crews, positionHistories);
+    addCrew("St Peter's II", Sex.female, 5, 9, crews, positionHistories);
+    addCrew("Magdalen III", Sex.female, 5, 10, crews, positionHistories);
+    addCrew("Oriel III", Sex.female, 5, 11, crews, positionHistories);
+    addCrew("St Antony's II", Sex.female, 5, 12, crews, positionHistories);
+    addCrew("Exeter II", Sex.female, 5, 13, crews, positionHistories);
+
+    addCrew("Wadham III", Sex.female, 6, 1, crews, positionHistories);
+    addCrew("Balliol III", Sex.female, 6, 2, crews, positionHistories);
+    addCrew("St Anne's II", Sex.female, 6, 3, crews, positionHistories);
+    addCrew("Pembroke IV", Sex.female, 6, 4, crews, positionHistories);
+    addCrew("St Catherine's II", Sex.female, 6, 5, crews, positionHistories);
+    addCrew("Corpus Christi II", Sex.female, 6, 6, crews, positionHistories);
+    addCrew("L.M.H. III", Sex.female, 6, 7, crews, positionHistories);
+    addCrew("Corpus Christi III", Sex.female, 6, 8, crews, positionHistories);
+    addCrew("Keble III", Sex.female, 6, 9, crews, positionHistories);
+    addCrew("Worcester III", Sex.female, 6, 10, crews, positionHistories);
+    addCrew("Jesus III", Sex.female, 6, 11, crews, positionHistories);
+    addCrew("Somerville III", Sex.female, 6, 12, crews, positionHistories);
+    addCrew("S.E.H. II", Sex.female, 6, 13, crews, positionHistories);
+
+    positionHistories = crewPositionHistoryRepository.save(positionHistories);
+    return crewPositionHistoryMapper.crewPositionHistorysToCrewPositionHistoryDTOs(positionHistories);
+  }
+
+  private void addCrew(String crewName, Sex sex, int divNum, int position, List<Crew> crews, List<CrewPositionHistory> positionHistories) {
+    int overallPosition = (divNum - 1)* Constants.CREWS_PER_DIVISION+position;
+    CrewPositionHistory crewPositionHistory = new CrewPositionHistory();
+    crewPositionHistory.day(0).dividend(BigDecimal.ZERO).bumps(0).position(overallPosition);
+    Crew crew = findCrew(crewName, sex, crews);
+    if (crew != null) {
+      crewPositionHistory.setCrew(crew);
+      positionHistories.add(crewPositionHistory);
+      crew.setPrice(calculateStartPriceForPosition(overallPosition));
+      crewRepository.save(crew);
+      crewPriceHistoryService.createForCrew(crew);
+    }
   }
 
   private Crew findCrew(String crewNameFromAnu, Sex sex, List<Crew> allCrews) {
