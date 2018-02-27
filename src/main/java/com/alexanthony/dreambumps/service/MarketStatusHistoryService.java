@@ -51,7 +51,12 @@ public class MarketStatusHistoryService {
     MarketStatusHistory marketStatusHistory = marketStatusHistoryMapper
         .marketStatusHistoryDTOToMarketStatusHistory(marketStatusHistoryDTO);
     marketStatusHistory.setDateTime(ZonedDateTime.now());
-    Integer currentDay = findLatest().getDay();
+    Integer currentDay;
+    try {
+      currentDay = findLatest().getDay();
+    } catch (NullPointerException e) {
+      currentDay = Integer.valueOf(-1);
+    }
     if (marketStatusHistory.getDay() < currentDay || marketStatusHistory.getDay() > currentDay + 1) {
       // throw an error
     } else if (marketStatusHistory.getDay() == currentDay + 1) {

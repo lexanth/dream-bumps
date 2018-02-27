@@ -17,18 +17,18 @@ public final class Constants {
     public static final String SYSTEM_ACCOUNT = "system";
     public static final String ANONYMOUS_USER = "anonymoususer";
 
-	public static final int CREWS_PER_DIVISION = 13;
-	public static final int MENS_CREWS = 92;
-	public static final int WOMENS_CREWS = 79;
+	public static final int CREWS_PER_DIVISION = 12;
+	public static final int MENS_CREWS = 73;
+	public static final int WOMENS_CREWS = 61;
 
   public static final BigDecimal THREE_HUNDRED = new BigDecimal("300");
   public static final BigDecimal MULTIPLIER = new BigDecimal("66");
 
-  public static final BigDecimal ROWOVER_DIVIDEND = new BigDecimal("0.3");
+  public static final BigDecimal ROWOVER_DIVIDEND = new BigDecimal("0.1");
   public static final BigDecimal BUMP_MULTIPLIER = new BigDecimal("3");
   public static final BigDecimal HEADSHIP_MULTIPLIER = new BigDecimal("3");
 
-  public static final String REGATTA_NAME = "Eights 2017";
+  public static final String REGATTA_NAME = "Torpids 2018";
 
 
     private Constants() {

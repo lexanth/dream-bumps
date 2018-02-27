@@ -24,6 +24,6 @@
     "jhiPrefix": "jhi",
     "skipClient": true,
     "clientPackageManager": "yarn",
-    "herokuAppName": "dream-bumps"
+    "herokuAppName": null
   }
 }

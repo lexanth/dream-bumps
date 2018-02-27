@@ -1,10 +1,10 @@
 // @flow
-import { round } from './maths';
+import { round } from "./maths";
 const getStartPrice = position => 300 - 66 * Math.log(position);
 
 // This is 3x more generous than fantasy bumps was
 // Maybe 0.2?
-const getBaseRowOverDividend = position => 0.3 * getStartPrice(position);
+const getBaseRowOverDividend = position => 0.1 * getStartPrice(position);
 
 const isPositionSandwichBoat = (position, numberOfCrews, crewsPerDivision) => {
   if (position === numberOfCrews) {
