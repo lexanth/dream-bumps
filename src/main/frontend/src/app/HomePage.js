@@ -1,10 +1,10 @@
 // @flow
-import React from 'react'
-import { Card, CardTitle, CardText, CardMedia } from 'material-ui/Card'
-import { Grid, Cell } from 'material-grid/dist'
+import React from "react";
+import { Card, CardTitle, CardText, CardMedia } from "material-ui/Card";
+import { Grid, Cell } from "material-grid/dist";
 // import {Link} from 'react-router';
 
-import bumpImg from '../../static/bump.jpg'
+import bumpImg from "../../static/bump.jpg";
 
 const HomePage = () => {
   return (
@@ -15,9 +15,9 @@ const HomePage = () => {
             overlay={
               <CardTitle
                 title="Dream Bumps"
-                titleStyle={{ fontSize: '48px' }}
-                subtitle="Summer Eights 2017"
-                subtitleStyle={{ fontSize: '28px' }}
+                titleStyle={{ fontSize: "48px" }}
+                subtitle="Torpids 2018"
+                subtitleStyle={{ fontSize: "28px" }}
               />
             }
           >
@@ -44,7 +44,7 @@ const HomePage = () => {
             Put your (fake) money where your mouth is.
           </CardText>
         </Card>
-        <Card style={{ marginTop: '16px' }}>
+        <Card style={{ marginTop: "16px" }}>
           <CardTitle title="Get in touch" />
           <CardText>
             <p>
@@ -62,7 +62,7 @@ const HomePage = () => {
             </p>
           </CardText>
         </Card>
-        <Card style={{ marginTop: '16px' }}>
+        <Card style={{ marginTop: "16px" }}>
           <CardTitle title="Credits" />
           <CardText>
             Oliver Clarke - Images
@@ -151,7 +151,7 @@ const HomePage = () => {
         </Card>
       </Cell>
     </Grid>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;

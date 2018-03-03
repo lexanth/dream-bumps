@@ -1,5 +1,5 @@
 {
-  "name": "dream-bumps",
+  "name": "dreambumps",
   "version": "0.1.0",
   "description": "Definitely not fantasy bumps...",
   "engines": {
@@ -18,7 +18,7 @@
     "lint:watch": "npm run lint -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "rimraf ./dist",
-    "prebuild": "npm run clean-dist && npm run test",
+    "prebuild": "npm run clean-dist",
     "build": "babel-node tools/build.js && npm run open:dist",
     "test": "jest",
     "test:CI": "babel-node tools/testCi.js",

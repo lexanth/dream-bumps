@@ -24,6 +24,7 @@
     "jhiPrefix": "jhi",
     "skipClient": true,
     "clientPackageManager": "yarn",
-    "herokuAppName": null
+    "herokuAppName": "dream-bumps-torpids-2018",
+    "herokuDeployType": "jar"
   }
 }
