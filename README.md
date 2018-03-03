@@ -28,7 +28,7 @@ Build the front end code to be served by the backend:
     yarn
     yarn build
 
-Then need to copy the output (everything in dist) to be served by the frontend (where??).
+Then need to copy the output (everything in dist) to be served by the frontend (where?? Might be src/main/webapp, might be src/main/frontend/static).
 
 To optimize the DreamBumps application for production, run:
 
